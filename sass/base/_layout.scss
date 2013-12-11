@@ -88,7 +88,6 @@ body > .container {
   max-width: 500px;
   @if $image == true {
     background: $left-background-image !important;
-    border-right: 1px solid darken($base02, 5) !important;
   } @else {
     background-color: $left-background-color;
   }
