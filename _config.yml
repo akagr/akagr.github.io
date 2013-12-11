@@ -4,10 +4,10 @@
 
 url: http://akagr.github.io
 title: Akash Agrawal
-subtitle: I hack and stuff
+subtitle: This blog is about everyting cool which I come across.
 author: Akash  Agrawal
 simple_search: http://google.com/search
-description: 
+description: A blog about what catches my fancy although most probably it will have something to do with code.
 # Gravatar
 gravatar_email: akagr@outlook.com
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
@@ -98,4 +98,4 @@ disqus_show_comment_count: false
 google_analytics_tracking_id:
 
 # Facebook Like
-facebook_like: false
+facebook_like: true
