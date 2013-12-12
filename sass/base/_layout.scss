@@ -87,7 +87,8 @@ body > .container {
   height: 100%;
   max-width: 500px;
   @if $image == true {
-    background: $left-background-image !important;
+    background-image: $left-background-image !important;
+    background-size: cover;
   } @else {
     background-color: $left-background-color;
   }
