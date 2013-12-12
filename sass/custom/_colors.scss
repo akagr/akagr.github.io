@@ -6,8 +6,8 @@ $header-bg: #333;
 $left-background-color: hsl(0, 0%, 16%);
 
 // Change this if you want to use a background image
-$image: false !default;
-$left-background-image: image-url('bright_squares.png');
+$image: true !default;
+$left-background-image: image-url('blurred_vision-wallpaper-2560x1440.jpg');
 
 $subtitle-color: lighten($header-bg, 58);
 $link-color-hover: #343434;
@@ -46,8 +46,8 @@ $button-light-hover-border: hsl(206, 72%, 48%);
 $button-light-fill: $white;
 
 // dark
-$button-dark-color:         hsl(0, 0%, 47%);
-$button-dark-border:        hsl(0, 0%, 27%);
+$button-dark-color:         hsl(0, 0%, 75%);
+$button-dark-border:        hsl(0, 0%, 45%);
 $button-dark-hover-fill:    hsl(206, 90%, 66%);
 $button-dark-hover-border:  hsl(206, 72%, 48%);
 
