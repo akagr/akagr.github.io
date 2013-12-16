@@ -14,6 +14,13 @@
 		h1, h2 {
 			@extend .serif;
 		}
+		.navigation{
+			font-size:0.6em;
+			&:last-child {
+				border-left: 1px solid;
+				padding-left: 0.4em;
+			}
+		}
 		h1 {
 			letter-spacing: -1px;
 			text-transform: uppercase;
