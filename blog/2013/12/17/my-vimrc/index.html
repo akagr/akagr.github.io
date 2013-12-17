@@ -107,129 +107,68 @@
 
 <div class="entry-content"><p>I love using sublime text. But there is something about vim that just keeps me pulling back. It&rsquo;s not my default editor of choice (yet) but I still enjoy writing stuff with it when I am not working. This blog is a fine example. Following is my vim config file. Some settings are there thanks to authors of some excellent blogs. Others, I have written myself out of my own needs. One thing&rsquo;s for sure, when it comes to customizability, vim is the grand-daddy of them all.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-</pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="k">set</span> <span class="nb">nocompatible</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</span>
-</span><span class='line'><span class="c">&quot; vundle config</span>
-</span><span class='line'><span class="c">&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</span>
-</span><span class='line'><span class="k">filetype</span> off
-</span><span class='line'>
-</span><span class='line'><span class="k">set</span> <span class="nb">rtp</span><span class="p">+=~</span><span class="sr">/.vim/</span>bundle<span class="sr">/vundle/</span>
-</span><span class='line'><span class="k">call</span> vundle#rc<span class="p">()</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</span>
-</span><span class='line'><span class="c">&quot; Vundles</span>
-</span><span class='line'><span class="c">&quot; git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle</span>
-</span><span class='line'><span class="c">&quot; add this to bashrc or bash_profile: export TERM=&quot;xterm-256color&quot;</span>
-</span><span class='line'><span class="c">&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</span>
-</span><span class='line'>Bundle <span class="s1">&#39;gmarik/vundle&#39;</span>
-</span><span class='line'>
-</span><span class='line'>Bundle <span class="s1">&#39;altercation/vim-colors-solarized&#39;</span>
-</span><span class='line'>Bundle <span class="s1">&#39;Raimondi/delimitMate&#39;</span>
-</span><span class='line'>Bundle <span class="s1">&#39;tpope/vim-fugitive&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</span>
-</span><span class='line'><span class="c">&quot; General</span>
-</span><span class='line'><span class="c">&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</span>
-</span><span class='line'><span class="k">set</span> <span class="nb">nobackup</span> <span class="nb">nowritebackup</span> <span class="nb">noswapfile</span>
-</span><span class='line'><span class="k">filetype</span> plugin indent <span class="k">on</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</span>
-</span><span class='line'><span class="c">&quot; Interface</span>
-</span><span class='line'><span class="c">&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</span>
-</span><span class='line'><span class="c">&quot; Syntax Highlighting</span>
-</span><span class='line'><span class="k">set</span> <span class="nb">background</span><span class="p">=</span><span class="nb">dark</span>
-</span><span class='line'><span class="k">colorscheme</span> solarized
-</span><span class='line'><span class="nb">syntax</span> enable
-</span><span class='line'>
-</span><span class='line'><span class="k">set</span> <span class="nb">wildmenu</span> <span class="nb">wildmode</span><span class="p">=</span>longest:full<span class="p">,</span>full
-</span><span class='line'><span class="k">set</span> <span class="nb">ruler</span>
-</span><span class='line'><span class="k">set</span> <span class="k">number</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">&quot; Indentation</span>
-</span><span class='line'><span class="k">set</span> <span class="nb">expandtab</span> <span class="nb">tabstop</span><span class="p">=</span><span class="m">2</span> <span class="nb">shiftwidth</span><span class="p">=</span><span class="m">2</span>
-</span><span class='line'><span class="k">set</span> <span class="nb">smartindent</span> <span class="nb">autoindent</span> <span class="nb">copyindent</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">&quot; Search</span>
-</span><span class='line'><span class="k">set</span> <span class="nb">ignorecase</span> <span class="nb">smartcase</span>
-</span><span class='line'><span class="k">set</span> <span class="nb">hlsearch</span> <span class="nb">incsearch</span> <span class="nb">showmatch</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">set</span> <span class="nb">magic</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</span>
-</span><span class='line'><span class="c">&quot; Key Bindings</span>
-</span><span class='line'><span class="c">&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</span>
-</span><span class='line'><span class="k">let</span> mapleader <span class="p">=</span> <span class="s2">&quot;,&quot;</span>
-</span><span class='line'><span class="k">let</span> <span class="k">g</span>:mapleader <span class="p">=</span> <span class="s2">&quot;,&quot;</span>
-</span><span class='line'>nmap <span class="p">&lt;</span>leader<span class="p">&gt;</span><span class="k">w</span> :<span class="k">w</span><span class="p">!&lt;</span><span class="k">cr</span><span class="p">&gt;</span>
-</span><span class='line'>nmap <span class="p">&lt;</span>leader<span class="p">&gt;</span><span class="k">q</span> :<span class="k">q</span><span class="p">&lt;</span><span class="k">cr</span><span class="p">&gt;</span>
-</span><span class='line'>map <span class="k">j</span> gj
-</span><span class='line'>map <span class="k">k</span> gk
-</span><span class='line'>map <span class="p">&lt;</span>space<span class="p">&gt;</span> /
-</span><span class='line'>map <span class="p">&lt;</span><span class="k">c</span><span class="p">-</span>space<span class="p">&gt;</span> ?
-</span><span class='line'>map <span class="p">&lt;</span><span class="k">silent</span><span class="p">&gt;</span> <span class="p">&lt;</span>leader<span class="p">&gt;,</span> :<span class="k">noh</span><span class="p">&lt;</span><span class="k">cr</span><span class="p">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<div><script src='https://gist.github.com/8001153.js'></script>
+<noscript><pre><code>set nocompatible
+
+&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
+&quot; vundle config
+&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
+filetype off
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
+&quot; Vundles
+&quot; git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+&quot; add this to bashrc or bash_profile: export TERM=&quot;xterm-256color&quot;
+&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
+Bundle &#39;gmarik/vundle&#39;
+
+Bundle &#39;altercation/vim-colors-solarized&#39;
+Bundle &#39;Raimondi/delimitMate&#39;
+
+&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
+&quot; General
+&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
+set nobackup nowritebackup noswapfile
+filetype plugin indent on
+
+&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
+&quot; Interface
+&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
+&quot; Syntax Highlighting
+set background=dark
+colorscheme solarized
+syntax enable
+
+set wildmenu wildmode=longest:full,full
+set ruler
+set number
+
+&quot; Indentation
+set expandtab tabstop=2 shiftwidth=2 
+set smartindent autoindent copyindent
+
+&quot; Search
+set ignorecase smartcase
+set hlsearch incsearch showmatch
+
+set magic
+
+&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
+&quot; Key Bindings
+&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
+let mapleader = &quot;,&quot;
+let g:mapleader = &quot;,&quot;
+nmap &lt;leader&gt;w :w!&lt;cr&gt;
+nmap &lt;leader&gt;q :q&lt;cr&gt;
+map j gj
+map k gk
+map &lt;space&gt; /
+map &lt;c-space&gt; ?
+map &lt;silent&gt; &lt;leader&gt;, :noh&lt;cr&gt;
+</code></pre></noscript></div>
 
 
 <p>I know I really need some plug-ins. This file, like everybody else&rsquo;s, is a work in progress. Feel free to rip it off if you are starting out with vim. You can thank me by suggesting some great plug-ins or hacks which you dig in the comments below.</p>
