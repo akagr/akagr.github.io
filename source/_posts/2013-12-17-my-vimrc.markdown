@@ -13,62 +13,63 @@ set nocompatible
 
 """""""""""""""""""""""""""""""""""""""""""""""
 " vundle config
-" git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-" add this to bashrc or bash_profile: export TERM="xterm-256color"
 """""""""""""""""""""""""""""""""""""""""""""""
-  filetype off
+filetype off
 
-  set rtp+=~/.vim/bundle/vundle/
-  call vundle#rc()
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
 
 """""""""""""""""""""""""""""""""""""""""""""""
 " Vundles
+" git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+" add this to bashrc or bash_profile: export TERM="xterm-256color"
 """""""""""""""""""""""""""""""""""""""""""""""
-  Bundle 'gmarik/vundle'
+Bundle 'gmarik/vundle'
 
-  Bundle 'altercation/vim-colors-solarized'
-  Bundle 'Raimondi/delimitMate'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'Raimondi/delimitMate'
+Bundle 'tpope/vim-fugitive'
 
 """""""""""""""""""""""""""""""""""""""""""""""
 " General
 """""""""""""""""""""""""""""""""""""""""""""""
-  set nobackup nowritebackup noswapfile
-  filetype plugin indent on
+set nobackup nowritebackup noswapfile
+filetype plugin indent on
 
 """""""""""""""""""""""""""""""""""""""""""""""
 " Interface
 """""""""""""""""""""""""""""""""""""""""""""""
-  " Syntax Highlighting
-    set background=dark
-    colorscheme solarized
-    syntax enable
+" Syntax Highlighting
+set background=dark
+colorscheme solarized
+syntax enable
 
-  set wildmenu wildmode=longest:full,full
-  set ruler
-  set number
+set wildmenu wildmode=longest:full,full
+set ruler
+set number
 
-  " Indentation
-    set expandtab tabstop=2 shiftwidth=2 
-    set smartindent autoindent copyindent
+" Indentation
+set expandtab tabstop=2 shiftwidth=2 
+set smartindent autoindent copyindent
 
-  " Search
-    set ignorecase smartcase
-    set hlsearch incsearch showmatch
+" Search
+set ignorecase smartcase
+set hlsearch incsearch showmatch
 
-  set magic
+set magic
 
 """""""""""""""""""""""""""""""""""""""""""""""
 " Key Bindings
 """""""""""""""""""""""""""""""""""""""""""""""
-  let mapleader = ","
-  let g:mapleader = ","
-  nmap <leader>w :w!<cr>
-  nmap <leader>q :q<cr>
-  map j gj
-  map k gk
-  map <space> /
-  map <c-space> ?
-  map <silent> <leader>, :noh<cr>
+let mapleader = ","
+let g:mapleader = ","
+nmap <leader>w :w!<cr>
+nmap <leader>q :q<cr>
+map j gj
+map k gk
+map <space> /
+map <c-space> ?
+map <silent> <leader>, :noh<cr>
 ```
 I know I really need some plug-ins. This file, like everybody else's, is a work in progress. Feel free to rip it off if you are starting out with vim. You can thank me by suggesting some great plug-ins or hacks which you dig in the comments below.
 
