@@ -1,0 +1,260 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Building Vim from source - Akash Agrawal</title>
+  <meta name="author" content="Akash  Agrawal">
+
+  
+  <meta name="description" content="Continuing my journey to vim enlightment, I decided to build it from source since the one I installed from apt had begun panting on large files. I &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://akagr.github.io/blog/2013/12/24/building-vim-from-source">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Akash Agrawal" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href='http://fonts.googleapis.com/css?family=Quattrocento+Sans|Roboto:400,300' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-46483932-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+
+<body>
+	<div class="container">
+		<aside class="left">
+			<div class="inner-left">
+				<header>
+					<img src="http://www.gravatar.com/avatar/453b13f5280b214c55204aa8640efb8e?s=200" alt="Gravatar of Akash  Agrawal " title="Gravatar of Akash  Agrawal" class="profilepic" />
+<hgroup>
+  <h1><a href="/">Akash Agrawal</a></h1>
+  
+    <h2 class="subtitle">on coding, linux, trends and fun.</h2>
+   
+  <h3>
+    <a href="/know-me" class="navigation">Know Me</a>
+    <a href="/blog/archives" class="navigation">Blog Archives</a>
+  <h3>
+</hgroup>
+
+
+				</header>
+				<footer>
+					<p>
+	
+		<a href="http://github.com/akagr" class="btn btn-dark">GitHub</a>
+	
+	
+		<a href="http://twitter.com/akshagrwl" class="btn btn-dark">Twitter</a>
+	
+</p>
+				</footer>
+			</div>
+		</aside>
+    	<section class="right">
+    		<div class="inner-right">
+    			<div id="posts">
+    			  	<article class="post">
+    
+  <header>
+    
+      <h1 class="entry-title">Building Vim From Source</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-24T16:26:54+05:30" pubdate data-updated="true">Dec 24<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Continuing my journey to vim enlightment, I decided to build it from source since the one I installed from apt had begun panting on large files. I won&rsquo;t lie, compiling from source gives me that bad-ass father of god kinda feeling; so that&rsquo;s two for 2. Anyways let&rsquo;s get started. The steps given here will install console vim with perl, python, ruby and tcl enabled. I did it on my Ubuntu precise but it should work for all things nix.</p>
+
+<p><code>build-dep</code> and <code>vim-gnome</code> are listed as dependencies for console vim. Better install those first. Also for things like ruby, python etc, you will have to install those too if you want to include their support.</p>
+
+<p>I cloned the git repo of vim source from github</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone https://github.com/b4winckler/Vim
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Next, I needed to see what all options vim had to offer during install. You can get those with <code>./configure --help</code>. Take your time exploring this. Here&rsquo;s how I set what options appealed to me.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>./configure <span class="se">\</span>
+</span><span class='line'><span class="nb">enable</span>-perlinterp <span class="se">\</span>
+</span><span class='line'><span class="nb">enable</span>-pythoninterp <span class="se">\</span>
+</span><span class='line'><span class="nb">enable</span>-python3interp <span class="se">\</span>
+</span><span class='line'><span class="nb">enable</span>-tclinterp <span class="se">\</span>
+</span><span class='line'><span class="nb">enable</span>-rubyinterp <span class="se">\</span>
+</span><span class='line'><span class="nb">enable</span>-multibyte <span class="se">\</span>
+</span><span class='line'><span class="nb">enable</span>-fontset <span class="se">\</span>
+</span><span class='line'><span class="nb">enable</span>-gui<span class="o">=</span>no <span class="se">\</span>
+</span><span class='line'>with-features<span class="o">=</span>huge <span class="se">\</span>
+</span><span class='line'>with-compiledby<span class="o">=</span><span class="s2">&quot;Akash Agrawal&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This command creates some files in <code>src/auto</code> directory specifying install configuration. If you need to change or revise some options, or if you forgot to replace my name with yours, just delete the files in <code>src/auto</code> and configure again.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>make
+</span><span class='line'>sudo make installed
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Nothing special really. Just configure, make and install.
+To check the fruits of your toil, use <code>vim --version</code> and it will show you all things it installed as well as your name sitting there looking rad.</p>
+
+<p>I nailed it in my first try and wrinting this post from my newly installed copy. Let me know if the thing doesn&rsquo;t work for you.</p>
+</div>
+
+
+</article>
+
+
+        <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://akagr.github.io/blog/2013/12/24/building-vim-from-source/" data-via="akshagrwl" data-counturl="http://akagr.github.io/blog/2013/12/24/building-vim-from-source/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+
+
+
+<section id="comments">
+    <div id="disqus_thread"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+
+    			</div>
+    			<footer id="footer">
+    				<p class="credit">
+  Copyright &copy; 2013 - Akash  Agrawal. Proudly powered by <a href="http://octopress.org">Octopress</a>
+</p>
+
+
+    			</footer>
+    			
+
+<script type="text/javascript">
+      var disqus_shortname = 'akagr';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://akagr.github.io/blog/2013/12/24/building-vim-from-source/';
+        var disqus_url = 'http://akagr.github.io/blog/2013/12/24/building-vim-from-source/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<link href='http://fonts.googleapis.com/css?family=Quattrocento+Sans|Roboto:400,300' rel='stylesheet' type='text/css'>
+
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-46483932-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+
+    		</div>
+    	</section>
+  	</div>
+</body>
+</html>

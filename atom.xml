@@ -4,7 +4,7 @@
   <title><![CDATA[Akash Agrawal]]></title>
   <link href="http://akagr.github.io/atom.xml" rel="self"/>
   <link href="http://akagr.github.io/"/>
-  <updated>2013-12-20T15:09:05+05:30</updated>
+  <updated>2013-12-24T18:10:16+05:30</updated>
   <id>http://akagr.github.io/</id>
   <author>
     <name><![CDATA[Akash  Agrawal]]></name>
@@ -12,6 +12,65 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Building Vim from source]]></title>
+    <link href="http://akagr.github.io/blog/2013/12/24/building-vim-from-source/"/>
+    <updated>2013-12-24T16:26:54+05:30</updated>
+    <id>http://akagr.github.io/blog/2013/12/24/building-vim-from-source</id>
+    <content type="html"><![CDATA[<p>Continuing my journey to vim enlightment, I decided to build it from source since the one I installed from apt had begun panting on large files. I won&rsquo;t lie, compiling from source gives me that bad-ass father of god kinda feeling; so that&rsquo;s two for 2. Anyways let&rsquo;s get started. The steps given here will install console vim with perl, python, ruby and tcl enabled. I did it on my Ubuntu precise but it should work for all things nix.</p>
+
+<p><code>build-dep</code> and <code>vim-gnome</code> are listed as dependencies for console vim. Better install those first. Also for things like ruby, python etc, you will have to install those too if you want to include their support.</p>
+
+<p>I cloned the git repo of vim source from github</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone https://github.com/b4winckler/Vim
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Next, I needed to see what all options vim had to offer during install. You can get those with <code>./configure --help</code>. Take your time exploring this. Here&rsquo;s how I set what options appealed to me.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>./configure <span class="se">\</span>
+</span><span class='line'><span class="nb">enable</span>-perlinterp <span class="se">\</span>
+</span><span class='line'><span class="nb">enable</span>-pythoninterp <span class="se">\</span>
+</span><span class='line'><span class="nb">enable</span>-python3interp <span class="se">\</span>
+</span><span class='line'><span class="nb">enable</span>-tclinterp <span class="se">\</span>
+</span><span class='line'><span class="nb">enable</span>-rubyinterp <span class="se">\</span>
+</span><span class='line'><span class="nb">enable</span>-multibyte <span class="se">\</span>
+</span><span class='line'><span class="nb">enable</span>-fontset <span class="se">\</span>
+</span><span class='line'><span class="nb">enable</span>-gui<span class="o">=</span>no <span class="se">\</span>
+</span><span class='line'>with-features<span class="o">=</span>huge <span class="se">\</span>
+</span><span class='line'>with-compiledby<span class="o">=</span><span class="s2">&quot;Akash Agrawal&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This command creates some files in <code>src/auto</code> directory specifying install configuration. If you need to change or revise some options, or if you forgot to replace my name with yours, just delete the files in <code>src/auto</code> and configure again.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>make
+</span><span class='line'>sudo make installed
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Nothing special really. Just configure, make and install.
+To check the fruits of your toil, use <code>vim --version</code> and it will show you all things it installed as well as your name sitting there looking rad.</p>
+
+<p>I nailed it in my first try and wrinting this post from my newly installed copy. Let me know if the thing doesn&rsquo;t work for you.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Rudimentary Sessions for Vim]]></title>
@@ -185,10 +244,10 @@ call vundle#rc()
 &quot; git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 &quot; add this to bashrc or bash_profile: export TERM=&quot;xterm-256color&quot;
 &quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
-Bundle &#39;gmarik/vundle&#39;
+Bundle 'gmarik/vundle'
 
-Bundle &#39;altercation/vim-colors-solarized&#39;
-Bundle &#39;Raimondi/delimitMate&#39;
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'Raimondi/delimitMate'
 
 &quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
 &quot; General
