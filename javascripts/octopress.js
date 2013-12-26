@@ -109,6 +109,13 @@ function renderDeliciousLinks(items) {
   $('#delicious').html(output);
 }
 
+function setWidth() {
+  var width = $($('article')[0]).width();
+  var code_blocks = $('pre:not(.line-numbers)');
+  code_blocks.css("width", ""+width+"px")
+  })
+}
+
 $('document').ready(function() {
   testFeatures();
   wrapFlashVideos();
@@ -116,6 +123,7 @@ $('document').ready(function() {
   addCodeLineNumbers();
   getNav();
   addSidebarToggler();
+  setWidth();
 });
 
 // iOS scaling bug fix

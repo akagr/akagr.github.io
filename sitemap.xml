@@ -2,38 +2,38 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://akagr.github.io/blog/2013/12/11/riak-installation-on-ubuntu-12-dot-04/</loc>
-        <lastmod>2013-12-16T13:19:28+05:30</lastmod>
+        <lastmod>2013-12-26T23:55:05+05:30</lastmod>
     </url>
     <url>
         <loc>http://akagr.github.io/blog/2013/12/13/finally-gonna-date-node-dot-js/</loc>
-        <lastmod>2013-12-16T13:19:28+05:30</lastmod>
+        <lastmod>2013-12-26T23:55:05+05:30</lastmod>
     </url>
     <url>
         <loc>http://akagr.github.io/blog/2013/12/17/my-vimrc/</loc>
-        <lastmod>2013-12-17T19:23:33+05:30</lastmod>
+        <lastmod>2013-12-26T23:55:05+05:30</lastmod>
     </url>
     <url>
         <loc>http://akagr.github.io/blog/2013/12/20/rudimentary-sessions-for-vim/</loc>
-        <lastmod>2013-12-20T15:07:44+05:30</lastmod>
+        <lastmod>2013-12-26T23:55:05+05:30</lastmod>
     </url>
     <url>
         <loc>http://akagr.github.io/blog/2013/12/24/building-vim-from-source/</loc>
-        <lastmod>2013-12-24T17:58:59+05:30</lastmod>
+        <lastmod>2013-12-26T23:55:05+05:30</lastmod>
     </url>
     <url>
         <loc>http://akagr.github.io/know-me/</loc>
-        <lastmod>2013-12-17T12:45:11+05:30</lastmod>
-    </url>
-    <url>
-        <loc>http://akagr.github.io/robots.txt</loc>
-        <lastmod>2013-12-11T16:37:51+05:30</lastmod>
+        <lastmod>2013-12-26T23:58:06+05:30</lastmod>
     </url>
     <url>
         <loc>http://akagr.github.io/</loc>
-        <lastmod>2013-12-24T17:58:59+05:30</lastmod>
+        <lastmod>2013-12-26T23:55:05+05:30</lastmod>
     </url>
     <url>
         <loc>http://akagr.github.io/blog/archives/</loc>
-        <lastmod>2013-12-24T17:58:59+05:30</lastmod>
+        <lastmod>2013-12-26T23:58:06+05:30</lastmod>
+    </url>
+    <url>
+        <loc>http://akagr.github.io/robots.txt</loc>
+        <lastmod>2013-12-11T23:05:23+05:30</lastmod>
     </url>
 </urlset>
