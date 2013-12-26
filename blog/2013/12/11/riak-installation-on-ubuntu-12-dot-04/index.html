@@ -138,6 +138,10 @@ Next steps are fairly simple.</p>
 			var width = ($($('article')[0]).width())-20;
       var code_blocks = $('pre:not(.line-numbers)');
       code_blocks.css("width", ""+width+"px")
+      $(window).resize(function(){
+			var width = ($($('article')[0]).width())-20;
+      code_blocks.css("width", ""+width+"px")
+      })
 		});
 	</script>
 </html>
