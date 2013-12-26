@@ -151,18 +151,7 @@
 			$('code').addClass('prettyprint');
 			$('pre code').addClass('linenums');
 			
-			// Copy to clipboard with button
-			$('pre:has(code)').prepend(function(){
-				return '<div class="clip-btn">copy to clipboard</div>';
-			});
-			$('.clip-btn').zclip({
-				path:'/js/ZeroClipboard.swf',
-				copy: $(this).next('code').text(),
-				afterCopy: function(){
-					$(this).replaceWith('<div class="clip-btn">copied!');
-					}
-        });
-      var width = ($($('article')[0]).width());
+			var width = ($($('article')[0]).width());
       width=parseInt((80*width)/100);
       var code_blocks = $('pre:not(.line-numbers)');
       code_blocks.css("width", ""+width+"px")
