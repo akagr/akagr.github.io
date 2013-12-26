@@ -209,7 +209,7 @@ pre {
 	@include border-radius(4px);
 	line-height: $code-block-line-height;
 	background-color: $code-background-color;
-	overflow: hidden;
+	overflow: auto;
 	
 	.clip-btn {
 		position: absolute;
