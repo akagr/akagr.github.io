@@ -520,8 +520,7 @@ Next steps are fairly simple.</p>
 			$('code').addClass('prettyprint');
 			$('pre code').addClass('linenums');
 			
-			var width = ($($('article')[0]).width());
-      width=parseInt((80*width)/100);
+			var width = ($($('article')[0]).width())-20;
       var code_blocks = $('pre:not(.line-numbers)');
       code_blocks.css("width", ""+width+"px")
 		});
