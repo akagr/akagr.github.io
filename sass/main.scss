@@ -233,7 +233,7 @@ code {
 	font-size: $code-font-size;
 	
 	}
-	
+.code{margin:0 !important;}	
 /* Inline code */
 p > code {
 	border: 1px solid $light-gray;
