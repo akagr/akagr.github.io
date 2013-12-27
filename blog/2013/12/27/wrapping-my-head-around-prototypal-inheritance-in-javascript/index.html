@@ -1,0 +1,291 @@
+
+<!doctype html>
+<!-- START OF _layouts/default.html -->
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" >
+		<meta content="width=device-width,initial-scale=1" name="viewport">
+		<meta content="A blog about what catches my fancy although most probably it will have something to do with code." name="description">
+		<meta content="Akash Agrawal" name="author">
+		
+		<title>Wrapping my head around prototypal inheritance in javascript &mdash; Akash Agrawal</title>
+		
+		<!-- Styles -->
+		<link href="/stylesheets/main.css" rel="stylesheet">
+		
+		<!-- Google webfonts -->
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Cousine">
+		
+		<!-- jQuery and plugins -->
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script src="/js/jquery.zclip.min.js"></script>
+		
+		<!-- Syntax highlighter -->
+		<link href="/stylesheets/prettify-hemisu.css" type="text/css" rel="stylesheet" />
+		<script type="text/javascript" src="/js/prettify.js"></script>
+		
+		<!--<link href="http://feeds.feedburner.com/turkeltaub" rel="alternate" title="Akash Agrawal" type="application/rss+xml" />-->
+		
+	</head>
+	<body onload="prettyPrint()">
+	
+		<div class="wrap">
+	
+			<header>
+				<div class="title">Akash Agrawal</div>
+				
+				<div class="navi">
+					<ul>
+						<li><a href="/">Blog</a></li>
+						<li><a href="/blog/archives">Archives</a></li>
+						<li><a href="/know-me">Know Me</a></li>
+					</ul>
+				</div> <!-- // .navi -->
+			</header>
+		
+				<!-- START OF _layouts/post.html -->
+
+<!-- START OF _includes/article.html -->
+<article>
+	<header>
+		<h1><a href="/blog/2013/12/27/wrapping-my-head-around-prototypal-inheritance-in-javascript/">Wrapping my head around prototypal inheritance in javascript</a></h1>
+		<time>27 December 2013</time>
+	</header>
+		<div class="content">
+			<p>Javascript does not have the usual class-object model. I know some C++, some more Java and lots of Ruby. All of them follow classical object model which was kinda etched in my mind now. As such, the object model of javascript took a lot of time for me to wrap my stubborn head around.</p>
+
+<p>So have I mastered it? Not at all. I have just started with serious js and need to practise. But I think I have a fairly good idea of how it works and what goes where. So here goes.</p>
+
+<h2>So what exactly is a prototype?</h2>
+
+<p>Prototype is an object which acts as a base for other objects to inherit from. if that sounds confusing, consider an example. If we have a class named Animal, what will the Human be? If you think Human is also a class, what would your father be? An object? But you inherit from him too, right?</p>
+
+<p>This was the eureka for me when I realized we can do without classes in our life. Object oriented programming was designed to mirror real-world. And there are no classes here. Everything is an object. We can say that two objects are similar, like two people. But this doesn&rsquo;t mean someone 3-d printed them according to a design called class. Those people came from other people, inheriting things, modifying and adding stuff on the way. See it?</p>
+
+<blockquote><p>In real world, classes don&#8217;t spawn objects, objects do.</p></blockquote>
+
+
+<p>This outlook feels more natural to me now. And if you want to get the js object model, you need to come at it with an open mind. Don&rsquo;t try and find answers of prototypal model in the classical one and vice-versa.</p>
+
+<h2>So how does it work in javascript?</h2>
+
+<p>Let&rsquo;s see some code.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">Animal</span><span class="p">(</span><span class="nx">no_of_legs</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">legs</span> <span class="o">=</span> <span class="nx">no_of_legs</span>
+</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">how_many_legs</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">legs</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">strange</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Animal</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'><span class="nx">strange</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="p">{</span> <span class="nx">legs</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">how_many_legs</span><span class="o">:</span> <span class="p">[</span><span class="nb">Function</span><span class="p">]</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here&rsquo;s the break-up. Animal is an ordinary function. Don&rsquo;t mind the capital A. Call it what you want. Doesn&rsquo;t matter at all. So what&rsquo;s new? <code>new</code> is a keyword which creates a generic object <code>{}</code> and runs the given function on it. Nothing fancy. Let&rsquo;s write the last lines of the above examples somewhat differently to show you what I mean.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">strange</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1">// we create a generic object</span>
+</span><span class='line'><span class="nx">Animal</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">strange</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">// we run the function on it</span>
+</span><span class='line'><span class="nx">strange</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="p">{</span> <span class="nx">legs</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">how_many_legs</span><span class="o">:</span> <span class="p">[</span><span class="nb">Function</span><span class="p">]</span> <span class="p">}</span> <span class="c1">// Voila!</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>See how we mimicked the behavior of <code>new</code>? We now have a strange object with a couple of properties. We kinda initilized the object by giving it some pieces to own via <code>Animal()</code>. And we have a name for such kind of functions, do we not? We call them constructors. But don&rsquo;t let the name fool you. They really are ordinary functions.</p>
+
+<p>We now know how we can create similar objects by using constructors. Let&rsquo;s create a couple more.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">normal</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Animal</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</span><span class='line'><span class="nx">wtf</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Animal</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>All these animals have common properties namely <code>legs</code> and <code>how_many_legs()</code>. We can definitely specialize these objects by assigning new un-related properties to each of them individually.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">strange</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s2">&quot;Strange&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">strange</span><span class="p">.</span><span class="nx">name</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="s1">&#39;Strange&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">normal</span><span class="p">.</span><span class="nx">name</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="kc">undefined</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">wtf</span><span class="p">.</span><span class="nx">name</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="kc">undefined</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There is a problem with above code. Each new object has its own copy of <code>legs</code> which is necessary to differentiate their states. But they also have their own separate copies of <code>how_many_legs()</code> method. Method body remains same for all objects. So how do we share same method object between various animal objects?</p>
+
+<h2>Prototypes</h2>
+
+<p>Each function in js is potentially a constructor. Just write a silly one and use <code>new your_silly_method()</code> and it will create an object. If your method gives it some properties, fine, otherwise it will still create an empty <code>{}</code>. Similarly, each function also has a property called <code>prototype</code>. The contents of this property are shared by all the objects created through this function.</p>
+
+<blockquote><p>Each function has a property called &#8216;prototype&#8217;. If the function is used as a constructor to create objects, then the contents of its &#8216;prototype&#8217; property will be shared by all those objects.</p></blockquote>
+
+
+<p>This is probably the most important line of this post. Keep it clear in your head. Here&rsquo;s how we use prototypes.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">Animal</span><span class="p">(</span><span class="nx">no_of_legs</span><span class="p">){</span>
+</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">legs</span> <span class="o">=</span> <span class="nx">no_of_legs</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">Animal</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">how_many_legs</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">legs</span><span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">strange</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Animal</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">strange</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="p">{</span> <span class="nx">legs</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Animal</span><span class="p">.</span><span class="nx">prototype</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="p">{</span> <span class="nx">how_many_legs</span><span class="o">:</span> <span class="p">[</span><span class="nb">Function</span><span class="p">]</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">strange</span><span class="p">.</span><span class="nx">how_many_legs</span><span class="p">(){</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">legs</span><span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="mi">1</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>See how the <code>how_many_legs()</code> function is no more a part of <code>strange</code>? Instead it resides in <code>Animal.prototype</code> and is thus callable from <code>strange</code>.</p>
+
+<p>Experiment a bit with prototypes. If you got your brains around the above concept, you&rsquo;re are already almost there.</p>
+
+<h2>Inheritance. Finally.</h2>
+
+<p>So what do we need to implement inheritance. Only a couple of things actually.</p>
+
+<ol>
+<li>We need to share the properties of parent with child.</li>
+<li>A child needs to be able to pass the baton to parent in case something does not exist with it. We will need a pointer of sorts for this.</li>
+</ol>
+
+
+<p>Here&rsquo;s how we get the first requirement, i.e. share Animal&rsquo;s properties with its children</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">Human</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">){</span>
+</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Human</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Animal</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">i</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Human</span><span class="p">(</span><span class="s2">&quot;Akash&quot;</span><span class="p">,</span> <span class="mi">23</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now take a moment and think about what all things <code>you</code> will have access to. Here&rsquo;s what we have.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">i</span><span class="p">.</span><span class="nx">name</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="s2">&quot;Akash&quot;</span> <span class="c1">// as expected</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">i</span><span class="p">.</span><span class="nx">age</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="mi">23</span> <span class="c1">// also expected</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Human</span><span class="p">.</span><span class="nx">prototype</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="p">{</span> <span class="nx">legs</span><span class="o">:</span> <span class="mi">2</span> <span class="p">}</span> <span class="c1">// new Animal(2)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// therefore</span>
+</span><span class='line'><span class="nx">i</span><span class="p">.</span><span class="nx">legs</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="mi">2</span> <span class="c1">// see it?</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you are still with me, you deserve a pat on back. This is the purest most undiluted method of implementing inheritance in javascript. There are other tricks too, but all of them have their roots here. We still have one last thing to see.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">i</span><span class="p">.</span><span class="nx">how_namy_legs</span><span class="p">()</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="mi">2</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So how does this work? When interpreter does not find <code>how_many_legs()</code> in <code>i</code>, it looks it in its prototype. It founds that <code>i's</code> prototype is an Animal object which does have access to the said function. You can create a child object of Human and the chain will be continue the same way.</p>
+
+<p>Thanks for reading. Sound off below if you think something&rsquo;s amiss or incorrect.</p>
+
+		</div>
+	<footer>
+		
+
+
+		
+
+
+
+
+	
+	
+	</footer>
+	
+</article>
+<!-- END OF _includes/article.html -->
+
+
+<section id="comments">
+<div id="disqus_thread"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+<!-- END OF _/layouts/post.html -->
+
+		
+			<footer>
+				Copyright &copy; 2013
+
+	Akash  Agrawal
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+      var disqus_shortname = 'akagr';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://akashagrawal.me/blog/2013/12/27/wrapping-my-head-around-prototypal-inheritance-in-javascript/';
+        var disqus_url = 'http://akashagrawal.me/blog/2013/12/27/wrapping-my-head-around-prototypal-inheritance-in-javascript/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }());
+    });
+</script>
+
+
+
+			</footer>
+			
+		</div> <!-- // .wrap -->
+	</body>
+	<script>
+		$(document).ready(function() {
+			// Make images center
+			$('p:has(img)').css('text-align', 'center');
+			
+			// Add the image's title attribute as a caption
+			$('p:has(img)').append(function () {
+				return '<div class="caption">' + $('img', this).attr('title') + '</div>';
+			});
+			
+			// Prettify code
+			$('code').addClass('prettyprint');
+			$('pre code').addClass('linenums');
+			
+			var width = ($($('article')[0]).width())-20;
+      var code_blocks = $('pre:not(.line-numbers)');
+      code_blocks.css("width", ""+width+"px")
+      $(window).resize(function(){
+			var width = ($($('article')[0]).width())-20;
+      code_blocks.css("width", ""+width+"px")
+      })
+		});
+	</script>
+</html>
+<!-- END OF _layouts/default.html -->
