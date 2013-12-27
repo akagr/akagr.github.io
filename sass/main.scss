@@ -234,6 +234,15 @@ code {
 	
 	}
 .code{margin:0 !important;}	
+.gist-file{
+  font-size:0.8em;
+  border-radius: 4px !important;
+  .gist-data{
+    background: #fff !important;
+    td.line-numbers{background:#fff !important;}
+    pre{overflow:hidden !important;}
+  }
+}
 /* Inline code */
 p > code {
 	border: 1px solid $light-gray;
