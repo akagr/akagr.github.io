@@ -1,0 +1,183 @@
+
+<!doctype html>
+<!-- START OF _layouts/default.html -->
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" >
+		<meta content="width=device-width,initial-scale=1" name="viewport">
+		<meta content="A blog about what catches my fancy although most probably it will have something to do with code." name="description">
+		<meta content="Akash Agrawal" name="author">
+		
+		<title>All posts &mdash; Akash Agrawal</title>
+		
+		<!-- Styles -->
+		<link href="/stylesheets/main.css" rel="stylesheet">
+		
+		<!-- Google webfonts -->
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Cousine">
+		
+		<!-- jQuery and plugins -->
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script src="/js/jquery.zclip.min.js"></script>
+		
+		<!-- Syntax highlighter -->
+		<link href="/stylesheets/prettify-hemisu.css" type="text/css" rel="stylesheet" />
+		<script type="text/javascript" src="/js/prettify.js"></script>
+		
+		<!--<link href="http://feeds.feedburner.com/turkeltaub" rel="alternate" title="Akash Agrawal" type="application/rss+xml" />-->
+		
+	</head>
+	<body onload="prettyPrint()">
+	
+		<div class="wrap">
+	
+			<header>
+				<div class="title">Akash Agrawal</div>
+				
+				<div class="navi">
+					<ul>
+						<li><a href="/">Blog</a></li>
+						<li><a href="/blog/archives">Archives</a></li>
+						<li><a href="/know-me">Know Me</a></li>
+					</ul>
+				</div> <!-- // .navi -->
+			</header>
+		
+				<!-- START OF _layouts/page.html -->
+<article>
+<!-- BEGIN blog/archives/index.html -->
+
+
+
+
+
+  
+	<div class="cat-year">2013</div>
+
+
+
+  
+	<div class="cat-month">December</div>
+
+
+<!-- BEGIN _includes/archive_post.html -->
+
+<a class="title-listing" href="/blog/2013/12/24/building-vim-from-source/">Building Vim from source</a><br>
+<!-- END _includes/archive_post.html -->
+
+
+
+
+
+
+
+
+
+<!-- BEGIN _includes/archive_post.html -->
+
+<a class="title-listing" href="/blog/2013/12/20/rudimentary-sessions-for-vim/">Rudimentary Sessions for Vim</a><br>
+<!-- END _includes/archive_post.html -->
+
+
+
+
+
+
+
+
+
+<!-- BEGIN _includes/archive_post.html -->
+
+<a class="title-listing" href="/blog/2013/12/17/my-vimrc/">My Vimrc</a><br>
+<!-- END _includes/archive_post.html -->
+
+
+
+
+
+
+
+
+
+<!-- BEGIN _includes/archive_post.html -->
+
+<a class="title-listing" href="/blog/2013/12/13/finally-gonna-date-node-dot-js/">Finally gonna date node.js</a><br>
+<!-- END _includes/archive_post.html -->
+
+
+
+
+
+
+
+
+
+<!-- BEGIN _includes/archive_post.html -->
+
+<a class="title-listing" href="/blog/2013/12/11/riak-installation-on-ubuntu-12-dot-04/">Riak: Installation on Ubuntu 12.04</a><br>
+<!-- END _includes/archive_post.html -->
+
+
+
+<!-- END blog/archives/index.html -->
+
+</article>
+<!-- END OF _layouts/page.html -->
+
+		
+			<footer>
+				Copyright &copy; 2013
+
+	Akash  Agrawal
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+      var disqus_shortname = 'akagr';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }());
+    });
+</script>
+
+
+
+			</footer>
+			
+		</div> <!-- // .wrap -->
+	</body>
+	<script>
+		$(document).ready(function() {
+			// Make images center
+			$('p:has(img)').css('text-align', 'center');
+			
+			// Add the image's title attribute as a caption
+			$('p:has(img)').append(function () {
+				return '<div class="caption">' + $('img', this).attr('title') + '</div>';
+			});
+			
+			// Prettify code
+			$('code').addClass('prettyprint');
+			$('pre code').addClass('linenums');
+			
+			var width = ($($('article')[0]).width())-20;
+      var code_blocks = $('pre:not(.line-numbers)');
+      code_blocks.css("width", ""+width+"px")
+      $(window).resize(function(){
+			var width = ($($('article')[0]).width())-20;
+      code_blocks.css("width", ""+width+"px")
+      })
+		});
+	</script>
+</html>
+<!-- END OF _layouts/default.html -->

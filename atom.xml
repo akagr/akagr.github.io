@@ -1,62 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
 
-<!doctype html>
-<!-- START OF _layouts/default.html -->
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" >
-		<meta content="width=device-width,initial-scale=1" name="viewport">
-		<meta content="A blog about what catches my fancy although most probably it will have something to do with code." name="description">
-		<meta content="Akash Agrawal" name="author">
+	<title><![CDATA[Akash Agrawal]]></title>
+	<link href="http://akagr.github.io/atom.xml" rel="self"/>
+	<link href="http://akagr.github.io/"/>
+	<updated>2013-12-27T16:21:28+05:30</updated>
+	<id>http://akagr.github.io/</id>
+	<author>
+		<name><![CDATA[Akash  Agrawal]]></name>
 		
-		<title>Akash Agrawal</title>
-		
-		<!-- Styles -->
-		<link href="/stylesheets/main.css" rel="stylesheet">
-		
-		<!-- Google webfonts -->
-		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
-		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Cousine">
-		
-		<!-- jQuery and plugins -->
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-		<script src="/js/jquery.zclip.min.js"></script>
-		
-		<!-- Syntax highlighter -->
-		<link href="/stylesheets/prettify-hemisu.css" type="text/css" rel="stylesheet" />
-		<script type="text/javascript" src="/js/prettify.js"></script>
-		
-		<!--<link href="http://feeds.feedburner.com/turkeltaub" rel="alternate" title="Akash Agrawal" type="application/rss+xml" />-->
-		
-	</head>
-	<body onload="prettyPrint()">
+	</author>
+	<generator uri="http://octopress.org/">Octopress</generator>
+
 	
-		<div class="wrap">
-	
-			<header>
-				<div class="title">Akash Agrawal</div>
+	<entry>
+		
+			<title type="html"><![CDATA[Building Vim from source]]></title>
+		
+		<link href="http://akagr.github.io/blog/2013/12/24/building-vim-from-source/"/>
+		<updated>2013-12-24T16:26:54+05:30</updated>
+		<id>http://akagr.github.io/blog/2013/12/24/building-vim-from-source</id>
+		<content type="html">
+			<![CDATA[
 				
-				<div class="navi">
-					<ul>
-						<li><a href="/">Blog</a></li>
-						<li><a href="/blog/archives">Archives</a></li>
-						<li><a href="/know-me">Know Me</a></li>
-					</ul>
-				</div> <!-- // .navi -->
-			</header>
-		
-				<!-- START OF index.html -->
-
-	
-		
-		<!-- START OF _includes/article.html -->
-<article>
-	<header>
-		<h1><a href="/blog/2013/12/24/building-vim-from-source/">Building Vim from source</a></h1>
-		<time>24 December 2013</time>
-	</header>
-		<div class="content">
-			<p>Continuing my journey to vim enlightment, I decided to build it from source since the one I installed from apt had begun panting on large files. I won&rsquo;t lie, compiling from source gives me that bad-ass father of god kinda feeling; so that&rsquo;s two for 2. Anyways let&rsquo;s get started. The steps given here will install console vim with perl, python, ruby and tcl enabled. I did it on my Ubuntu precise but it should work for all things nix.</p>
+					<p></p>
+				
+			]]>
+			<![CDATA[<p>Continuing my journey to vim enlightment, I decided to build it from source since the one I installed from apt had begun panting on large files. I won&rsquo;t lie, compiling from source gives me that bad-ass father of god kinda feeling; so that&rsquo;s two for 2. Anyways let&rsquo;s get started. The steps given here will install console vim with perl, python, ruby and tcl enabled. I did it on my Ubuntu precise but it should work for all things nix.</p>
 
 <p><code>build-dep</code> and <code>vim-gnome</code> are listed as dependencies for console vim. Better install those first. Also for things like ruby, python etc, you will have to install those too if you want to include their support.</p>
 
@@ -93,34 +63,24 @@
 To check the fruits of your toil, use <code>vim --version</code> and it will show you all things it installed as well as your name sitting there looking rad.</p>
 
 <p>I nailed it in my first try and wrinting this post from my newly installed copy. Let me know if the thing doesn&rsquo;t work for you.</p>
-
-		</div>
-	<footer>
+]]>
+		</content>
+	</entry>
+	
+	<entry>
 		
-
-
+			<title type="html"><![CDATA[Rudimentary Sessions for Vim]]></title>
 		
-
-
-
-
-	
-	
-	</footer>
-	
-</article>
-<!-- END OF _includes/article.html -->
-
-	
-		
-		<!-- START OF _includes/article.html -->
-<article>
-	<header>
-		<h1><a href="/blog/2013/12/20/rudimentary-sessions-for-vim/">Rudimentary Sessions for Vim</a></h1>
-		<time>20 December 2013</time>
-	</header>
-		<div class="content">
-			<p>I have been taking a lot of vim with coffee lately. I really like the raw power of this editor. Up till now I have found replacement commands, mappings and plugins for most of my daily used features. Still, vim does not see projects and there is no automatic sessions support built-in.</p>
+		<link href="http://akagr.github.io/blog/2013/12/20/rudimentary-sessions-for-vim/"/>
+		<updated>2013-12-20T10:26:52+05:30</updated>
+		<id>http://akagr.github.io/blog/2013/12/20/rudimentary-sessions-for-vim</id>
+		<content type="html">
+			<![CDATA[
+				
+					<p></p>
+				
+			]]>
+			<![CDATA[<p>I have been taking a lot of vim with coffee lately. I really like the raw power of this editor. Up till now I have found replacement commands, mappings and plugins for most of my daily used features. Still, vim does not see projects and there is no automatic sessions support built-in.</p>
 
 <p>The plugins on offer are excellent in their own right but they did not cut it for me. Plus, I really want to get into hacking editor part and it was a nice excuse to try out some of the vimscript I learnt.</p>
 
@@ -202,34 +162,24 @@ To check the fruits of your toil, use <code>vim --version</code> and it will sho
 <p>If you want to give it a go, use your favorite vim bundle manager to install it from <a href="https://github.com/akagr/vim-rudimentary-sessions">my git repo here</a>.</p>
 
 <p>If you have any suggestions or issues, take it to the github issue tracker. It ain&rsquo;t there for nothing.</p>
-
-		</div>
-	<footer>
+]]>
+		</content>
+	</entry>
+	
+	<entry>
 		
-
-
+			<title type="html"><![CDATA[My Vimrc]]></title>
 		
-
-
-
-
-	
-	
-	</footer>
-	
-</article>
-<!-- END OF _includes/article.html -->
-
-	
-		
-		<!-- START OF _includes/article.html -->
-<article>
-	<header>
-		<h1><a href="/blog/2013/12/17/my-vimrc/">My Vimrc</a></h1>
-		<time>17 December 2013</time>
-	</header>
-		<div class="content">
-			<p>I love using sublime text. But there is something about vim that just keeps me pulling back. It&rsquo;s not my default editor of choice (yet) but I still enjoy writing stuff with it when I am not working. This blog is a fine example. Following is my vim config file. Some settings are there thanks to authors of some excellent blogs. Others, I have written myself out of my own needs. One thing&rsquo;s for sure, when it comes to customizability, vim is the grand-daddy of them all.</p>
+		<link href="http://akagr.github.io/blog/2013/12/17/my-vimrc/"/>
+		<updated>2013-12-17T12:46:00+05:30</updated>
+		<id>http://akagr.github.io/blog/2013/12/17/my-vimrc</id>
+		<content type="html">
+			<![CDATA[
+				
+					<p></p>
+				
+			]]>
+			<![CDATA[<p>I love using sublime text. But there is something about vim that just keeps me pulling back. It&rsquo;s not my default editor of choice (yet) but I still enjoy writing stuff with it when I am not working. This blog is a fine example. Following is my vim config file. Some settings are there thanks to authors of some excellent blogs. Others, I have written myself out of my own needs. One thing&rsquo;s for sure, when it comes to customizability, vim is the grand-daddy of them all.</p>
 
 <div><script src='https://gist.github.com/8001153.js'></script>
 <noscript><pre><code>&quot; Akash Agrawal akashagrawal.me
@@ -368,34 +318,24 @@ augroup END
 
 
 <p>I know I really need some plug-ins. This file, like everybody else&rsquo;s, is a work in progress. Feel free to rip it off if you are starting out with vim. You can thank me by suggesting some great plug-ins or hacks which you dig in the comments below.</p>
-
-		</div>
-	<footer>
+]]>
+		</content>
+	</entry>
+	
+	<entry>
 		
-
-
+			<title type="html"><![CDATA[Finally gonna date node.js]]></title>
 		
-
-
-
-
-	
-	
-	</footer>
-	
-</article>
-<!-- END OF _includes/article.html -->
-
-	
-		
-		<!-- START OF _includes/article.html -->
-<article>
-	<header>
-		<h1><a href="/blog/2013/12/13/finally-gonna-date-node-dot-js/">Finally gonna date node.js</a></h1>
-		<time>13 December 2013</time>
-	</header>
-		<div class="content">
-			<p>When I first heard of node.js, I was in graduation just getting into rails. But I seriously took notice when it displaced rails as the most popular repo on github. Speed whore as I am, I found event-driven non-blocking I/O particularly seducing.</p>
+		<link href="http://akagr.github.io/blog/2013/12/13/finally-gonna-date-node-dot-js/"/>
+		<updated>2013-12-13T17:51:17+05:30</updated>
+		<id>http://akagr.github.io/blog/2013/12/13/finally-gonna-date-node-dot-js</id>
+		<content type="html">
+			<![CDATA[
+				
+					<p></p>
+				
+			]]>
+			<![CDATA[<p>When I first heard of node.js, I was in graduation just getting into rails. But I seriously took notice when it displaced rails as the most popular repo on github. Speed whore as I am, I found event-driven non-blocking I/O particularly seducing.</p>
 
 <p>I knew some elementary javascript and even at my work-ex of 7 months, never really used pure js. So I guessed, that just like ruby, I will definitely need to learn javascript a little. The world will be written in javascript in near future. Might as well start speaking it now.</p>
 
@@ -404,34 +344,24 @@ augroup END
 <p>About the only downside I can think of it is is that it does not have eyes for anything other than MongoDb. So I can&rsquo;t just start writing code for my projects.</p>
 
 <p>A nodejs project should be coming my way in sometime. I am hopeful of that. I will be spending as much time as I can manage with node till then. Should be an interesting journey.</p>
-
-		</div>
-	<footer>
+]]>
+		</content>
+	</entry>
+	
+	<entry>
 		
-
-
+			<title type="html"><![CDATA[Riak: Installation on Ubuntu 12.04]]></title>
 		
-
-
-
-
-	
-	
-	</footer>
-	
-</article>
-<!-- END OF _includes/article.html -->
-
-	
-		
-		<!-- START OF _includes/article.html -->
-<article>
-	<header>
-		<h1><a href="/blog/2013/12/11/riak-installation-on-ubuntu-12-dot-04/">Riak: Installation on Ubuntu 12.04</a></h1>
-		<time>11 December 2013</time>
-	</header>
-		<div class="content">
-			<p>Riak is a relatively new kid on the block of NoSQL territory. It is based on principles of high availability, fault-tolerance, automatic replication and load balancing. Sounds like a deal for your next project&hellip; right? I got interested in one of my co-worker&rsquo;s project which is based on riak and decided to take it for a spin. Here is my first account with riak where I installed it on my Ubuntu 12.04 precise.</p>
+		<link href="http://akagr.github.io/blog/2013/12/11/riak-installation-on-ubuntu-12-dot-04/"/>
+		<updated>2013-12-11T17:47:38+05:30</updated>
+		<id>http://akagr.github.io/blog/2013/12/11/riak-installation-on-ubuntu-12-dot-04</id>
+		<content type="html">
+			<![CDATA[
+				
+					<p></p>
+				
+			]]>
+			<![CDATA[<p>Riak is a relatively new kid on the block of NoSQL territory. It is based on principles of high availability, fault-tolerance, automatic replication and load balancing. Sounds like a deal for your next project&hellip; right? I got interested in one of my co-worker&rsquo;s project which is based on riak and decided to take it for a spin. Here is my first account with riak where I installed it on my Ubuntu 12.04 precise.</p>
 
 <p>First I needed to get all the prerequisites right. This involves some packages and erlang. Now I already got error with erlang OTP R14 so I decided to go with the latest R16 (B02 to be exact).</p>
 
@@ -466,87 +396,8 @@ Next steps are fairly simple.</p>
 <p>If the output goes pong, you are all set to get your explorer cap on.</p>
 
 <p>In my case, there were lots of head-scratching due to incompatibilities between erlang, riak sources yada yada. Hopefully the process goes smoothly for you. Hoot off below if you are having problems</p>
-
-		</div>
-	<footer>
-		
-
-
-		
-
-
-
-
+]]>
+		</content>
+	</entry>
 	
-	
-	</footer>
-	
-</article>
-<!-- END OF _includes/article.html -->
-
-	
-	
-<div class="pagination">
-	
-	
-	<span class="total">1 of 1</span>
-	
-	
-</div>
-<!-- END OF index.html -->
-
-		
-			<footer>
-				Copyright &copy; 2013
-
-	Akash  Agrawal
-
-
-
-
-<script type="text/javascript">
-    $(document).ready(function(){
-      var disqus_shortname = 'akagr';
-      
-        
-        var disqus_script = 'count.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      }());
-    });
-</script>
-
-
-
-			</footer>
-			
-		</div> <!-- // .wrap -->
-	</body>
-	<script>
-		$(document).ready(function() {
-			// Make images center
-			$('p:has(img)').css('text-align', 'center');
-			
-			// Add the image's title attribute as a caption
-			$('p:has(img)').append(function () {
-				return '<div class="caption">' + $('img', this).attr('title') + '</div>';
-			});
-			
-			// Prettify code
-			$('code').addClass('prettyprint');
-			$('pre code').addClass('linenums');
-			
-			var width = ($($('article')[0]).width())-20;
-      var code_blocks = $('pre:not(.line-numbers)');
-      code_blocks.css("width", ""+width+"px")
-      $(window).resize(function(){
-			var width = ($($('article')[0]).width())-20;
-      code_blocks.css("width", ""+width+"px")
-      })
-		});
-	</script>
-</html>
-<!-- END OF _layouts/default.html -->
+</feed>
