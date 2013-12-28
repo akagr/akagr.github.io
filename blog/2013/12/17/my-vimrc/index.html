@@ -74,18 +74,18 @@ call vundle#rc()
 &quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
 &quot; Vundles
 &quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
-Bundle 'gmarik/vundle'
+Bundle &#39;gmarik/vundle&#39;
 
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'Raimondi/delimitMate'
-Bundle 'tpope/vim-fugitive'
-Bundle 'kien/ctrlp.vim'
-Bundle 'terryma/vim-multiple-cursors'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'akagr/vim-rudimentary-sessions'
-Bundle 'vim-scripts/scratch.vim'
-Bundle 'godlygeek/tabular'
-Bundle 'mileszs/ack.vim'
+Bundle &#39;altercation/vim-colors-solarized&#39;
+Bundle &#39;Raimondi/delimitMate&#39;
+Bundle &#39;tpope/vim-fugitive&#39;
+Bundle &#39;kien/ctrlp.vim&#39;
+Bundle &#39;terryma/vim-multiple-cursors&#39;
+Bundle &#39;Valloric/YouCompleteMe&#39;
+Bundle &#39;akagr/vim-rudimentary-sessions&#39;
+Bundle &#39;vim-scripts/scratch.vim&#39;
+Bundle &#39;godlygeek/tabular&#39;
+Bundle &#39;mileszs/ack.vim&#39;
 
 &quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
 &quot; General
@@ -128,15 +128,15 @@ function! ToggleVExplorer()
     let expl_win_num = bufwinnr(t:expl_buf_num)
     if expl_win_num != -1
       let cur_win_nr = winnr()
-      exec expl_win_num . 'wincmd w'
+      exec expl_win_num . &#39;wincmd w&#39;
       close
-      exec cur_win_nr . 'wincmd w'
+      exec cur_win_nr . &#39;wincmd w&#39;
       unlet t:expl_buf_num
     else
       unlet t:expl_buf_num
     endif
   else
-    exec '1wincmd w'
+    exec &#39;1wincmd w&#39;
     Vexplore
     let t:expl_buf_num = bufnr(&quot;%&quot;)
   endif
@@ -149,12 +149,12 @@ let mapleader = &quot;,&quot;
 let g:mapleader = &quot;,&quot;
 
 let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_next_key='&lt;C-n&gt;'
-let g:multi_cursor_quit_key='&lt;Esc&gt;'
+let g:multi_cursor_next_key=&#39;&lt;C-n&gt;&#39;
+let g:multi_cursor_quit_key=&#39;&lt;Esc&gt;&#39;
 
-let g:ctrlp_map = '&lt;c-p&gt;'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_map = &#39;&lt;c-p&gt;&#39;
+let g:ctrlp_cmd = &#39;CtrlP&#39;
+let g:ctrlp_working_path_mode = &#39;ra&#39;
 
 map &lt;silent&gt; &lt;C-E&gt; :call ToggleVExplorer()&lt;CR&gt;
 

@@ -58,15 +58,15 @@
 		<div class="content">
 			<p>Javascript does not have the usual class-object model. I know some C++, some more Java and lots of Ruby. All of them follow classical object model which was kinda etched in my mind now. As such, the object model of javascript took a lot of time for me to wrap my stubborn head around.</p>
 
-<p>So have I mastered it? Not at all. I have just started with serious js and need to practise. But I think I have a fairly good idea of how it works and what goes where. So here goes.</p>
+<p>So have I mastered it? Not at all. I have just started with serious js and need to practice. But I think I have a fairly good idea of how it works and what goes where. So here goes.</p>
 
-<h2>So what exactly is a prototype?</h2>
+<h2>So what exactly prototypal means?</h2>
 
 <p>Prototype is an object which acts as a base for other objects to inherit from. if that sounds confusing, consider an example. If we have a class named Animal, what will the Human be? If you think Human is also a class, what would your father be? An object? But you inherit from him too, right?</p>
 
-<p>This was the eureka for me when I realized we can do without classes in our life. Object oriented programming was designed to mirror real-world. And there are no classes here. Everything is an object. We can say that two objects are similar, like two people. But this doesn&rsquo;t mean someone 3-d printed them according to a design called class. Those people came from other people, inheriting things, modifying and adding stuff on the way. See it?</p>
+<p>Object oriented programming was designed to mirror real-world. And there are no classes here. Everything is an object. We can say that two objects are similar, like two people. But this doesn&rsquo;t mean someone 3-d printed them according to a design called class. Those people came from other people, inheriting things, modifying and adding stuff on the way. See it?</p>
 
-<blockquote><p>In real world, classes don&#8217;t spawn objects, objects do.</p></blockquote>
+<blockquote><p>In real world, classes don&#8217;t spawn objects. Objects do.</p></blockquote>
 
 
 <p>This outlook feels more natural to me now. And if you want to get the js object model, you need to come at it with an open mind. Don&rsquo;t try and find answers of prototypal model in the classical one and vice-versa.</p>
@@ -75,7 +75,7 @@
 
 <p>Let&rsquo;s see some code.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">Animal</span><span class="p">(</span><span class="nx">no_of_legs</span><span class="p">)</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">Animal</span><span class="p">(</span><span class="nx">no_of_legs</span><span class="p">){</span>
 </span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">legs</span> <span class="o">=</span> <span class="nx">no_of_legs</span>
 </span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">how_many_legs</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
 </span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">legs</span><span class="p">)</span>
@@ -96,7 +96,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>See how we mimicked the behavior of <code>new</code>? We now have a strange object with a couple of properties. We kinda initilized the object by giving it some pieces to own via <code>Animal()</code>. And we have a name for such kind of functions, do we not? We call them constructors. But don&rsquo;t let the name fool you. They really are ordinary functions.</p>
+<p>See how we mimicked the behavior of <code>new</code>? We now have a strange object with a couple of properties. We kinda initialized the object by giving it some pieces to own via <code>Animal()</code>. And we have a name for such kind of functions, do we not? We call them constructors. But don&rsquo;t let the name fool you. They really are ordinary functions.</p>
 
 <p>We now know how we can create similar objects by using constructors. Let&rsquo;s create a couple more.</p>
 
@@ -124,7 +124,7 @@
 
 <h2>Prototypes</h2>
 
-<p>Each function in js is potentially a constructor. Just write a silly one and use <code>new your_silly_method()</code> and it will create an object. If your method gives it some properties, fine, otherwise it will still create an empty <code>{}</code>. Similarly, each function also has a property called <code>prototype</code>. The contents of this property are shared by all the objects created through this function.</p>
+<p>Each function in js is potentially a constructor. Just write a silly one and use <code>new my_silly_method()</code> and it will create an object. If your method gives it some properties, fine, otherwise it will still create an empty <code>{}</code>. Similarly, each function also has a property called <code>prototype</code>. The contents of this property are shared by all the objects created through this function.</p>
 
 <blockquote><p>Each function has a property called &#8216;prototype&#8217;. If the function is used as a constructor to create objects, then the contents of its &#8216;prototype&#8217; property will be shared by all those objects.</p></blockquote>
 
@@ -180,7 +180,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Now take a moment and think about what all things <code>you</code> will have access to. Here&rsquo;s what we have.</p>
+<p>Now take a moment and think about what all things <code>i</code> will have access to. Here&rsquo;s what we have.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">i</span><span class="p">.</span><span class="nx">name</span>
 </span><span class='line'><span class="o">&gt;&gt;</span> <span class="s2">&quot;Akash&quot;</span> <span class="c1">// as expected</span>
@@ -205,6 +205,8 @@
 
 
 <p>So how does this work? When interpreter does not find <code>how_many_legs()</code> in <code>i</code>, it looks it in its prototype. It founds that <code>i's</code> prototype is an Animal object which does have access to the said function. You can create a child object of Human and the chain will be continue the same way.</p>
+
+<p>I hope now you have a better understanding of how the prototypal inheritance works in javascript. For perfection, world&rsquo;s your playground.</p>
 
 <p>Thanks for reading. Sound off below if you think something&rsquo;s amiss or incorrect.</p>
 
@@ -427,18 +429,18 @@ call vundle#rc()
 &quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
 &quot; Vundles
 &quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
-Bundle 'gmarik/vundle'
+Bundle &#39;gmarik/vundle&#39;
 
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'Raimondi/delimitMate'
-Bundle 'tpope/vim-fugitive'
-Bundle 'kien/ctrlp.vim'
-Bundle 'terryma/vim-multiple-cursors'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'akagr/vim-rudimentary-sessions'
-Bundle 'vim-scripts/scratch.vim'
-Bundle 'godlygeek/tabular'
-Bundle 'mileszs/ack.vim'
+Bundle &#39;altercation/vim-colors-solarized&#39;
+Bundle &#39;Raimondi/delimitMate&#39;
+Bundle &#39;tpope/vim-fugitive&#39;
+Bundle &#39;kien/ctrlp.vim&#39;
+Bundle &#39;terryma/vim-multiple-cursors&#39;
+Bundle &#39;Valloric/YouCompleteMe&#39;
+Bundle &#39;akagr/vim-rudimentary-sessions&#39;
+Bundle &#39;vim-scripts/scratch.vim&#39;
+Bundle &#39;godlygeek/tabular&#39;
+Bundle &#39;mileszs/ack.vim&#39;
 
 &quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
 &quot; General
@@ -481,15 +483,15 @@ function! ToggleVExplorer()
     let expl_win_num = bufwinnr(t:expl_buf_num)
     if expl_win_num != -1
       let cur_win_nr = winnr()
-      exec expl_win_num . 'wincmd w'
+      exec expl_win_num . &#39;wincmd w&#39;
       close
-      exec cur_win_nr . 'wincmd w'
+      exec cur_win_nr . &#39;wincmd w&#39;
       unlet t:expl_buf_num
     else
       unlet t:expl_buf_num
     endif
   else
-    exec '1wincmd w'
+    exec &#39;1wincmd w&#39;
     Vexplore
     let t:expl_buf_num = bufnr(&quot;%&quot;)
   endif
@@ -502,12 +504,12 @@ let mapleader = &quot;,&quot;
 let g:mapleader = &quot;,&quot;
 
 let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_next_key='&lt;C-n&gt;'
-let g:multi_cursor_quit_key='&lt;Esc&gt;'
+let g:multi_cursor_next_key=&#39;&lt;C-n&gt;&#39;
+let g:multi_cursor_quit_key=&#39;&lt;Esc&gt;&#39;
 
-let g:ctrlp_map = '&lt;c-p&gt;'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_map = &#39;&lt;c-p&gt;&#39;
+let g:ctrlp_cmd = &#39;CtrlP&#39;
+let g:ctrlp_working_path_mode = &#39;ra&#39;
 
 map &lt;silent&gt; &lt;C-E&gt; :call ToggleVExplorer()&lt;CR&gt;
 
