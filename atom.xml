@@ -4,7 +4,7 @@
 	<title><![CDATA[Akash Agrawal]]></title>
 	<link href="http://akashagrawal.me/atom.xml" rel="self"/>
 	<link href="http://akashagrawal.me/"/>
-	<updated>2013-12-28T10:23:52+05:30</updated>
+	<updated>2013-12-28T20:22:29+05:30</updated>
 	<id>http://akashagrawal.me/</id>
 	<author>
 		<name><![CDATA[Akash  Agrawal]]></name>
@@ -32,7 +32,7 @@
 
 <h2>So what exactly prototypal means?</h2>
 
-<p>Prototype is an object which acts as a base for other objects to inherit from. if that sounds confusing, consider an example. If we have a class named Animal, what will the Human be? If you think Human is also a class, what would your father be? An object? But you inherit from him too, right?</p>
+<p>Prototype is an object which acts as a base for other objects to inherit from. If that sounds confusing, consider an example. If we have a class named Animal, what will the Human be? If you think Human is also a class, what would your father be? An object? But you inherit from him too, right?</p>
 
 <p>Object oriented programming was designed to mirror real-world. And there are no classes here. Everything is an object. We can say that two objects are similar, like two people. But this doesn&rsquo;t mean someone 3-d printed them according to a design called class. Those people came from other people, inheriting things, modifying and adding stuff on the way. See it?</p>
 
