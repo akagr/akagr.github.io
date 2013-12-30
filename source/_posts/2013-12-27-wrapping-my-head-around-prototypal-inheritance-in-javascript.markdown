@@ -7,15 +7,15 @@ categories:
 ---
 Javascript does not have the usual class-object model. I know some C++, some more Java and lots of Ruby. All of them follow classical object model which was kinda etched in my mind now. As such, the object model of javascript took a lot of time for me to wrap my stubborn head around.
 
-So have I mastered it? Not at all. I have just started with serious js and need to practise. But I think I have a fairly good idea of how it works and what goes where. So here goes.
+So have I mastered it? Not at all. I have just started with serious js and need to practice. But I think I have a fairly good idea of how it works and what goes where. So here goes.
 
-##  So what exactly is a prototype?
-Prototype is an object which acts as a base for other objects to inherit from. if that sounds confusing, consider an example. If we have a class named Animal, what will the Human be? If you think Human is also a class, what would your father be? An object? But you inherit from him too, right?
+##  So what exactly prototypal means?
+Prototype is an object which acts as a base for other objects to inherit from. If that sounds confusing, consider an example. If we have a class named Animal, what will the Human be? If you think Human is also a class, what would your father be? An object? But you inherit from him too, right?
 
-This was the eureka for me when I realized we can do without classes in our life. Object oriented programming was designed to mirror real-world. And there are no classes here. Everything is an object. We can say that two objects are similar, like two people. But this doesn't mean someone 3-d printed them according to a design called class. Those people came from other people, inheriting things, modifying and adding stuff on the way. See it?
+Object oriented programming was designed to mirror real-world. And there are no classes here. Everything is an object. We can say that two objects are similar, like two people. But this doesn't mean someone 3-d printed them according to a design called class. Those people came from other people, inheriting things, modifying and adding stuff on the way. See it?
 
 {% blockquote %}
-In real world, classes don't spawn objects, objects do.
+In real world, classes don't spawn objects. Objects do.
 {% endblockquote %}
 
 This outlook feels more natural to me now. And if you want to get the js object model, you need to come at it with an open mind. Don't try and find answers of prototypal model in the classical one and vice-versa.
@@ -24,7 +24,7 @@ This outlook feels more natural to me now. And if you want to get the js object 
 Let's see some code.
 
 ```javascript
-function Animal(no_of_legs)
+function Animal(no_of_legs){
   this.legs = no_of_legs
   this.how_many_legs = function(){
     console.log(this.legs)
@@ -42,7 +42,7 @@ Animal.call(strange, 1) // we run the function on it
 strange
 >> { legs: 1, how_many_legs: [Function] } // Voila!
 ```
-See how we mimicked the behavior of `new`? We now have a strange object with a couple of properties. We kinda initilized the object by giving it some pieces to own via `Animal()`. And we have a name for such kind of functions, do we not? We call them constructors. But don't let the name fool you. They really are ordinary functions.
+See how we mimicked the behavior of `new`? We now have a strange object with a couple of properties. We kinda initialized the object by giving it some pieces to own via `Animal()`. And we have a name for such kind of functions, do we not? We call them constructors. But don't let the name fool you. They really are ordinary functions.
 
 We now know how we can create similar objects by using constructors. Let's create a couple more.
 
@@ -68,7 +68,7 @@ wtf.name
 There is a problem with above code. Each new object has its own copy of `legs` which is necessary to differentiate their states. But they also have their own separate copies of `how_many_legs()` method. Method body remains same for all objects. So how do we share same method object between various animal objects?
 
 ## Prototypes
-Each function in js is potentially a constructor. Just write a silly one and use `new your_silly_method()` and it will create an object. If your method gives it some properties, fine, otherwise it will still create an empty `{}`. Similarly, each function also has a property called `prototype`. The contents of this property are shared by all the objects created through this function.
+Each function in js is potentially a constructor. Just write a silly one and use `new my_silly_method()` and it will create an object. If your method gives it some properties, fine, otherwise it will still create an empty `{}`. Similarly, each function also has a property called `prototype`. The contents of this property are shared by all the objects created through this function.
 
 {% blockquote %}
 Each function has a property called 'prototype'. If the function is used as a constructor to create objects, then the contents of its 'prototype' property will be shared by all those objects.
@@ -120,7 +120,7 @@ Human.prototype = new Animal(2)
 i = new Human("Akash", 23)
 ```
 
-Now take a moment and think about what all things `you` will have access to. Here's what we have.
+Now take a moment and think about what all things `i` will have access to. Here's what we have.
 ```javascript
 i.name
 >> "Akash" // as expected
@@ -143,5 +143,6 @@ i.how_namy_legs()
 ```
 So how does this work? When interpreter does not find `how_many_legs()` in `i`, it looks it in its prototype. It founds that `i's` prototype is an Animal object which does have access to the said function. You can create a child object of Human and the chain will be continue the same way.
 
-Thanks for reading. Sound off below if you think something's amiss or incorrect.
+I hope now you have a better understanding of how the prototypal inheritance works in javascript. For perfection, world's your playground.
 
+Thanks for reading. Sound off below if you think something's amiss or incorrect.
