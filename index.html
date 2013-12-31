@@ -58,15 +58,15 @@
 		<div class="content">
 			<p>Javascript does not have the usual class-object model. I know some C++, some more Java and lots of Ruby. All of them follow classical object model which was kinda etched in my mind now. As such, the object model of javascript took a lot of time for me to wrap my stubborn head around.</p>
 
-<p>So have I mastered it? Not at all. I have just started with serious js and need to practise. But I think I have a fairly good idea of how it works and what goes where. So here goes.</p>
+<p>So have I mastered it? Not at all. I have just started with serious js and need to practice. But I think I have a fairly good idea of how it works and what goes where. So here goes.</p>
 
-<h2>So what exactly is a prototype?</h2>
+<h2>So what exactly prototypal means?</h2>
 
-<p>Prototype is an object which acts as a base for other objects to inherit from. if that sounds confusing, consider an example. If we have a class named Animal, what will the Human be? If you think Human is also a class, what would your father be? An object? But you inherit from him too, right?</p>
+<p>Prototype is an object which acts as a base for other objects to inherit from. If that sounds confusing, consider an example. If we have a class named Animal, what will the Human be? If you think Human is also a class, what would your father be? An object? But you inherit from him too, right?</p>
 
-<p>This was the eureka for me when I realized we can do without classes in our life. Object oriented programming was designed to mirror real-world. And there are no classes here. Everything is an object. We can say that two objects are similar, like two people. But this doesn&rsquo;t mean someone 3-d printed them according to a design called class. Those people came from other people, inheriting things, modifying and adding stuff on the way. See it?</p>
+<p>Object oriented programming was designed to mirror real-world. And there are no classes here. Everything is an object. We can say that two objects are similar, like two people. But this doesn&rsquo;t mean someone 3-d printed them according to a design called class. Those people came from other people, inheriting things, modifying and adding stuff on the way. See it?</p>
 
-<blockquote><p>In real world, classes don&#8217;t spawn objects, objects do.</p></blockquote>
+<blockquote><p>In real world, classes don&#8217;t spawn objects. Objects do.</p></blockquote>
 
 
 <p>This outlook feels more natural to me now. And if you want to get the js object model, you need to come at it with an open mind. Don&rsquo;t try and find answers of prototypal model in the classical one and vice-versa.</p>
@@ -75,7 +75,7 @@
 
 <p>Let&rsquo;s see some code.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">Animal</span><span class="p">(</span><span class="nx">no_of_legs</span><span class="p">)</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">Animal</span><span class="p">(</span><span class="nx">no_of_legs</span><span class="p">){</span>
 </span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">legs</span> <span class="o">=</span> <span class="nx">no_of_legs</span>
 </span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">how_many_legs</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
 </span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">legs</span><span class="p">)</span>
@@ -96,7 +96,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>See how we mimicked the behavior of <code>new</code>? We now have a strange object with a couple of properties. We kinda initilized the object by giving it some pieces to own via <code>Animal()</code>. And we have a name for such kind of functions, do we not? We call them constructors. But don&rsquo;t let the name fool you. They really are ordinary functions.</p>
+<p>See how we mimicked the behavior of <code>new</code>? We now have a strange object with a couple of properties. We kinda initialized the object by giving it some pieces to own via <code>Animal()</code>. And we have a name for such kind of functions, do we not? We call them constructors. But don&rsquo;t let the name fool you. They really are ordinary functions.</p>
 
 <p>We now know how we can create similar objects by using constructors. Let&rsquo;s create a couple more.</p>
 
@@ -124,7 +124,7 @@
 
 <h2>Prototypes</h2>
 
-<p>Each function in js is potentially a constructor. Just write a silly one and use <code>new your_silly_method()</code> and it will create an object. If your method gives it some properties, fine, otherwise it will still create an empty <code>{}</code>. Similarly, each function also has a property called <code>prototype</code>. The contents of this property are shared by all the objects created through this function.</p>
+<p>Each function in js is potentially a constructor. Just write a silly one and use <code>new my_silly_method()</code> and it will create an object. If your method gives it some properties, fine, otherwise it will still create an empty <code>{}</code>. Similarly, each function also has a property called <code>prototype</code>. The contents of this property are shared by all the objects created through this function.</p>
 
 <blockquote><p>Each function has a property called &#8216;prototype&#8217;. If the function is used as a constructor to create objects, then the contents of its &#8216;prototype&#8217; property will be shared by all those objects.</p></blockquote>
 
@@ -180,7 +180,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Now take a moment and think about what all things <code>you</code> will have access to. Here&rsquo;s what we have.</p>
+<p>Now take a moment and think about what all things <code>i</code> will have access to. Here&rsquo;s what we have.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">i</span><span class="p">.</span><span class="nx">name</span>
 </span><span class='line'><span class="o">&gt;&gt;</span> <span class="s2">&quot;Akash&quot;</span> <span class="c1">// as expected</span>
@@ -206,444 +206,9 @@
 
 <p>So how does this work? When interpreter does not find <code>how_many_legs()</code> in <code>i</code>, it looks it in its prototype. It founds that <code>i's</code> prototype is an Animal object which does have access to the said function. You can create a child object of Human and the chain will be continue the same way.</p>
 
+<p>I hope now you have a better understanding of how the prototypal inheritance works in javascript. For perfection, world&rsquo;s your playground.</p>
+
 <p>Thanks for reading. Sound off below if you think something&rsquo;s amiss or incorrect.</p>
-
-		</div>
-	<footer>
-		
-
-
-		
-
-
-
-
-	
-	
-	</footer>
-	
-</article>
-<!-- END OF _includes/article.html -->
-
-	
-		
-		<!-- START OF _includes/article.html -->
-<article>
-	<header>
-		<h1><a href="/blog/2013/12/24/building-vim-from-source/">Building Vim from source</a></h1>
-		<time>24 December 2013</time>
-	</header>
-		<div class="content">
-			<p>Continuing my journey to vim enlightment, I decided to build it from source since the one I installed from apt had begun panting on large files. I won&rsquo;t lie, compiling from source gives me that bad-ass father of god kinda feeling; so that&rsquo;s two for 2. Anyways let&rsquo;s get started. The steps given here will install console vim with perl, python, ruby and tcl enabled. I did it on my Ubuntu precise but it should work for all things nix.</p>
-
-<p><code>build-dep</code> and <code>vim-gnome</code> are listed as dependencies for console vim. Better install those first. Also for things like ruby, python etc, you will have to install those too if you want to include their support.</p>
-
-<p>I cloned the git repo of vim source from github</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone https://github.com/b4winckler/Vim
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Next, I needed to see what all options vim had to offer during install. You can get those with <code>./configure --help</code>. Take your time exploring this. Here&rsquo;s how I set what options appealed to me.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='bash'><span class='line'>./configure <span class="se">\</span>
-</span><span class='line'><span class="nb">enable</span>-perlinterp <span class="se">\</span>
-</span><span class='line'><span class="nb">enable</span>-pythoninterp <span class="se">\</span>
-</span><span class='line'><span class="nb">enable</span>-python3interp <span class="se">\</span>
-</span><span class='line'><span class="nb">enable</span>-tclinterp <span class="se">\</span>
-</span><span class='line'><span class="nb">enable</span>-rubyinterp <span class="se">\</span>
-</span><span class='line'><span class="nb">enable</span>-multibyte <span class="se">\</span>
-</span><span class='line'><span class="nb">enable</span>-fontset <span class="se">\</span>
-</span><span class='line'><span class="nb">enable</span>-gui<span class="o">=</span>no <span class="se">\</span>
-</span><span class='line'>with-features<span class="o">=</span>huge <span class="se">\</span>
-</span><span class='line'>with-compiledby<span class="o">=</span><span class="s2">&quot;Akash Agrawal&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This command creates some files in <code>src/auto</code> directory specifying install configuration. If you need to change or revise some options, or if you forgot to replace my name with yours, just delete the files in <code>src/auto</code> and configure again.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='bash'><span class='line'>make
-</span><span class='line'>sudo make installed
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Nothing special really. Just configure, make and install.
-To check the fruits of your toil, use <code>vim --version</code> and it will show you all things it installed as well as your name sitting there looking rad.</p>
-
-<p>I nailed it in my first try and wrinting this post from my newly installed copy. Let me know if the thing doesn&rsquo;t work for you.</p>
-
-		</div>
-	<footer>
-		
-
-
-		
-
-
-
-
-	
-	
-	</footer>
-	
-</article>
-<!-- END OF _includes/article.html -->
-
-	
-		
-		<!-- START OF _includes/article.html -->
-<article>
-	<header>
-		<h1><a href="/blog/2013/12/20/rudimentary-sessions-for-vim/">Rudimentary Sessions for Vim</a></h1>
-		<time>20 December 2013</time>
-	</header>
-		<div class="content">
-			<p>I have been taking a lot of vim with coffee lately. I really like the raw power of this editor. Up till now I have found replacement commands, mappings and plugins for most of my daily used features. Still, vim does not see projects and there is no automatic sessions support built-in.</p>
-
-<p>The plugins on offer are excellent in their own right but they did not cut it for me. Plus, I really want to get into hacking editor part and it was a nice excuse to try out some of the vimscript I learnt.</p>
-
-<p>I started off a fork of casastorta&rsquo;s plugin of same name and got some autoloading in to avoid performance impact. I have also made the &lsquo;save session on exit default&rsquo;. The plugin once installed will try to save a session automatically in the current directory when you exit vim. Aaaannnnd, <strong>spoiler alert</strong>, it will also load the session when you fire up vim from same directory next time. It should fit right in if you plan to open vim from root of you projects.</p>
-
-<p>Enough talk, lets see some code:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="k">function</span><span class="p">!</span> sessions#create<span class="p">()</span>
-</span><span class='line'>   <span class="k">let</span> <span class="nb">path</span> <span class="p">=</span> getcwd<span class="p">()</span>
-</span><span class='line'>   <span class="k">if</span> <span class="p">!</span>filewritable<span class="p">(</span><span class="s1">&#39;./.session.vim&#39;</span><span class="p">)</span>
-</span><span class='line'>      <span class="k">if</span> tolower<span class="p">(</span>input<span class="p">(</span><span class="s2">&quot;No session file in &quot;</span> . <span class="nb">path</span> . <span class="s2">&quot;. Create one? [Y]es/[N]o &quot;</span><span class="p">))</span> <span class="p">=~</span> <span class="s2">&quot;y&quot;</span>
-</span><span class='line'>         <span class="k">mksession</span><span class="p">!</span> ./.session.<span class="k">vim</span>
-</span><span class='line'>      <span class="k">endif</span>
-</span><span class='line'>   <span class="k">else</span>
-</span><span class='line'>      <span class="k">if</span> tolower<span class="p">(</span>input<span class="p">(</span><span class="s2">&quot;Session file &quot;</span> . <span class="nb">path</span> . <span class="s2">&quot;/.seesion.vim already exists. Overwrite? [Y]es/[N]o? &quot;</span><span class="p">))</span> <span class="p">=~</span> <span class="s2">&quot;y&quot;</span>
-</span><span class='line'>         <span class="k">let</span> <span class="k">s</span>:sessionautoloaded <span class="p">=</span> <span class="m">1</span>
-</span><span class='line'>         <span class="k">call</span> sessions#<span class="k">save</span><span class="p">()</span>
-</span><span class='line'>      <span class="k">endif</span>
-</span><span class='line'>   <span class="k">endif</span>
-</span><span class='line'><span class="k">endfunction</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">function</span><span class="p">!</span> sessions#<span class="k">save</span><span class="p">()</span>
-</span><span class='line'>   <span class="k">if</span> <span class="k">s</span>:sessionautoloaded <span class="p">==</span> <span class="m">1</span>
-</span><span class='line'>      <span class="k">mksession</span><span class="p">!</span> ./.session.<span class="k">vim</span>
-</span><span class='line'>      <span class="k">echom</span> <span class="s2">&quot;Session saved.&quot;</span>
-</span><span class='line'><span class="c">      &quot;source ./.session.vim</span>
-</span><span class='line'>   <span class="k">else</span>
-</span><span class='line'>      <span class="k">echom</span> <span class="s2">&quot;No session to save. Please create session with &#39;:mksession .session.vim&#39; first! &quot;</span>
-</span><span class='line'>      <span class="k">if</span> tolower<span class="p">(</span>input<span class="p">(</span><span class="s2">&quot;Autocreate session for you? [Y]es/[N]o &quot;</span><span class="p">))</span> <span class="p">=~</span> <span class="s2">&quot;y&quot;</span>
-</span><span class='line'>         <span class="k">call</span> sessions#create<span class="p">()</span>
-</span><span class='line'>      <span class="k">endif</span>
-</span><span class='line'>   <span class="k">endif</span>
-</span><span class='line'><span class="k">endfunction</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">function</span><span class="p">!</span> sessions#<span class="k">load</span><span class="p">()</span>
-</span><span class='line'><span class="c">   &quot; Rudimentary session management</span>
-</span><span class='line'>   <span class="k">if</span> <span class="k">version</span> <span class="p">&gt;=</span> <span class="m">700</span>
-</span><span class='line'>      <span class="k">set</span> <span class="nb">sessionoptions</span><span class="p">=</span>blank<span class="p">,</span><span class="k">buffers</span><span class="p">,</span>sesdir<span class="p">,</span>tabpages<span class="p">,</span><span class="k">winpos</span><span class="p">,</span>folds<span class="p">,</span><span class="k">options</span><span class="p">,</span>unix<span class="p">,</span>slash
-</span><span class='line'>   <span class="k">endif</span>
-</span><span class='line'>
-</span><span class='line'>   <span class="k">if</span> <span class="p">!</span>exists<span class="p">(</span><span class="s2">&quot;s:sessionautoloaded&quot;</span><span class="p">)</span>
-</span><span class='line'>      <span class="k">let</span> <span class="k">s</span>:sessionautoloaded <span class="p">=</span> <span class="m">0</span>
-</span><span class='line'>   <span class="k">endif</span>
-</span><span class='line'>
-</span><span class='line'>   <span class="k">if</span> filereadable<span class="p">(</span><span class="s1">&#39;./.session.vim&#39;</span><span class="p">)</span>
-</span><span class='line'>      <span class="k">if</span> <span class="k">s</span>:sessionautoloaded <span class="p">==</span> <span class="m">0</span>
-</span><span class='line'>         source ./.session.<span class="k">vim</span>
-</span><span class='line'>         <span class="k">let</span> <span class="k">s</span>:sessionautoloaded <span class="p">=</span> <span class="m">1</span>
-</span><span class='line'>         <span class="k">echom</span> <span class="s2">&quot;Session loaded.&quot;</span>
-</span><span class='line'>      <span class="k">endif</span>
-</span><span class='line'>   <span class="k">endif</span>
-</span><span class='line'><span class="k">endfunction</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If you have any interest in scripting vim, above is a fairly easy noob code. The snippet from my base plugin is as follows:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="k">if</span> exists<span class="p">(</span><span class="s1">&#39;b:loaded_rudimentary_sessions_ftplugin&#39;</span><span class="p">)</span>
-</span><span class='line'>   <span class="k">finish</span>
-</span><span class='line'><span class="k">endif</span>
-</span><span class='line'><span class="k">let</span> <span class="k">b</span>:loaded_rudimentary_sessions_ftplugin <span class="p">=</span> <span class="m">1</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">&quot; Session is saved with &lt;leader&gt;ss (&lt;leader&gt; is \ by default)</span>
-</span><span class='line'>nmap <span class="p">&lt;</span><span class="k">silent</span><span class="p">&gt;</span> <span class="p">&lt;</span>leader<span class="p">&gt;</span><span class="nb">ss</span> :<span class="k">call</span> sessions#<span class="k">save</span><span class="p">()&lt;</span>CR<span class="p">&gt;</span>
-</span><span class='line'>nmap <span class="p">&lt;</span><span class="k">silent</span><span class="p">&gt;</span> <span class="p">&lt;</span>leader<span class="p">&gt;</span><span class="nb">sc</span> :<span class="k">call</span> sessions#create<span class="p">()&lt;</span>CR<span class="p">&gt;</span>
-</span><span class='line'>nmap <span class="p">&lt;</span><span class="k">silent</span><span class="p">&gt;</span> <span class="p">&lt;</span>leader<span class="p">&gt;</span><span class="k">sl</span> :<span class="k">call</span> sessions#<span class="k">load</span><span class="p">()&lt;</span>CR<span class="p">&gt;</span>
-</span><span class='line'>
-</span><span class='line'>augroup RudimentarySession
-</span><span class='line'>  autocmd <span class="nb">VimEnter</span> * <span class="k">call</span> sessions#<span class="k">load</span><span class="p">()</span>
-</span><span class='line'>  autocmd <span class="nb">VimLeave</span> * <span class="k">call</span> sessions#<span class="k">save</span><span class="p">()</span>
-</span><span class='line'>augroup END
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Before you think of installing this plugin, you might want to know a few issues that I noticed. First, if a session file exists in the directory, vim will always load it. Always. Even if you specify a file explicitly while opening vim. The file will be opened, sure, but in a hidden buffer. You will have to navigate to that file on your own.</p>
-
-<p>Second, it might get a little confusing when every directory can potentially house a vim session file. It will get unpredictable what you will see on entering vim from a particular directory. It will be good to have some sort of organization to these session files.</p>
-
-<p>If you want to give it a go, use your favorite vim bundle manager to install it from <a href="https://github.com/akagr/vim-rudimentary-sessions">my git repo here</a>.</p>
-
-<p>If you have any suggestions or issues, take it to the github issue tracker. It ain&rsquo;t there for nothing.</p>
-
-		</div>
-	<footer>
-		
-
-
-		
-
-
-
-
-	
-	
-	</footer>
-	
-</article>
-<!-- END OF _includes/article.html -->
-
-	
-		
-		<!-- START OF _includes/article.html -->
-<article>
-	<header>
-		<h1><a href="/blog/2013/12/17/my-vimrc/">My Vimrc</a></h1>
-		<time>17 December 2013</time>
-	</header>
-		<div class="content">
-			<p>I love using sublime text. But there is something about vim that just keeps me pulling back. It&rsquo;s not my default editor of choice (yet) but I still enjoy writing stuff with it when I am not working. This blog is a fine example. Following is my vim config file. Some settings are there thanks to authors of some excellent blogs. Others, I have written myself out of my own needs. One thing&rsquo;s for sure, when it comes to customizability, vim is the grand-daddy of them all.</p>
-
-<div><script src='https://gist.github.com/8001153.js'></script>
-<noscript><pre><code>&quot; Akash Agrawal akashagrawal.me
-set nocompatible
-set encoding=utf-8
-
-&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
-&quot; vundle config
-&quot; git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-&quot; add this to bashrc or bash_profile: export TERM=&quot;screen-256color&quot;
-&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
-filetype off
-
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
-&quot; Vundles
-&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
-Bundle 'gmarik/vundle'
-
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'Raimondi/delimitMate'
-Bundle 'tpope/vim-fugitive'
-Bundle 'kien/ctrlp.vim'
-Bundle 'terryma/vim-multiple-cursors'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'akagr/vim-rudimentary-sessions'
-Bundle 'vim-scripts/scratch.vim'
-Bundle 'godlygeek/tabular'
-Bundle 'mileszs/ack.vim'
-
-&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
-&quot; General
-&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
-set nobackup nowritebackup noswapfile hidden
-filetype plugin indent on
-set winheight=30
-set laststatus=2
-set ttyfast
-set lazyredraw
-
-&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
-&quot; Interface
-&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
-&quot; Syntax Highlighting
-set background=dark
-colorscheme solarized
-syntax on
-
-set wildmenu wildmode=longest:full,full
-set ruler
-set number
-set relativenumber
-
-&quot; Indentation
-set expandtab tabstop=2 shiftwidth=2 
-set smartindent autoindent copyindent
-
-&quot; Search
-set ignorecase smartcase
-set hlsearch incsearch showmatch
-
-set magic
-
-&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
-&quot; Functions
-&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
-function! ToggleVExplorer()
-  if exists(&quot;t:expl_buf_num&quot;)
-    let expl_win_num = bufwinnr(t:expl_buf_num)
-    if expl_win_num != -1
-      let cur_win_nr = winnr()
-      exec expl_win_num . 'wincmd w'
-      close
-      exec cur_win_nr . 'wincmd w'
-      unlet t:expl_buf_num
-    else
-      unlet t:expl_buf_num
-    endif
-  else
-    exec '1wincmd w'
-    Vexplore
-    let t:expl_buf_num = bufnr(&quot;%&quot;)
-  endif
-endfunction
-
-&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
-&quot; Variables 
-&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
-let mapleader = &quot;,&quot;
-let g:mapleader = &quot;,&quot;
-
-let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_next_key='&lt;C-n&gt;'
-let g:multi_cursor_quit_key='&lt;Esc&gt;'
-
-let g:ctrlp_map = '&lt;c-p&gt;'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'ra'
-
-map &lt;silent&gt; &lt;C-E&gt; :call ToggleVExplorer()&lt;CR&gt;
-
-&quot; Hit enter in the file browser to open the selected
-&quot; file with :vsplit to the right of the browser.
-let g:netrw_browse_split = 4
-let g:netrw_altv = 1
-
-&quot; Default to tree mode
-let g:netrw_liststyle=3
-
-&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
-&quot; Key Bindings
-&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
-
-noremap &lt;silent&gt; &lt;C-E&gt; :call ToggleVExplorer()&lt;CR&gt;
-noremap j gj
-noremap k gk
-inoremap jj &lt;ESC&gt;
-nnoremap &lt;leader&gt;s :w&lt;cr&gt;
-nnoremap &lt;leader&gt;w :bd&lt;cr&gt;
-noremap &lt;space&gt; /
-noremap &lt;silent&gt; &lt;leader&gt;, :noh&lt;cr&gt;
-
-nnoremap &lt;c-b&gt; :CtrlPBuffer&lt;cr&gt;
-
-nnoremap &lt;leader&gt;x :Scratch&lt;cr&gt;
-
-nnoremap &lt;leader&gt;r :source ~/.vimrc&lt;cr&gt;
-
-augroup myautocommands
-  autocmd!
-  autocmd FocusLost * :wa
-augroup END
-</code></pre></noscript></div>
-
-
-<p>I know I really need some plug-ins. This file, like everybody else&rsquo;s, is a work in progress. Feel free to rip it off if you are starting out with vim. You can thank me by suggesting some great plug-ins or hacks which you dig in the comments below.</p>
-
-		</div>
-	<footer>
-		
-
-
-		
-
-
-
-
-	
-	
-	</footer>
-	
-</article>
-<!-- END OF _includes/article.html -->
-
-	
-		
-		<!-- START OF _includes/article.html -->
-<article>
-	<header>
-		<h1><a href="/blog/2013/12/13/finally-gonna-date-node-dot-js/">Finally gonna date node.js</a></h1>
-		<time>13 December 2013</time>
-	</header>
-		<div class="content">
-			<p>When I first heard of node.js, I was in graduation just getting into rails. But I seriously took notice when it displaced rails as the most popular repo on github. Speed whore as I am, I found event-driven non-blocking I/O particularly seducing.</p>
-
-<p>I knew some elementary javascript and even at my work-ex of 7 months, never really used pure js. So I guessed, that just like ruby, I will definitely need to learn javascript a little. The world will be written in javascript in near future. Might as well start speaking it now.</p>
-
-<p>That said, my javascript is still quite rusty. But at least I now understand how to utilize functions as closures and decided to return to node. Being a web-dev, obviously I can&rsquo;t be playing with vanilla quite long. After saying hello to a couple of worlds and writing my own servers with some routes thrown in for taste, meteor caught my eye.</p>
-
-<p>About the only downside I can think of it is is that it does not have eyes for anything other than MongoDb. So I can&rsquo;t just start writing code for my projects.</p>
-
-<p>A nodejs project should be coming my way in sometime. I am hopeful of that. I will be spending as much time as I can manage with node till then. Should be an interesting journey.</p>
-
-		</div>
-	<footer>
-		
-
-
-		
-
-
-
-
-	
-	
-	</footer>
-	
-</article>
-<!-- END OF _includes/article.html -->
-
-	
-		
-		<!-- START OF _includes/article.html -->
-<article>
-	<header>
-		<h1><a href="/blog/2013/12/11/riak-installation-on-ubuntu-12-dot-04/">Riak: Installation on Ubuntu 12.04</a></h1>
-		<time>11 December 2013</time>
-	</header>
-		<div class="content">
-			<p>Riak is a relatively new kid on the block of NoSQL territory. It is based on principles of high availability, fault-tolerance, automatic replication and load balancing. Sounds like a deal for your next project&hellip; right? I got interested in one of my co-worker&rsquo;s project which is based on riak and decided to take it for a spin. Here is my first account with riak where I installed it on my Ubuntu 12.04 precise.</p>
-
-<p>First I needed to get all the prerequisites right. This involves some packages and erlang. Now I already got error with erlang OTP R14 so I decided to go with the latest R16 (B02 to be exact).</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install git build-essential libncurses5-dev openssl <span class="se">\</span>
-</span><span class='line'>libssl-dev libssl0.9.8 libc6-dev libc6-dev
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now download the latest erlang release from <a href="https://www.erlang-solutions.com/downloads/download-erlang-otp">here</a> and set it up as:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo dpkg -i &lt;your_downloaded_file.deb&gt;
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If that goes suuccessfully and without a fuss, chances are that you will have a fully functioning riak installation in a jiffy.
-Next steps are fairly simple.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone https://github.com/basho/riak.git
-</span><span class='line'><span class="nb">cd </span>riak
-</span><span class='line'>make devrel
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Successful completion of the above indicates you&rsquo;re good. Just in case, let&rsquo;s check our installation.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd </span>dev
-</span><span class='line'>dev1/bin/riak start
-</span><span class='line'>dev1/bin/riak ping
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If the output goes pong, you are all set to get your explorer cap on.</p>
-
-<p>In my case, there were lots of head-scratching due to incompatibilities between erlang, riak sources yada yada. Hopefully the process goes smoothly for you. Hoot off below if you are having problems</p>
 
 		</div>
 	<footer>
@@ -666,8 +231,10 @@ Next steps are fairly simple.</p>
 	
 <div class="pagination">
 	
+		<a class="older" href="/blog/page/2/">Older</a>
 	
-	<span class="total">1 of 1</span>
+	
+	<span class="total">1 of 6</span>
 	
 	
 </div>
@@ -679,6 +246,7 @@ Next steps are fairly simple.</p>
 
 	Akash  Agrawal
 
+| Proudly powered by Octopress
 
 
 
