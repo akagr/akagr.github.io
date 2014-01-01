@@ -6,7 +6,7 @@ comments: true
 sharing: true
 footer: true
 ---
-{% blockquote Steve Jobs%}
+{% blockquote Leonardo da Vinci%}
 Simplicity is the ultimate sophistication.
 {% endblockquote %}
 
