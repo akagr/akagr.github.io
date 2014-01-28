@@ -20,4 +20,3 @@ When I not in front of my machine, I can be found riding my bike, playing games 
 
 If you have suggestions/corrections regarding any of my posts, please take to the comments. Related content belongs together. If you want to reach out to me personally, you can always message me on [twitter](http://twitter.com/akshagrwl) or email me at [akagr@outlook.com](mailto:akagr@outlook.com).
 
-
