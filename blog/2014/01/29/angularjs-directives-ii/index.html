@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Know Me - Akash Agrawal</title>
+  <title>AngularJs Directives: II - Akash Agrawal</title>
   <meta name="author" content="Akash  Agrawal">
 
   
-  <meta name="description" content="Know Me Dec 16th, 2013 Simplicity is the ultimate sophistication.Leonardo da Vinci Hey! My name is Akash Agrawal(duh!). I am currently based in &hellip;">
+  <meta name="description" content="Ok lets finish the configuration options in directives. You might want to view my previous post first. We were looking at what all things can be &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://akashagrawal.me/know-me">
+  <link rel="canonical" href="http://akashagrawal.me/blog/2014/01/29/angularjs-directives-ii">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Akash Agrawal" type="application/atom+xml">
@@ -77,43 +77,15 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Know Me</h1>
-    <p class="meta">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-12-16T10:30:00+05:30" pubdate data-updated="true">Dec 16<span>th</span>, 2013</time></p>
-  </header>
-  
-  <blockquote><p>Simplicity is the ultimate sophistication.</p><footer><strong>Leonardo da Vinci</strong></footer></blockquote>
-
-
-<p>Hey!</p>
-
-<p>My name is Akash Agrawal(duh!). I am currently based in Lucknow, India working as a Ruby on Rails Dev in <a href="http://laitkor.com">Laitkor Software Services</a>. I graduated from Uttar Pradesh Technical University with B.Tech in Computers in 2013.</p>
-
-<p>I enjoy writing ruby and love reading elegant code. Vim is my weapon of choice. Server side javascript has had me hooked up lately. I really dig speed. So, V8 along with hashed performance of NoSQL is kinda seductive.</p>
-
-<p>When I not in front of my machine, I can be found riding my bike, playing games or reading sci-fi.</p>
-
-<p>If you have suggestions/corrections regarding any of my posts, please take to the comments. Related content belongs together. If you want to reach out to me personally, you can always message me on <a href="http://twitter.com/akshagrwl">twitter</a> or email me at <a href="mailto:akagr@outlook.com">akagr@outlook.com</a>.</p>
-
-  
-    <footer>
+    
+      <h1 class="entry-title">AngularJs Directives: II</h1>
+    
+    
       <p class="meta">
         
-        
 
 
 
@@ -125,13 +97,72 @@
   
 
 
-<time datetime="2013-12-16T10:30:00+05:30" pubdate data-updated="true">Dec 16<span>th</span>, 2013</time>
+<time datetime="2014-01-29T15:40:27+05:30" pubdate data-updated="true">Jan 29<span>th</span>, 2014</time>
         
       </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Ok lets finish the configuration options in directives. You might want to view my previous post first. We were looking at what all things can be specified for directives and how to use them. We already looked at restrict,  replace, template, templateUrl, priority, terminal and transclude. Now to round up the remaining of rather more complex options:</p>
+
+<p><strong>controller</strong>: Lets you specify the controlling station of your directive. It is here that you should do any manipulations. The controller is defined as:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">directive</span> <span class="s">&#39;myDirective&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="nf">-&gt;</span>
+</span><span class='line'>  <span class="c1"># other options</span>
+</span><span class='line'>  <span class="nv">controller: </span><span class="nf">($scope, $element, $attrs) -&gt;</span>
+</span><span class='line'>    <span class="nv">$scope.myvalue = </span><span class="s">&#39;yay!&#39;</span>
+</span><span class='line'>    <span class="k">this</span><span class="p">.</span><span class="nv">anotherValue = </span><span class="s">&quot;al&#39;right!&quot;</span>
+</span><span class='line'>  <span class="c1">#other options</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note that the <code>$scope</code> in the controller here refers to the scope specified as an option (we&rsquo;ll look at that in a bit). Also while setting values on <code>$scope</code> will function just like you think, setting values on <code>this</code> will make them available in other directives if we wish. i.e. we can share stuff between directives. The next option shows how.</p>
+
+<p><strong>require</strong>: Let&rsquo;s you require a controller from other directives. It follows two forms:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">require: </span><span class="s">&#39;?myDirective&#39;</span> <span class="c1">#looks for the directive on same element and will not raise error if no such directive found</span>
+</span><span class='line'><span class="nv">require: </span><span class="s">&#39;^myDirective&#39;</span> <span class="c1">#looks for directive on parent element if not found in same element</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a class="jsbin-embed" href="http://jsbin.com/EqUxigiX/1/embed?html,js,output">JS Bin</a></p>
+
+<script src="http://static.jsbin.com/js/embed.js"></script>
+
+
+<p></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
       
-        <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://akashagrawal.me/know-me/index.html" data-via="akshagrwl" data-counturl="http://akashagrawal.me/know-me/index.html" >Tweet</a>
+
+<span class="byline author vcard">Posted by <span class="fn">Akash  Agrawal</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-29T15:40:27+05:30" pubdate data-updated="true">Jan 29<span>th</span>, 2014</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://akashagrawal.me/blog/2014/01/29/angularjs-directives-ii/" data-via="akshagrwl" data-counturl="http://akashagrawal.me/blog/2014/01/29/angularjs-directives-ii/" >Tweet</a>
   
   
   
@@ -139,9 +170,12 @@
   
 </div>
 
+    
+    <p class="meta">
       
-    </footer>
-  
+      
+    </p>
+  </footer>
 </article>
 
   <section>
@@ -187,8 +221,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://akashagrawal.me/know-me/index.html';
-        var disqus_url = 'http://akashagrawal.me/know-me/index.html';
+        var disqus_identifier = 'http://akashagrawal.me/blog/2014/01/29/angularjs-directives-ii/';
+        var disqus_url = 'http://akashagrawal.me/blog/2014/01/29/angularjs-directives-ii/';
         var disqus_script = 'embed.js';
       
     (function () {
