@@ -198,7 +198,7 @@
 
 <p><strong>terminal</strong>: This is one which I haven&rsquo;t found any use for yet. It will prevent directives with priority greater than itself from executing. I can&rsquo;t think of a scenario to show this one so feel free to hack away inside any given bins.</p>
 
-<p><strong>transclude</strong>: This option lets you substitute the contents of the directive element inside the template you are rendering. This option requires either template or templateUrl for correct fuctioning. Plus you need to specify where you want to substitute the contents in template with the help of <code>ng-transclude</code> directive.</p>
+<p><strong>transclude</strong>: This option lets you substitute the contents of the directive element inside the template you are rendering. It can take <code>true</code> which means the directives contents get transcluded. Or it can also be <code>'element'</code> which transcludes the directive itself. You need to specify where you want to substitute the contents in template with the help of <code>ng-transclude</code> directive.</p>
 
 <p>  <a class="jsbin-embed" href="http://jsbin.com/InideRIW/1/embed?html,js,output">JS Bin</a></p>
 
