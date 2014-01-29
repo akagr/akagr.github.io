@@ -1,11 +1,6 @@
-<img src="{% gravatar_image 200 %}" alt="Gravatar of {{ site.author}} " title="Gravatar of {{ site.author }}" class="profilepic" />
 <hgroup>
   <h1><a href="{{ root_url }}/">{{ site.title }}</a></h1>
   {% if site.subtitle %}
-    <h2 class="subtitle">{{ site.subtitle }}</h2>
-   {% endif %}
-  <h3>
-    <a href="/know-me" class="navigation">Know Me</a>
-    <a href="/blog/archives" class="navigation">Blog Archives</a>
-  <h3>
+    <h2>{{ site.subtitle }}</h2>
+  {% endif %}
 </hgroup>
