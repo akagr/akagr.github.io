@@ -1,0 +1,319 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Akash Agrawal</title>
+  <meta name="author" content="Akash  Agrawal">
+
+  
+  <meta name="description" content="I&rsquo;ll be frank. Directives scared the hell out of me. They always seemed like something I needed to know to really put a leash around the &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://akashagrawal.me/blog/page/2">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Akash Agrawal" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-46483932-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Akash Agrawal</a></h1>
+  
+    <h2>on coding, linux, trends and fun.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:akashagrawal.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/know-me">Know Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/28/angularjs-directives-i/">AngularJs Directives: I</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-28T18:40:24+05:30" pubdate data-updated="true">Jan 28<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&rsquo;ll be frank. Directives scared the hell out of me. They always seemed like something I needed to know to really put a leash around the angularjs code. But somehow I always found ways not to use them. A couple of variables here and a dozen of functions there. I hacked away ignoring any real need to use directives while the truth always loomed above. I needed to conquer them. Maybe I did, or maybe I cracked. Here&rsquo;s what I learnt on way to either of the two.</p>
+
+<h2>Just why the hell should I care about directives?</h2>
+
+<p>Because they could make your code from this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">&quot;nav nav-tabs&quot;</span> <span class="na">id=</span><span class="s">&quot;myTab&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&quot;active&quot;</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;#section1&quot;</span><span class="nt">&gt;</span>Section 1<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;#profile&quot;</span><span class="nt">&gt;</span>Section 2<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;/ul&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;tab-content&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;tab-pane active&quot;</span> <span class="na">id=</span><span class="s">&quot;section1&quot;</span><span class="nt">&gt;</span>Hi, I&#39;m Section 1<span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;tab-pane&quot;</span> <span class="na">id=</span><span class="s">&quot;section2&quot;</span><span class="nt">&gt;</span>Hi, I&#39;m Section 2<span class="nt">&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;script&gt;</span>
+</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#myTab a:last&#39;</span><span class="p">).</span><span class="nx">tab</span><span class="p">(</span><span class="s1">&#39;show&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">})</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>to this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;tabs&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;pane</span> <span class="na">title=</span><span class="s">&quot;Section 1&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    Hi, I&#39;m Section 1
+</span><span class='line'>  <span class="nt">&lt;/pane&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;pane</span> <span class="na">title=</span><span class="s">&quot;Section 2&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    Hi, I&#39;m Section 2
+</span><span class='line'>  <span class="nt">&lt;/pane&gt;</span>
+</span><span class='line'><span class="nt">&lt;/tabs&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And this is a very small example, mind.</p>
+
+<h2>Ok. You are already convinced. Let&rsquo;s do it.</h2>
+
+<p>I will assume you know how to bootstrap an angular app. <a href="http://docs.angularjs.org/tutorial/step_00">Read the docs</a> to learn how otherwise. I have provided jsbins along the article so feel free to tinker.</p>
+
+<p>So a general definition of a directive looks something like:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">app = </span><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span> <span class="s">&#39;myApp&#39;</span><span class="p">,</span> <span class="p">[]</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">directive</span> <span class="s">&#39;mindBlown&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="nf">-&gt;</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1"># configuration options</span>
+</span><span class='line'>  <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&rsquo;s about it. This was the easy part. Lets get down to the meat and see what options we get to pass to create a directive of our dreams.</p>
+
+<p><strong>restrict</strong>: Takes <code>EAMC</code>(default) individually or in any combination. This option defines how your directive can be declared in markup.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">restrict: </span><span class="s">&#39;A&#39;</span> <span class="c1"># The directive can appear as attribute: &lt;div id=&quot;yada-yada&quot; mindblown&gt;</span>
+</span><span class='line'><span class="nv">restrict: </span><span class="s">&#39;E&#39;</span> <span class="c1"># The directive can appear as element: &lt;mindblown&gt; yada-yada &lt;/mindblown&gt;</span>
+</span><span class='line'><span class="nv">restrict: </span><span class="s">&#39;C&#39;</span> <span class="c1"># The directive can appear as class name: &lt;span class=&quot;yada-tada mindblown&quot;/&gt;</span>
+</span><span class='line'><span class="nv">restrict: </span><span class="s">&#39;M&#39;</span> <span class="c1"># The directive can appear as comment: &lt;!-- directive:minblown --&gt;</span>
+</span><span class='line'><span class="nv">restrict: </span><span class="s">&#39;AE&#39;</span> <span class="c1"># The directive can appear as both an element or/and an attribute. You get the idea?</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>replace</strong>: Takes <code>true</code> or <code>false</code>(default). It is used with either <code>template</code> or <code>templateUrl</code>. It controls whether the given template is substituted inside the directive element or the directive element itself is replaced by the given template.</p>
+
+<p><strong>template</strong>: Takes valid html markup as string.</p>
+
+<p>Here is a bin to drive the above concepts home. Inspect the output in your favorite html inspector to get the drift.</p>
+
+<p>  <a class="jsbin-embed" href="http://jsbin.com/APujiXI/1/embed?html,js,output">JS Bin</a></p>
+
+<script src="http://static.jsbin.com/js/embed.js"></script>
+
+
+<p></p>
+
+<p><strong>templateUrl</strong>: Writing html markup may pollute your code especially if it is lengthy. You can create an html file with the required markup and reference it from here. Obviously you should use only one of <code>template</code> or <code>templateUrl</code>.</p>
+
+<p><strong>priority</strong>: During the compiling phase, angularjs compiles all the directives (built-in and custom) and links them where applicable. If we want to control the order of compilation of our directives, we can supply optional integer value to priority. Lower value means higher priority.</p>
+
+<p>Here is an example scenario of when it might be needed.</p>
+
+<p>  <a class="jsbin-embed" href="http://jsbin.com/izuwOgAH/4/embed?html,js,css,output">JS Bin</a></p>
+
+<script src="http://static.jsbin.com/js/embed.js"></script>
+
+
+<p></p>
+
+<p><strong>terminal</strong>: This is one which I haven&rsquo;t found any use for yet. It will prevent directives with priority greater than itself from executing. I can&rsquo;t think of a scenario to show this one so feel free to hack away inside any given bins.</p>
+
+<p><strong>transclude</strong>: This option lets you substitute the contents of the directive element inside the template you are rendering. This option requires either template or templateUrl for correct fuctioning. Plus you need to specify where you want to substitute the contents in template with the help of <code>ng-transclude</code> directive.</p>
+
+<p>  <a class="jsbin-embed" href="http://jsbin.com/InideRIW/1/embed?html,js,output">JS Bin</a></p>
+
+<script src="http://static.jsbin.com/js/embed.js"></script>
+
+
+<p></p>
+
+<p>That&rsquo;s it for the first part. I left the most complex options for the next post. Coming up soon.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/3/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/01/29/angularjs-directives-ii/">AngularJs Directives: II</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/28/angularjs-directives-i/">AngularJs Directives: I</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/12/27/wrapping-my-head-around-prototypal-inheritance-in-javascript/">Wrapping My Head Around Prototypal Inheritance in Javascript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/12/24/building-vim-from-source/">Building Vim From Source</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/12/20/rudimentary-sessions-for-vim/">Rudimentary Sessions for Vim</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Akash  Agrawal -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'akagr';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,6 +1,36 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
+        <loc>http://akashagrawal.me/blog/2013/12/11/riak-installation-on-ubuntu-12-dot-04/</loc>
+        <lastmod>2014-01-29T11:16:26+05:30</lastmod>
+    </url>
+    <url>
+        <loc>http://akashagrawal.me/blog/2013/12/13/finally-gonna-date-node-dot-js/</loc>
+        <lastmod>2014-01-29T11:16:26+05:30</lastmod>
+    </url>
+    <url>
+        <loc>http://akashagrawal.me/blog/2013/12/17/my-vimrc/</loc>
+        <lastmod>2014-01-29T11:16:26+05:30</lastmod>
+    </url>
+    <url>
+        <loc>http://akashagrawal.me/blog/2013/12/20/rudimentary-sessions-for-vim/</loc>
+        <lastmod>2014-01-29T11:16:26+05:30</lastmod>
+    </url>
+    <url>
+        <loc>http://akashagrawal.me/blog/2013/12/24/building-vim-from-source/</loc>
+        <lastmod>2014-01-29T11:16:26+05:30</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://akashagrawal.me/blog/2013/12/27/wrapping-my-head-around-prototypal-inheritance-in-javascript/
+        </loc>
+        <lastmod>2014-01-29T11:16:26+05:30</lastmod>
+    </url>
+    <url>
+        <loc>http://akashagrawal.me/blog/2014/01/28/angularjs-directives-i/</loc>
+        <lastmod>2014-01-29T15:58:58+05:30</lastmod>
+    </url>
+    <url>
         <loc>http://akashagrawal.me/blog/2014/01/29/angularjs-directives-ii/</loc>
         <lastmod>2014-01-29T15:45:43+05:30</lastmod>
     </url>
@@ -14,10 +44,10 @@
     </url>
     <url>
         <loc>http://akashagrawal.me/</loc>
-        <lastmod>2014-01-29T15:45:43+05:30</lastmod>
+        <lastmod>2014-01-29T15:58:58+05:30</lastmod>
     </url>
     <url>
         <loc>http://akashagrawal.me/blog/archives/</loc>
-        <lastmod>2014-01-29T15:45:43+05:30</lastmod>
+        <lastmod>2014-01-29T15:58:58+05:30</lastmod>
     </url>
 </urlset>
