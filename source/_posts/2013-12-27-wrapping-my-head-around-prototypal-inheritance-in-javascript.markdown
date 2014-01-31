@@ -9,6 +9,8 @@ Javascript does not have the usual class-object model. I know some C++, some mor
 
 So have I mastered it? Not at all. I have just started with serious js and need to practice. But I think I have a fairly good idea of how it works and what goes where. So here goes.
 
+<!--more-->
+
 ##  So what exactly prototypal means?
 Prototype is an object which acts as a base for other objects to inherit from. If that sounds confusing, consider an example. If we have a class named Animal, what will the Human be? If you think Human is also a class, what would your father be? An object? But you inherit from him too, right?
 

@@ -7,6 +7,8 @@ categories: [db, riak]
 ---
 Riak is a relatively new kid on the block of NoSQL territory. It is based on principles of high availability, fault-tolerance, automatic replication and load balancing. Sounds like a deal for your next project... right? I got interested in one of my co-worker's project which is based on riak and decided to take it for a spin. Here is my first account with riak where I installed it on my Ubuntu 12.04 precise.
 
+<!--more-->
+
 First I needed to get all the prerequisites right. This involves some packages and erlang. Now I already got error with erlang OTP R14 so I decided to go with the latest R16 (B02 to be exact).
 
 ``` bash

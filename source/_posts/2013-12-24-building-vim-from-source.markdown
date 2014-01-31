@@ -7,6 +7,8 @@ categories: vim
 ---
 Continuing my journey to vim enlightment, I decided to build it from source since the one I installed from apt had begun panting on large files. I won't lie, compiling from source gives me that bad-ass father of god kinda feeling; so that's two for 2. Anyways let's get started. The steps given here will install console vim with perl, python, ruby and tcl enabled. I did it on my Ubuntu precise but it should work for all things nix.
 
+<!--more-->
+
 `build-dep` and `vim-gnome` are listed as dependencies for console vim. Better install those first. Also for things like ruby, python etc, you will have to install those too if you want to include their support.
 
 I cloned the git repo of vim source from github

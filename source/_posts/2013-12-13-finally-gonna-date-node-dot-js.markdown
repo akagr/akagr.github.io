@@ -9,6 +9,8 @@ When I first heard of node.js, I was in graduation just getting into rails. But 
 
 I knew some elementary javascript and even at my work-ex of 7 months, never really used pure js. So I guessed, that just like ruby, I will definitely need to learn javascript a little. The world will be written in javascript in near future. Might as well start speaking it now.
 
+<!--more-->
+
 That said, my javascript is still quite rusty. But at least I now understand how to utilize functions as closures and decided to return to node. Being a web-dev, obviously I can't be playing with vanilla quite long. After saying hello to a couple of worlds and writing my own servers with some routes thrown in for taste, meteor caught my eye.
 
 About the only downside I can think of it is is that it does not have eyes for anything other than MongoDb. So I can't just start writing code for my projects.

@@ -9,6 +9,8 @@ I have been taking a lot of vim with coffee lately. I really like the raw power 
 
 The plugins on offer are excellent in their own right but they did not cut it for me. Plus, I really want to get into hacking editor part and it was a nice excuse to try out some of the vimscript I learnt.
 
+<!--more-->
+
 I started off a fork of casastorta's plugin of same name and got some autoloading in to avoid performance impact. I have also made the 'save session on exit default'. The plugin once installed will try to save a session automatically in the current directory when you exit vim. Aaaannnnd, **spoiler alert**, it will also load the session when you fire up vim from same directory next time. It should fit right in if you plan to open vim from root of you projects.
 
 Enough talk, lets see some code:

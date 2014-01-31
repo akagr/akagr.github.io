@@ -8,6 +8,8 @@ categories: vim
 
 I love using sublime text. But there is something about vim that just keeps me pulling back. It's not my default editor of choice (yet) but I still enjoy writing stuff with it when I am not working. This blog is a fine example. Following is my vim config file. Some settings are there thanks to authors of some excellent blogs. Others, I have written myself out of my own needs. One thing's for sure, when it comes to customizability, vim is the grand-daddy of them all.
 
+<!--more-->
+
 {% gist 8001153 %}
 
 I know I really need some plug-ins. This file, like everybody else's, is a work in progress. Feel free to rip it off if you are starting out with vim. You can thank me by suggesting some great plug-ins or hacks which you dig in the comments below.
