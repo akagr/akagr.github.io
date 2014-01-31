@@ -5,24 +5,24 @@
 #   A bin url is either just the code: `abcefg` or you can include the revision
 #   `abcefg/4` or you can point to latest: `abcefg/latest`
 #
-# Panels: html, javascript, css, console, live (default)
+# Panels: html, js, css, console, output (default: html,css,js,output)
 #
-# Syntax: {% jsbin bin [panels] [height] [width] %}
+# Syntax: {% jsbin bin %}
 #
 # Examples:
 #
 # Input: {% jsbin exedab %}
-# Output: <a class="jsbin-embed" href="http://jsbin.com/exedab/1/embed?live">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script>
+# Output: <a class="jsbin-embed" href="http://jsbin.com/exedab/1/embed?output">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script>
 #
-# Input: {% jsbin exedab javascript,html %}
-# Output: <a class="jsbin-embed" href="http://jsbin.com/exedab/1/embed?javascript,html">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script>
+# Input: {% jsbin exedab js,html %}
+# Output: <a class="jsbin-embed" href="http://jsbin.com/exedab/1/embed?js,html">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script>
 #
 module Jekyll
   class JSBin < Liquid::Tag
     def initialize(tag_name, markup, tokens)
-      if /(?<jsbin>\S+\/?\d?)(?:\s+(?<sequence>[\w,]+))?(?:\s+(?<revision>\d+))?/ =~ markup
+      if /(?<jsbin>[^\s\/]+)(\/(?<revision>\d))?(?:\s+(?<sequence>[\w,]+))?/ =~ markup
         @bin = jsbin
-        @revision = revision || 1
+        @revision = revision || 'latest'
         @sequence = (sequence unless sequence == 'all') || 'html,css,js,output'
       end
     end
