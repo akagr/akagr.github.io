@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Js | Akash Agrawal]]></title>
+  <link href="http://akashagrawal.me/blog/categories/js/atom.xml" rel="self"/>
+  <link href="http://akashagrawal.me/"/>
+  <updated>2014-01-31T13:33:37+05:30</updated>
+  <id>http://akashagrawal.me/</id>
+  <author>
+    <name><![CDATA[Akash  Agrawal]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Infinite Scroller in AngularJs]]></title>
+    <link href="http://akashagrawal.me/blog/2014/01/31/infinite-scroller-in-angularjs/"/>
+    <updated>2014-01-31T10:52:03+05:30</updated>
+    <id>http://akashagrawal.me/blog/2014/01/31/infinite-scroller-in-angularjs</id>
+    <content type="html"><![CDATA[<p>Pagination is necessary. You can&rsquo;t slap 10k records in front of a user. And it is stupid to send that much data across. Even more stupid to expect that user will stick around while your data is received and rendered.</p>
+
+<p>But infinite scrollers are like pagination hopped up on botox. They look beautiful, feel fresh and don&rsquo;t make users wait for silly page loads. What&rsquo;s more? They are generally much easier to build. So lets build one such scroller in angularjs from scratch.</p>
+
+<p>Here&rsquo;s a light bulb. If you don&rsquo;t know when to use directives, look out for places where you need to manipulate DOM from js. This includes adding event listeners, manipulating classes, css etc. These scream directive almost always. Since we will most definitely need to attach at least a scroll event listener to something, directive is what we are going to write.</p>
+
+<p>Let&rsquo;s quickly create a dummy directive which attaches a scroll event to an element and make it alert every time we scroll it. Here is a quick fiddle to tinker with. Note that I have limited the height of scrollable element. Obviously, something needs to be scrollable. Be sure to put the directive on the element on which you are putting a scrollbar. It can be <code>&lt;body&gt;</code> itself. Just take care to get the controller right in that case.</p>
+
+<p><iframe style="width: 100%; height: 300px" frameborder="0" seamless="seamless" src="http://jsfiddle.net/akagr/Eu2FW/embedded/js,resources,html,css,result/light/"></iframe></p>
+
+<p>See how I have populated the list very crudely to get things going. The interesting points here are the <code>&lt;ul scroller&gt;</code> element in html and the directive in js. We have binded an event to the element.</p>
+
+<p>But this list population is really bugging me. Moreover, I believe you&rsquo;ll want to load data on scroll instead of showing alert. So let&rsquo;s quickly refactor our controller and reference it from our directive.</p>
+
+<p><iframe style="width: 100%; height: 300px" frameborder="0" seamless="seamless" src="http://jsfiddle.net/akagr/Eu2FW/2/embedded/js,resources,html,css,result/light/"></iframe></p>
+
+<p>We have stashed away the logic to add more data inside a method which is called once from controller itself to load initial data. Every time we scroll, it adds more data. See the problem yet? We need to load data only when user hits the bottom. And we don&rsquo;t want to load data if user is scrolling up. Notice how scroll bar behavior changes as you scroll more. Try dragging scrollbar manually.</p>
+
+<p>We need some logic to only load data if we have reached bottom. Lets see what we can do.</p>
+
+<p><iframe style="width: 100%; height: 300px" frameborder="0" seamless="seamless" src="http://jsfiddle.net/akagr/Eu2FW/4/embedded/js,resources,html,css,result/light/"></iframe></p>
+
+<p>Now that&rsquo;s more like it. I have marked the new bits with comments. We had some core js methods for DOM elements so we needed to extract it out of jquery wrapped element object. Next we put in a condition so that the <code>loadMore()</code> is called only when we are near bottom. Here&rsquo;s what each option means:</p>
+
+<ul>
+<li>scrollHeight: This is the total height of the element if it were not of limited height. Imagine all the <code>&lt;li&gt;</code> elements stacked without any hidden by overflow.</li>
+<li>scrollTop: This is the amount of vertical pixels which we have scrolled. If you are at the top, it is 0.</li>
+<li>offsetHeight: This is the height of the current frame visible to you. (Height of the yellow frame visible to us)</li>
+</ul>
+
+
+<p>  <img class="center <a" src="href="http://javascript.info/files/tutorial/browser/dom/elemScroll.png">http://javascript.info/files/tutorial/browser/dom/elemScroll.png</a>"></p>
+
+<p>I have added a padding of 5 pixels to make it failsafe. I found sometimes even when I was at bottom, the sum of scrollTop and offsetHeight was lagging behind by a couple of pixels.</p>
+
+<p>We have a fully functional infinite scrolling directive at this point. However it needs some refactoring. Right now, the directive is coupled with our controller too tight. For ex, it assumes that our controller must be having a <code>loadMore()</code> method. We can eliminate this by providing the loading method in html itself. Here&rsquo;s how. Look for additions and changes in comments.</p>
+
+<p><iframe style="width: 100%; height: 300px" frameborder="0" seamless="seamless" src="http://jsfiddle.net/akagr/Eu2FW/6/embedded/js,resources,html,css,result/light/"></iframe></p>
+
+<p>By using isolate scope, we have fully decoupled our directive from controller. We can now use it without any changes across our apps. All we need is to specify the loading method in the html declaration. You can pimp out the <code>loadMore()</code> method by using some network calls and fetching stuff from database.</p>
+
+<p>Thanks for sticking through. Hope you enjoyed it.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Wrapping My Head Around Prototypal Inheritance in Javascript]]></title>
+    <link href="http://akashagrawal.me/blog/2013/12/27/wrapping-my-head-around-prototypal-inheritance-in-javascript/"/>
+    <updated>2013-12-27T16:28:40+05:30</updated>
+    <id>http://akashagrawal.me/blog/2013/12/27/wrapping-my-head-around-prototypal-inheritance-in-javascript</id>
+    <content type="html"><![CDATA[<p>Javascript does not have the usual class-object model. I know some C++, some more Java and lots of Ruby. All of them follow classical object model which was kinda etched in my mind now. As such, the object model of javascript took a lot of time for me to wrap my stubborn head around.</p>
+
+<p>So have I mastered it? Not at all. I have just started with serious js and need to practice. But I think I have a fairly good idea of how it works and what goes where. So here goes.</p>
+
+<h2>So what exactly prototypal means?</h2>
+
+<p>Prototype is an object which acts as a base for other objects to inherit from. If that sounds confusing, consider an example. If we have a class named Animal, what will the Human be? If you think Human is also a class, what would your father be? An object? But you inherit from him too, right?</p>
+
+<p>Object oriented programming was designed to mirror real-world. And there are no classes here. Everything is an object. We can say that two objects are similar, like two people. But this doesn&rsquo;t mean someone 3-d printed them according to a design called class. Those people came from other people, inheriting things, modifying and adding stuff on the way. See it?</p>
+
+<p><blockquote><p>In real world, classes don&rsquo;t spawn objects. Objects do.</p></blockquote></p>
+
+<p>This outlook feels more natural to me now. And if you want to get the js object model, you need to come at it with an open mind. Don&rsquo;t try and find answers of prototypal model in the classical one and vice-versa.</p>
+
+<h2>So how does it work in javascript?</h2>
+
+<p>Let&rsquo;s see some code.</p>
+
+<p>```javascript
+function Animal(no_of_legs){
+  this.legs = no_of_legs
+  this.how_many_legs = function(){</p>
+
+<pre><code>console.log(this.legs)
+</code></pre>
+
+<p>  }
+}
+strange = new Animal(1)
+strange</p>
+
+<blockquote><blockquote><p>{ legs: 1, how_many_legs: [Function] }
+<code>``
+Here's the break-up. Animal is an ordinary function. Don't mind the capital A. Call it what you want. Doesn't matter at all. So what's new?</code>new<code>is a keyword which creates a generic object</code>{}` and runs the given function on it. Nothing fancy. Let&rsquo;s write the last lines of the above examples somewhat differently to show you what I mean.</p></blockquote></blockquote>
+
+<p>```javascript
+strange = {} // we create a generic object
+Animal.call(strange, 1) // we run the function on it
+strange</p>
+
+<blockquote><blockquote><p>{ legs: 1, how_many_legs: [Function] } // Voila!
+<code>``
+See how we mimicked the behavior of</code>new<code>? We now have a strange object with a couple of properties. We kinda initialized the object by giving it some pieces to own via</code>Animal()`. And we have a name for such kind of functions, do we not? We call them constructors. But don&rsquo;t let the name fool you. They really are ordinary functions.</p></blockquote></blockquote>
+
+<p>We now know how we can create similar objects by using constructors. Let&rsquo;s create a couple more.</p>
+
+<p><code>javascript
+normal = new Animal(4)
+wtf = new Animal(10)
+</code>
+All these animals have common properties namely <code>legs</code> and <code>how_many_legs()</code>. We can definitely specialize these objects by assigning new un-related properties to each of them individually.</p>
+
+<p>```javascript
+strange.name = &ldquo;Strange&rdquo;</p>
+
+<p>strange.name</p>
+
+<blockquote><blockquote><p>&lsquo;Strange&rsquo;</p></blockquote></blockquote>
+
+<p>normal.name</p>
+
+<blockquote><blockquote><p>undefined</p></blockquote></blockquote>
+
+<p>wtf.name</p>
+
+<blockquote><blockquote><p>undefined
+```</p></blockquote></blockquote>
+
+<p>There is a problem with above code. Each new object has its own copy of <code>legs</code> which is necessary to differentiate their states. But they also have their own separate copies of <code>how_many_legs()</code> method. Method body remains same for all objects. So how do we share same method object between various animal objects?</p>
+
+<h2>Prototypes</h2>
+
+<p>Each function in js is potentially a constructor. Just write a silly one and use <code>new my_silly_method()</code> and it will create an object. If your method gives it some properties, fine, otherwise it will still create an empty <code>{}</code>. Similarly, each function also has a property called <code>prototype</code>. The contents of this property are shared by all the objects created through this function.</p>
+
+<p><blockquote><p>Each function has a property called &lsquo;prototype&rsquo;. If the function is used as a constructor to create objects, then the contents of its &lsquo;prototype&rsquo; property will be shared by all those objects.</p></blockquote></p>
+
+<p>This is probably the most important line of this post. Keep it clear in your head. Here&rsquo;s how we use prototypes.</p>
+
+<p>```javascript
+function Animal(no_of_legs){
+  this.legs = no_of_legs
+}
+Animal.prototype.how_many_legs = function(){
+  console.log(this.legs)
+}</p>
+
+<p>strange = new Animal(1)</p>
+
+<p>strange</p>
+
+<blockquote><blockquote><p>{ legs: 1 }</p></blockquote></blockquote>
+
+<p>Animal.prototype</p>
+
+<blockquote><blockquote><p>{ how_many_legs: [Function] }</p></blockquote></blockquote>
+
+<p>strange.how_many_legs(){
+  console.log(this.legs)
+}</p>
+
+<blockquote><blockquote><p>1
+<code>``
+See how the</code>how_many_legs()<code>function is no more a part of</code>strange<code>? Instead it resides in</code>Animal.prototype<code>and is thus callable from</code>strange`.</p></blockquote></blockquote>
+
+<p>Experiment a bit with prototypes. If you got your brains around the above concept, you&rsquo;re are already almost there.</p>
+
+<h2>Inheritance. Finally.</h2>
+
+<p>So what do we need to implement inheritance. Only a couple of things actually.</p>
+
+<ol>
+<li>We need to share the properties of parent with child.</li>
+<li>A child needs to be able to pass the baton to parent in case something does not exist with it. We will need a pointer of sorts for this.</li>
+</ol>
+
+
+<p>Here&rsquo;s how we get the first requirement, i.e. share Animal&rsquo;s properties with its children</p>
+
+<p>```javascript
+function Human(name, age){
+  this.name = name;
+  this.age = age;
+}</p>
+
+<p>Human.prototype = new Animal(2)</p>
+
+<p>i = new Human(&ldquo;Akash&rdquo;, 23)
+```</p>
+
+<p>Now take a moment and think about what all things <code>i</code> will have access to. Here&rsquo;s what we have.
+```javascript
+i.name</p>
+
+<blockquote><blockquote><p>&ldquo;Akash&rdquo; // as expected</p></blockquote></blockquote>
+
+<p>i.age</p>
+
+<blockquote><blockquote><p>23 // also expected</p></blockquote></blockquote>
+
+<p>Human.prototype</p>
+
+<blockquote><blockquote><p>{ legs: 2 } // new Animal(2)</p></blockquote></blockquote>
+
+<p>// therefore
+i.legs</p>
+
+<blockquote><blockquote><p>2 // see it?
+```
+If you are still with me, you deserve a pat on back. This is the purest most undiluted method of implementing inheritance in javascript. There are other tricks too, but all of them have their roots here. We still have one last thing to see.</p></blockquote></blockquote>
+
+<p>```javascript
+i.how_namy_legs()</p>
+
+<blockquote><blockquote><p>2
+<code>``
+So how does this work? When interpreter does not find</code>how_many_legs()<code>in</code>i<code>, it looks it in its prototype. It founds that</code>i&rsquo;s` prototype is an Animal object which does have access to the said function. You can create a child object of Human and the chain will be continue the same way.</p></blockquote></blockquote>
+
+<p>I hope now you have a better understanding of how the prototypal inheritance works in javascript. For perfection, world&rsquo;s your playground.</p>
+
+<p>Thanks for reading. Sound off below if you think something&rsquo;s amiss or incorrect.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Finally Gonna Date node.js]]></title>
+    <link href="http://akashagrawal.me/blog/2013/12/13/finally-gonna-date-node-dot-js/"/>
+    <updated>2013-12-13T17:51:17+05:30</updated>
+    <id>http://akashagrawal.me/blog/2013/12/13/finally-gonna-date-node-dot-js</id>
+    <content type="html"><![CDATA[<p>When I first heard of node.js, I was in graduation just getting into rails. But I seriously took notice when it displaced rails as the most popular repo on github. Speed whore as I am, I found event-driven non-blocking I/O particularly seducing.</p>
+
+<p>I knew some elementary javascript and even at my work-ex of 7 months, never really used pure js. So I guessed, that just like ruby, I will definitely need to learn javascript a little. The world will be written in javascript in near future. Might as well start speaking it now.</p>
+
+<p>That said, my javascript is still quite rusty. But at least I now understand how to utilize functions as closures and decided to return to node. Being a web-dev, obviously I can&rsquo;t be playing with vanilla quite long. After saying hello to a couple of worlds and writing my own servers with some routes thrown in for taste, meteor caught my eye.</p>
+
+<p>About the only downside I can think of it is is that it does not have eyes for anything other than MongoDb. So I can&rsquo;t just start writing code for my projects.</p>
+
+<p>A nodejs project should be coming my way in sometime. I am hopeful of that. I will be spending as much time as I can manage with node till then. Should be an interesting journey.</p>
+]]></content>
+  </entry>
+  
+</feed>

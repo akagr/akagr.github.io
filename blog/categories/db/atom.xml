@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Db | Akash Agrawal]]></title>
+  <link href="http://akashagrawal.me/blog/categories/db/atom.xml" rel="self"/>
+  <link href="http://akashagrawal.me/"/>
+  <updated>2014-01-31T13:33:37+05:30</updated>
+  <id>http://akashagrawal.me/</id>
+  <author>
+    <name><![CDATA[Akash  Agrawal]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Riak: Installation on Ubuntu 12.04]]></title>
+    <link href="http://akashagrawal.me/blog/2013/12/11/riak-installation-on-ubuntu-12-dot-04/"/>
+    <updated>2013-12-11T17:47:38+05:30</updated>
+    <id>http://akashagrawal.me/blog/2013/12/11/riak-installation-on-ubuntu-12-dot-04</id>
+    <content type="html"><![CDATA[<p>Riak is a relatively new kid on the block of NoSQL territory. It is based on principles of high availability, fault-tolerance, automatic replication and load balancing. Sounds like a deal for your next project&hellip; right? I got interested in one of my co-worker&rsquo;s project which is based on riak and decided to take it for a spin. Here is my first account with riak where I installed it on my Ubuntu 12.04 precise.</p>
+
+<p>First I needed to get all the prerequisites right. This involves some packages and erlang. Now I already got error with erlang OTP R14 so I decided to go with the latest R16 (B02 to be exact).</p>
+
+<p><code>bash
+sudo apt-get install git build-essential libncurses5-dev openssl \
+libssl-dev libssl0.9.8 libc6-dev libc6-dev
+</code></p>
+
+<p>Now download the latest erlang release from <a href="https://www.erlang-solutions.com/downloads/download-erlang-otp">here</a> and set it up as:</p>
+
+<p><code>bash
+sudo dpkg -i &lt;your_downloaded_file.deb&gt;
+</code>
+If that goes suuccessfully and without a fuss, chances are that you will have a fully functioning riak installation in a jiffy.
+Next steps are fairly simple.</p>
+
+<p><code>bash
+git clone https://github.com/basho/riak.git
+cd riak
+make devrel
+</code></p>
+
+<p>Successful completion of the above indicates you&rsquo;re good. Just in case, let&rsquo;s check our installation.</p>
+
+<p><code>bash
+cd dev
+dev1/bin/riak start
+dev1/bin/riak ping
+</code>
+If the output goes pong, you are all set to get your explorer cap on.</p>
+
+<p>In my case, there were lots of head-scratching due to incompatibilities between erlang, riak sources yada yada. Hopefully the process goes smoothly for you. Hoot off below if you are having problems</p>
+]]></content>
+  </entry>
+  
+</feed>

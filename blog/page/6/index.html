@@ -9,7 +9,7 @@
   <meta name="author" content="Akash  Agrawal">
 
   
-  <meta name="description" content="Riak is a relatively new kid on the block of NoSQL territory. It is based on principles of high availability, fault-tolerance, automatic replication &hellip;">
+  <meta name="description" content="When I first heard of node.js, I was in graduation just getting into rails. But I seriously took notice when it displaced rails as the most popular &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -84,7 +84,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/12/11/riak-installation-on-ubuntu-12-dot-04/">Riak: Installation on Ubuntu 12.04</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/12/13/finally-gonna-date-node-dot-js/">Finally Gonna Date node.js</a></h1>
     
     
       <p class="meta">
@@ -100,48 +100,22 @@
   
 
 
-<time datetime="2013-12-11T17:47:38+05:30" pubdate data-updated="true">Dec 11<span>th</span>, 2013</time>
+<time datetime="2013-12-13T17:51:17+05:30" pubdate data-updated="true">Dec 13<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Riak is a relatively new kid on the block of NoSQL territory. It is based on principles of high availability, fault-tolerance, automatic replication and load balancing. Sounds like a deal for your next project&hellip; right? I got interested in one of my co-worker&rsquo;s project which is based on riak and decided to take it for a spin. Here is my first account with riak where I installed it on my Ubuntu 12.04 precise.</p>
+  <div class="entry-content"><p>When I first heard of node.js, I was in graduation just getting into rails. But I seriously took notice when it displaced rails as the most popular repo on github. Speed whore as I am, I found event-driven non-blocking I/O particularly seducing.</p>
 
-<p>First I needed to get all the prerequisites right. This involves some packages and erlang. Now I already got error with erlang OTP R14 so I decided to go with the latest R16 (B02 to be exact).</p>
+<p>I knew some elementary javascript and even at my work-ex of 7 months, never really used pure js. So I guessed, that just like ruby, I will definitely need to learn javascript a little. The world will be written in javascript in near future. Might as well start speaking it now.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install git build-essential libncurses5-dev openssl <span class="se">\</span>
-</span><span class='line'>libssl-dev libssl0.9.8 libc6-dev libc6-dev
-</span></code></pre></td></tr></table></div></figure>
+<p>That said, my javascript is still quite rusty. But at least I now understand how to utilize functions as closures and decided to return to node. Being a web-dev, obviously I can&rsquo;t be playing with vanilla quite long. After saying hello to a couple of worlds and writing my own servers with some routes thrown in for taste, meteor caught my eye.</p>
 
+<p>About the only downside I can think of it is is that it does not have eyes for anything other than MongoDb. So I can&rsquo;t just start writing code for my projects.</p>
 
-<p>Now download the latest erlang release from <a href="https://www.erlang-solutions.com/downloads/download-erlang-otp">here</a> and set it up as:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo dpkg -i &lt;your_downloaded_file.deb&gt;
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If that goes suuccessfully and without a fuss, chances are that you will have a fully functioning riak installation in a jiffy.
-Next steps are fairly simple.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone https://github.com/basho/riak.git
-</span><span class='line'><span class="nb">cd </span>riak
-</span><span class='line'>make devrel
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Successful completion of the above indicates you&rsquo;re good. Just in case, let&rsquo;s check our installation.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd </span>dev
-</span><span class='line'>dev1/bin/riak start
-</span><span class='line'>dev1/bin/riak ping
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If the output goes pong, you are all set to get your explorer cap on.</p>
-
-<p>In my case, there were lots of head-scratching due to incompatibilities between erlang, riak sources yada yada. Hopefully the process goes smoothly for you. Hoot off below if you are having problems</p>
+<p>A nodejs project should be coming my way in sometime. I am hopeful of that. I will be spending as much time as I can manage with node till then. Should be an interesting journey.</p>
 </div>
   
   
@@ -150,6 +124,8 @@ Next steps are fairly simple.</p>
     </article>
   
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/7/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -162,6 +138,10 @@ Next steps are fairly simple.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/01/31/infinite-scroller-in-angularjs/">Infinite Scroller in AngularJs</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/12/27/wrapping-my-head-around-prototypal-inheritance-in-javascript/">Wrapping My Head Around Prototypal Inheritance in Javascript</a>
@@ -177,10 +157,6 @@ Next steps are fairly simple.</p>
     
       <li class="post">
         <a href="/blog/2013/12/17/my-vimrc/">My Vimrc</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/12/13/finally-gonna-date-node-dot-js/">Finally Gonna Date node.js</a>
       </li>
     
   </ul>

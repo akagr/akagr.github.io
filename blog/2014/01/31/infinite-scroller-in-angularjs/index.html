@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Akash Agrawal</title>
+  <title>Infinite Scroller in AngularJs - Akash Agrawal</title>
   <meta name="author" content="Akash  Agrawal">
 
   
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://akashagrawal.me">
+  <link rel="canonical" href="http://akashagrawal.me/blog/2014/01/31/infinite-scroller-in-angularjs">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Akash Agrawal" type="application/atom+xml">
@@ -76,15 +76,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/01/31/infinite-scroller-in-angularjs/">Infinite Scroller in AngularJs</a></h1>
+      <h1 class="entry-title">Infinite Scroller in AngularJs</h1>
     
     
       <p class="meta">
@@ -107,7 +104,7 @@
   </header>
 
 
-  <div class="entry-content"><p>Pagination is necessary. You can&rsquo;t slap 10k records in front of a user. And it is stupid to send that much data across. Even more stupid to expect that user will stick around while your data is received and rendered.</p>
+<div class="entry-content"><p>Pagination is necessary. You can&rsquo;t slap 10k records in front of a user. And it is stupid to send that much data across. Even more stupid to expect that user will stick around while your data is received and rendered.</p>
 
 <p>But infinite scrollers are like pagination hopped up on botox. They look beautiful, feel fresh and don&rsquo;t make users wait for silly page loads. What&rsquo;s more? They are generally much easier to build. So lets build one such scroller in angularjs from scratch.</p>
 
@@ -154,20 +151,67 @@
 
 <p>Thanks for sticking through. Hope you enjoyed it.</p>
 </div>
+
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Akash  Agrawal</span></span>
+
+      
+
+
+
+
+
+
+
+
   
 
 
-    </article>
+<time datetime="2014-01-31T10:52:03+05:30" pubdate data-updated="true">Jan 31<span>st</span>, 2014</time>
+      
+
+<span class="categories">
   
-  <div class="pagination">
+    <a class='category' href='/blog/categories/angularjs/'>angularjs</a>, <a class='category' href='/blog/categories/js/'>js</a>
+  
+</span>
+
+
+    </p>
     
-      <a class="prev" href="/blog/page/2/">&larr; Older</a>
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://akashagrawal.me/blog/2014/01/31/infinite-scroller-in-angularjs/" data-via="akshagrwl" data-counturl="http://akashagrawal.me/blog/2014/01/31/infinite-scroller-in-angularjs/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
 </div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/12/27/wrapping-my-head-around-prototypal-inheritance-in-javascript/" title="Previous Post: Wrapping my head around prototypal inheritance in javascript">&laquo; Wrapping my head around prototypal inheritance in javascript</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
 <aside class="sidebar">
   
     <section>
@@ -203,6 +247,7 @@
   
 </aside>
 
+
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -217,7 +262,10 @@
       var disqus_shortname = 'akagr';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://akashagrawal.me/blog/2014/01/31/infinite-scroller-in-angularjs/';
+        var disqus_url = 'http://akashagrawal.me/blog/2014/01/31/infinite-scroller-in-angularjs/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
