@@ -3,7 +3,7 @@ layout: post
 title: "My Vimrc"
 date: 2013-12-17 12:46:00 +0530
 comments: true
-categories: 
+categories: vim
 ---
 
 I love using sublime text. But there is something about vim that just keeps me pulling back. It's not my default editor of choice (yet) but I still enjoy writing stuff with it when I am not working. This blog is a fine example. Following is my vim config file. Some settings are there thanks to authors of some excellent blogs. Others, I have written myself out of my own needs. One thing's for sure, when it comes to customizability, vim is the grand-daddy of them all.

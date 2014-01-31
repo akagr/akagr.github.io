@@ -3,7 +3,7 @@ layout: post
 title: "Building Vim from source"
 date: 2013-12-24 16:26:54 +0530
 comments: true
-categories: 
+categories: vim
 ---
 Continuing my journey to vim enlightment, I decided to build it from source since the one I installed from apt had begun panting on large files. I won't lie, compiling from source gives me that bad-ass father of god kinda feeling; so that's two for 2. Anyways let's get started. The steps given here will install console vim with perl, python, ruby and tcl enabled. I did it on my Ubuntu precise but it should work for all things nix.
 

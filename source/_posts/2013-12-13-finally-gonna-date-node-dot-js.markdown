@@ -3,7 +3,7 @@ layout: post
 title: "Finally gonna date node.js"
 date: 2013-12-13 17:51:17 +0530
 comments: true
-categories: 
+categories: [js, nodejs]
 ---
 When I first heard of node.js, I was in graduation just getting into rails. But I seriously took notice when it displaced rails as the most popular repo on github. Speed whore as I am, I found event-driven non-blocking I/O particularly seducing. 
 

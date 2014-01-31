@@ -3,7 +3,7 @@ layout: post
 title: "Rudimentary Sessions for Vim"
 date: 2013-12-20 10:26:52 +0530
 comments: true
-categories: 
+categories: [vim]
 ---
 I have been taking a lot of vim with coffee lately. I really like the raw power of this editor. Up till now I have found replacement commands, mappings and plugins for most of my daily used features. Still, vim does not see projects and there is no automatic sessions support built-in.
 

@@ -3,7 +3,7 @@ layout: post
 title: "Riak: Installation on Ubuntu 12.04"
 date: 2013-12-11 17:47:38 +0530
 comments: true
-categories: 
+categories: [db, riak]
 ---
 Riak is a relatively new kid on the block of NoSQL territory. It is based on principles of high availability, fault-tolerance, automatic replication and load balancing. Sounds like a deal for your next project... right? I got interested in one of my co-worker's project which is based on riak and decided to take it for a spin. Here is my first account with riak where I installed it on my Ubuntu 12.04 precise.
 
