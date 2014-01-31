@@ -9,7 +9,7 @@
   <meta name="author" content="Akash  Agrawal">
 
   
-  <meta name="description" content="I love using sublime text. But there is something about vim that just keeps me pulling back. It&rsquo;s not my default editor of choice (yet) but I &hellip;">
+  <meta name="description" content="Riak is a relatively new kid on the block of NoSQL territory. It is based on principles of high availability, fault-tolerance, automatic replication &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -84,7 +84,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/12/17/my-vimrc/">My Vimrc</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/12/11/riak-installation-on-ubuntu-12-dot-04/">Riak: Installation on Ubuntu 12.04</a></h1>
     
     
       <p class="meta">
@@ -100,152 +100,48 @@
   
 
 
-<time datetime="2013-12-17T12:46:00+05:30" pubdate data-updated="true">Dec 17<span>th</span>, 2013</time>
+<time datetime="2013-12-11T17:47:38+05:30" pubdate data-updated="true">Dec 11<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>I love using sublime text. But there is something about vim that just keeps me pulling back. It&rsquo;s not my default editor of choice (yet) but I still enjoy writing stuff with it when I am not working. This blog is a fine example. Following is my vim config file. Some settings are there thanks to authors of some excellent blogs. Others, I have written myself out of my own needs. One thing&rsquo;s for sure, when it comes to customizability, vim is the grand-daddy of them all.</p>
+  <div class="entry-content"><p>Riak is a relatively new kid on the block of NoSQL territory. It is based on principles of high availability, fault-tolerance, automatic replication and load balancing. Sounds like a deal for your next project&hellip; right? I got interested in one of my co-worker&rsquo;s project which is based on riak and decided to take it for a spin. Here is my first account with riak where I installed it on my Ubuntu 12.04 precise.</p>
 
-<div><script src='https://gist.github.com/8001153.js'></script>
-<noscript><pre><code>&quot; Akash Agrawal akashagrawal.me
-set nocompatible
-set encoding=utf-8
+<p>First I needed to get all the prerequisites right. This involves some packages and erlang. Now I already got error with erlang OTP R14 so I decided to go with the latest R16 (B02 to be exact).</p>
 
-&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
-&quot; vundle config
-&quot; git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-&quot; add this to bashrc or bash_profile: export TERM=&quot;screen-256color&quot;
-&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
-filetype off
-
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
-&quot; Vundles
-&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
-Bundle 'gmarik/vundle'
-
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'Raimondi/delimitMate'
-Bundle 'tpope/vim-fugitive'
-Bundle 'kien/ctrlp.vim'
-Bundle 'terryma/vim-multiple-cursors'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'akagr/vim-rudimentary-sessions'
-Bundle 'vim-scripts/scratch.vim'
-Bundle 'godlygeek/tabular'
-Bundle 'mileszs/ack.vim'
-
-&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
-&quot; General
-&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
-set nobackup nowritebackup noswapfile hidden
-filetype plugin indent on
-set winheight=30
-set laststatus=2
-set ttyfast
-set lazyredraw
-
-&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
-&quot; Interface
-&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
-&quot; Syntax Highlighting
-set background=dark
-colorscheme solarized
-syntax on
-
-set wildmenu wildmode=longest:full,full
-set ruler
-set number
-set relativenumber
-
-&quot; Indentation
-set expandtab tabstop=2 shiftwidth=2 
-set smartindent autoindent copyindent
-
-&quot; Search
-set ignorecase smartcase
-set hlsearch incsearch showmatch
-
-set magic
-
-&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
-&quot; Functions
-&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
-function! ToggleVExplorer()
-  if exists(&quot;t:expl_buf_num&quot;)
-    let expl_win_num = bufwinnr(t:expl_buf_num)
-    if expl_win_num != -1
-      let cur_win_nr = winnr()
-      exec expl_win_num . 'wincmd w'
-      close
-      exec cur_win_nr . 'wincmd w'
-      unlet t:expl_buf_num
-    else
-      unlet t:expl_buf_num
-    endif
-  else
-    exec '1wincmd w'
-    Vexplore
-    let t:expl_buf_num = bufnr(&quot;%&quot;)
-  endif
-endfunction
-
-&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
-&quot; Variables 
-&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
-let mapleader = &quot;,&quot;
-let g:mapleader = &quot;,&quot;
-
-let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_next_key='&lt;C-n&gt;'
-let g:multi_cursor_quit_key='&lt;Esc&gt;'
-
-let g:ctrlp_map = '&lt;c-p&gt;'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'ra'
-
-map &lt;silent&gt; &lt;C-E&gt; :call ToggleVExplorer()&lt;CR&gt;
-
-&quot; Hit enter in the file browser to open the selected
-&quot; file with :vsplit to the right of the browser.
-let g:netrw_browse_split = 4
-let g:netrw_altv = 1
-
-&quot; Default to tree mode
-let g:netrw_liststyle=3
-
-&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
-&quot; Key Bindings
-&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
-
-noremap &lt;silent&gt; &lt;C-E&gt; :call ToggleVExplorer()&lt;CR&gt;
-noremap j gj
-noremap k gk
-inoremap jj &lt;ESC&gt;
-nnoremap &lt;leader&gt;s :w&lt;cr&gt;
-nnoremap &lt;leader&gt;w :bd&lt;cr&gt;
-noremap &lt;space&gt; /
-noremap &lt;silent&gt; &lt;leader&gt;, :noh&lt;cr&gt;
-
-nnoremap &lt;c-b&gt; :CtrlPBuffer&lt;cr&gt;
-
-nnoremap &lt;leader&gt;x :Scratch&lt;cr&gt;
-
-nnoremap &lt;leader&gt;r :source ~/.vimrc&lt;cr&gt;
-
-augroup myautocommands
-  autocmd!
-  autocmd FocusLost * :wa
-augroup END
-</code></pre></noscript></div>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install git build-essential libncurses5-dev openssl <span class="se">\</span>
+</span><span class='line'>libssl-dev libssl0.9.8 libc6-dev libc6-dev
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p>I know I really need some plug-ins. This file, like everybody else&rsquo;s, is a work in progress. Feel free to rip it off if you are starting out with vim. You can thank me by suggesting some great plug-ins or hacks which you dig in the comments below.</p>
+<p>Now download the latest erlang release from <a href="https://www.erlang-solutions.com/downloads/download-erlang-otp">here</a> and set it up as:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo dpkg -i &lt;your_downloaded_file.deb&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If that goes suuccessfully and without a fuss, chances are that you will have a fully functioning riak installation in a jiffy.
+Next steps are fairly simple.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone https://github.com/basho/riak.git
+</span><span class='line'><span class="nb">cd </span>riak
+</span><span class='line'>make devrel
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Successful completion of the above indicates you&rsquo;re good. Just in case, let&rsquo;s check our installation.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd </span>dev
+</span><span class='line'>dev1/bin/riak start
+</span><span class='line'>dev1/bin/riak ping
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If the output goes pong, you are all set to get your explorer cap on.</p>
+
+<p>In my case, there were lots of head-scratching due to incompatibilities between erlang, riak sources yada yada. Hopefully the process goes smoothly for you. Hoot off below if you are having problems</p>
 </div>
   
   
@@ -254,8 +150,6 @@ augroup END
     </article>
   
   <div class="pagination">
-    
-      <a class="prev" href="/blog/page/7/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -270,14 +164,6 @@ augroup END
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2014/01/29/angularjs-directives-ii/">AngularJs Directives: II</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/01/28/angularjs-directives-i/">AngularJs Directives: I</a>
-      </li>
-    
-      <li class="post">
         <a href="/blog/2013/12/27/wrapping-my-head-around-prototypal-inheritance-in-javascript/">Wrapping My Head Around Prototypal Inheritance in Javascript</a>
       </li>
     
@@ -287,6 +173,14 @@ augroup END
     
       <li class="post">
         <a href="/blog/2013/12/20/rudimentary-sessions-for-vim/">Rudimentary Sessions for Vim</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/12/17/my-vimrc/">My Vimrc</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/12/13/finally-gonna-date-node-dot-js/">Finally Gonna Date node.js</a>
       </li>
     
   </ul>

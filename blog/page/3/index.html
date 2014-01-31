@@ -9,7 +9,7 @@
   <meta name="author" content="Akash  Agrawal">
 
   
-  <meta name="description" content="Javascript does not have the usual class-object model. I know some C++, some more Java and lots of Ruby. All of them follow classical object model &hellip;">
+  <meta name="description" content="I have been taking a lot of vim with coffee lately. I really like the raw power of this editor. Up till now I have found replacement commands, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -84,7 +84,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/12/27/wrapping-my-head-around-prototypal-inheritance-in-javascript/">Wrapping My Head Around Prototypal Inheritance in Javascript</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/12/20/rudimentary-sessions-for-vim/">Rudimentary Sessions for Vim</a></h1>
     
     
       <p class="meta">
@@ -100,166 +100,95 @@
   
 
 
-<time datetime="2013-12-27T16:28:40+05:30" pubdate data-updated="true">Dec 27<span>th</span>, 2013</time>
+<time datetime="2013-12-20T10:26:52+05:30" pubdate data-updated="true">Dec 20<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Javascript does not have the usual class-object model. I know some C++, some more Java and lots of Ruby. All of them follow classical object model which was kinda etched in my mind now. As such, the object model of javascript took a lot of time for me to wrap my stubborn head around.</p>
+  <div class="entry-content"><p>I have been taking a lot of vim with coffee lately. I really like the raw power of this editor. Up till now I have found replacement commands, mappings and plugins for most of my daily used features. Still, vim does not see projects and there is no automatic sessions support built-in.</p>
 
-<p>So have I mastered it? Not at all. I have just started with serious js and need to practice. But I think I have a fairly good idea of how it works and what goes where. So here goes.</p>
+<p>The plugins on offer are excellent in their own right but they did not cut it for me. Plus, I really want to get into hacking editor part and it was a nice excuse to try out some of the vimscript I learnt.</p>
 
-<h2>So what exactly prototypal means?</h2>
+<p>I started off a fork of casastorta&rsquo;s plugin of same name and got some autoloading in to avoid performance impact. I have also made the &lsquo;save session on exit default&rsquo;. The plugin once installed will try to save a session automatically in the current directory when you exit vim. Aaaannnnd, <strong>spoiler alert</strong>, it will also load the session when you fire up vim from same directory next time. It should fit right in if you plan to open vim from root of you projects.</p>
 
-<p>Prototype is an object which acts as a base for other objects to inherit from. If that sounds confusing, consider an example. If we have a class named Animal, what will the Human be? If you think Human is also a class, what would your father be? An object? But you inherit from him too, right?</p>
+<p>Enough talk, lets see some code:</p>
 
-<p>Object oriented programming was designed to mirror real-world. And there are no classes here. Everything is an object. We can say that two objects are similar, like two people. But this doesn&rsquo;t mean someone 3-d printed them according to a design called class. Those people came from other people, inheriting things, modifying and adding stuff on the way. See it?</p>
-
-<blockquote><p>In real world, classes don&#8217;t spawn objects. Objects do.</p></blockquote>
-
-
-<p>This outlook feels more natural to me now. And if you want to get the js object model, you need to come at it with an open mind. Don&rsquo;t try and find answers of prototypal model in the classical one and vice-versa.</p>
-
-<h2>So how does it work in javascript?</h2>
-
-<p>Let&rsquo;s see some code.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">Animal</span><span class="p">(</span><span class="nx">no_of_legs</span><span class="p">){</span>
-</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">legs</span> <span class="o">=</span> <span class="nx">no_of_legs</span>
-</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">how_many_legs</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
-</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">legs</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nx">strange</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Animal</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</span><span class='line'><span class="nx">strange</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="p">{</span> <span class="nx">legs</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">how_many_legs</span><span class="o">:</span> <span class="p">[</span><span class="nb">Function</span><span class="p">]</span> <span class="p">}</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="k">function</span><span class="p">!</span> sessions#create<span class="p">()</span>
+</span><span class='line'>   <span class="k">let</span> <span class="nb">path</span> <span class="p">=</span> getcwd<span class="p">()</span>
+</span><span class='line'>   <span class="k">if</span> <span class="p">!</span>filewritable<span class="p">(</span><span class="s1">&#39;./.session.vim&#39;</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">if</span> tolower<span class="p">(</span>input<span class="p">(</span><span class="s2">&quot;No session file in &quot;</span> . <span class="nb">path</span> . <span class="s2">&quot;. Create one? [Y]es/[N]o &quot;</span><span class="p">))</span> <span class="p">=~</span> <span class="s2">&quot;y&quot;</span>
+</span><span class='line'>         <span class="k">mksession</span><span class="p">!</span> ./.session.<span class="k">vim</span>
+</span><span class='line'>      <span class="k">endif</span>
+</span><span class='line'>   <span class="k">else</span>
+</span><span class='line'>      <span class="k">if</span> tolower<span class="p">(</span>input<span class="p">(</span><span class="s2">&quot;Session file &quot;</span> . <span class="nb">path</span> . <span class="s2">&quot;/.seesion.vim already exists. Overwrite? [Y]es/[N]o? &quot;</span><span class="p">))</span> <span class="p">=~</span> <span class="s2">&quot;y&quot;</span>
+</span><span class='line'>         <span class="k">let</span> <span class="k">s</span>:sessionautoloaded <span class="p">=</span> <span class="m">1</span>
+</span><span class='line'>         <span class="k">call</span> sessions#<span class="k">save</span><span class="p">()</span>
+</span><span class='line'>      <span class="k">endif</span>
+</span><span class='line'>   <span class="k">endif</span>
+</span><span class='line'><span class="k">endfunction</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span><span class="p">!</span> sessions#<span class="k">save</span><span class="p">()</span>
+</span><span class='line'>   <span class="k">if</span> <span class="k">s</span>:sessionautoloaded <span class="p">==</span> <span class="m">1</span>
+</span><span class='line'>      <span class="k">mksession</span><span class="p">!</span> ./.session.<span class="k">vim</span>
+</span><span class='line'>      <span class="k">echom</span> <span class="s2">&quot;Session saved.&quot;</span>
+</span><span class='line'><span class="c">      &quot;source ./.session.vim</span>
+</span><span class='line'>   <span class="k">else</span>
+</span><span class='line'>      <span class="k">echom</span> <span class="s2">&quot;No session to save. Please create session with &#39;:mksession .session.vim&#39; first! &quot;</span>
+</span><span class='line'>      <span class="k">if</span> tolower<span class="p">(</span>input<span class="p">(</span><span class="s2">&quot;Autocreate session for you? [Y]es/[N]o &quot;</span><span class="p">))</span> <span class="p">=~</span> <span class="s2">&quot;y&quot;</span>
+</span><span class='line'>         <span class="k">call</span> sessions#create<span class="p">()</span>
+</span><span class='line'>      <span class="k">endif</span>
+</span><span class='line'>   <span class="k">endif</span>
+</span><span class='line'><span class="k">endfunction</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span><span class="p">!</span> sessions#<span class="k">load</span><span class="p">()</span>
+</span><span class='line'><span class="c">   &quot; Rudimentary session management</span>
+</span><span class='line'>   <span class="k">if</span> <span class="k">version</span> <span class="p">&gt;=</span> <span class="m">700</span>
+</span><span class='line'>      <span class="k">set</span> <span class="nb">sessionoptions</span><span class="p">=</span>blank<span class="p">,</span><span class="k">buffers</span><span class="p">,</span>sesdir<span class="p">,</span>tabpages<span class="p">,</span><span class="k">winpos</span><span class="p">,</span>folds<span class="p">,</span><span class="k">options</span><span class="p">,</span>unix<span class="p">,</span>slash
+</span><span class='line'>   <span class="k">endif</span>
+</span><span class='line'>
+</span><span class='line'>   <span class="k">if</span> <span class="p">!</span>exists<span class="p">(</span><span class="s2">&quot;s:sessionautoloaded&quot;</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">let</span> <span class="k">s</span>:sessionautoloaded <span class="p">=</span> <span class="m">0</span>
+</span><span class='line'>   <span class="k">endif</span>
+</span><span class='line'>
+</span><span class='line'>   <span class="k">if</span> filereadable<span class="p">(</span><span class="s1">&#39;./.session.vim&#39;</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">if</span> <span class="k">s</span>:sessionautoloaded <span class="p">==</span> <span class="m">0</span>
+</span><span class='line'>         source ./.session.<span class="k">vim</span>
+</span><span class='line'>         <span class="k">let</span> <span class="k">s</span>:sessionautoloaded <span class="p">=</span> <span class="m">1</span>
+</span><span class='line'>         <span class="k">echom</span> <span class="s2">&quot;Session loaded.&quot;</span>
+</span><span class='line'>      <span class="k">endif</span>
+</span><span class='line'>   <span class="k">endif</span>
+</span><span class='line'><span class="k">endfunction</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Here&rsquo;s the break-up. Animal is an ordinary function. Don&rsquo;t mind the capital A. Call it what you want. Doesn&rsquo;t matter at all. So what&rsquo;s new? <code>new</code> is a keyword which creates a generic object <code>{}</code> and runs the given function on it. Nothing fancy. Let&rsquo;s write the last lines of the above examples somewhat differently to show you what I mean.</p>
+<p>If you have any interest in scripting vim, above is a fairly easy noob code. The snippet from my base plugin is as follows:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">strange</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1">// we create a generic object</span>
-</span><span class='line'><span class="nx">Animal</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">strange</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">// we run the function on it</span>
-</span><span class='line'><span class="nx">strange</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="p">{</span> <span class="nx">legs</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">how_many_legs</span><span class="o">:</span> <span class="p">[</span><span class="nb">Function</span><span class="p">]</span> <span class="p">}</span> <span class="c1">// Voila!</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="k">if</span> exists<span class="p">(</span><span class="s1">&#39;b:loaded_rudimentary_sessions_ftplugin&#39;</span><span class="p">)</span>
+</span><span class='line'>   <span class="k">finish</span>
+</span><span class='line'><span class="k">endif</span>
+</span><span class='line'><span class="k">let</span> <span class="k">b</span>:loaded_rudimentary_sessions_ftplugin <span class="p">=</span> <span class="m">1</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">&quot; Session is saved with &lt;leader&gt;ss (&lt;leader&gt; is \ by default)</span>
+</span><span class='line'>nmap <span class="p">&lt;</span><span class="k">silent</span><span class="p">&gt;</span> <span class="p">&lt;</span>leader<span class="p">&gt;</span><span class="nb">ss</span> :<span class="k">call</span> sessions#<span class="k">save</span><span class="p">()&lt;</span>CR<span class="p">&gt;</span>
+</span><span class='line'>nmap <span class="p">&lt;</span><span class="k">silent</span><span class="p">&gt;</span> <span class="p">&lt;</span>leader<span class="p">&gt;</span><span class="nb">sc</span> :<span class="k">call</span> sessions#create<span class="p">()&lt;</span>CR<span class="p">&gt;</span>
+</span><span class='line'>nmap <span class="p">&lt;</span><span class="k">silent</span><span class="p">&gt;</span> <span class="p">&lt;</span>leader<span class="p">&gt;</span><span class="k">sl</span> :<span class="k">call</span> sessions#<span class="k">load</span><span class="p">()&lt;</span>CR<span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>augroup RudimentarySession
+</span><span class='line'>  autocmd <span class="nb">VimEnter</span> * <span class="k">call</span> sessions#<span class="k">load</span><span class="p">()</span>
+</span><span class='line'>  autocmd <span class="nb">VimLeave</span> * <span class="k">call</span> sessions#<span class="k">save</span><span class="p">()</span>
+</span><span class='line'>augroup END
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>See how we mimicked the behavior of <code>new</code>? We now have a strange object with a couple of properties. We kinda initialized the object by giving it some pieces to own via <code>Animal()</code>. And we have a name for such kind of functions, do we not? We call them constructors. But don&rsquo;t let the name fool you. They really are ordinary functions.</p>
+<p>Before you think of installing this plugin, you might want to know a few issues that I noticed. First, if a session file exists in the directory, vim will always load it. Always. Even if you specify a file explicitly while opening vim. The file will be opened, sure, but in a hidden buffer. You will have to navigate to that file on your own.</p>
 
-<p>We now know how we can create similar objects by using constructors. Let&rsquo;s create a couple more.</p>
+<p>Second, it might get a little confusing when every directory can potentially house a vim session file. It will get unpredictable what you will see on entering vim from a particular directory. It will be good to have some sort of organization to these session files.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">normal</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Animal</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-</span><span class='line'><span class="nx">wtf</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Animal</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>If you want to give it a go, use your favorite vim bundle manager to install it from <a href="https://github.com/akagr/vim-rudimentary-sessions">my git repo here</a>.</p>
 
-
-<p>All these animals have common properties namely <code>legs</code> and <code>how_many_legs()</code>. We can definitely specialize these objects by assigning new un-related properties to each of them individually.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">strange</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s2">&quot;Strange&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">strange</span><span class="p">.</span><span class="nx">name</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="s1">&#39;Strange&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">normal</span><span class="p">.</span><span class="nx">name</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="kc">undefined</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">wtf</span><span class="p">.</span><span class="nx">name</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="kc">undefined</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>There is a problem with above code. Each new object has its own copy of <code>legs</code> which is necessary to differentiate their states. But they also have their own separate copies of <code>how_many_legs()</code> method. Method body remains same for all objects. So how do we share same method object between various animal objects?</p>
-
-<h2>Prototypes</h2>
-
-<p>Each function in js is potentially a constructor. Just write a silly one and use <code>new my_silly_method()</code> and it will create an object. If your method gives it some properties, fine, otherwise it will still create an empty <code>{}</code>. Similarly, each function also has a property called <code>prototype</code>. The contents of this property are shared by all the objects created through this function.</p>
-
-<blockquote><p>Each function has a property called &#8216;prototype&#8217;. If the function is used as a constructor to create objects, then the contents of its &#8216;prototype&#8217; property will be shared by all those objects.</p></blockquote>
-
-
-<p>This is probably the most important line of this post. Keep it clear in your head. Here&rsquo;s how we use prototypes.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">Animal</span><span class="p">(</span><span class="nx">no_of_legs</span><span class="p">){</span>
-</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">legs</span> <span class="o">=</span> <span class="nx">no_of_legs</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nx">Animal</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">how_many_legs</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
-</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">legs</span><span class="p">)</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">strange</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Animal</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">strange</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="p">{</span> <span class="nx">legs</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">Animal</span><span class="p">.</span><span class="nx">prototype</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="p">{</span> <span class="nx">how_many_legs</span><span class="o">:</span> <span class="p">[</span><span class="nb">Function</span><span class="p">]</span> <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">strange</span><span class="p">.</span><span class="nx">how_many_legs</span><span class="p">(){</span>
-</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">legs</span><span class="p">)</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="mi">1</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>See how the <code>how_many_legs()</code> function is no more a part of <code>strange</code>? Instead it resides in <code>Animal.prototype</code> and is thus callable from <code>strange</code>.</p>
-
-<p>Experiment a bit with prototypes. If you got your brains around the above concept, you&rsquo;re are already almost there.</p>
-
-<h2>Inheritance. Finally.</h2>
-
-<p>So what do we need to implement inheritance. Only a couple of things actually.</p>
-
-<ol>
-<li>We need to share the properties of parent with child.</li>
-<li>A child needs to be able to pass the baton to parent in case something does not exist with it. We will need a pointer of sorts for this.</li>
-</ol>
-
-
-<p>Here&rsquo;s how we get the first requirement, i.e. share Animal&rsquo;s properties with its children</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">Human</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">){</span>
-</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">Human</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Animal</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">i</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Human</span><span class="p">(</span><span class="s2">&quot;Akash&quot;</span><span class="p">,</span> <span class="mi">23</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now take a moment and think about what all things <code>i</code> will have access to. Here&rsquo;s what we have.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">i</span><span class="p">.</span><span class="nx">name</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="s2">&quot;Akash&quot;</span> <span class="c1">// as expected</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">i</span><span class="p">.</span><span class="nx">age</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="mi">23</span> <span class="c1">// also expected</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">Human</span><span class="p">.</span><span class="nx">prototype</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="p">{</span> <span class="nx">legs</span><span class="o">:</span> <span class="mi">2</span> <span class="p">}</span> <span class="c1">// new Animal(2)</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// therefore</span>
-</span><span class='line'><span class="nx">i</span><span class="p">.</span><span class="nx">legs</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="mi">2</span> <span class="c1">// see it?</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If you are still with me, you deserve a pat on back. This is the purest most undiluted method of implementing inheritance in javascript. There are other tricks too, but all of them have their roots here. We still have one last thing to see.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">i</span><span class="p">.</span><span class="nx">how_namy_legs</span><span class="p">()</span>
-</span><span class='line'><span class="o">&gt;&gt;</span> <span class="mi">2</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>So how does this work? When interpreter does not find <code>how_many_legs()</code> in <code>i</code>, it looks it in its prototype. It founds that <code>i's</code> prototype is an Animal object which does have access to the said function. You can create a child object of Human and the chain will be continue the same way.</p>
-
-<p>I hope now you have a better understanding of how the prototypal inheritance works in javascript. For perfection, world&rsquo;s your playground.</p>
-
-<p>Thanks for reading. Sound off below if you think something&rsquo;s amiss or incorrect.</p>
+<p>If you have any suggestions or issues, take it to the github issue tracker. It ain&rsquo;t there for nothing.</p>
 </div>
   
   
@@ -284,14 +213,6 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2014/01/29/angularjs-directives-ii/">AngularJs Directives: II</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/01/28/angularjs-directives-i/">AngularJs Directives: I</a>
-      </li>
-    
-      <li class="post">
         <a href="/blog/2013/12/27/wrapping-my-head-around-prototypal-inheritance-in-javascript/">Wrapping My Head Around Prototypal Inheritance in Javascript</a>
       </li>
     
@@ -301,6 +222,14 @@
     
       <li class="post">
         <a href="/blog/2013/12/20/rudimentary-sessions-for-vim/">Rudimentary Sessions for Vim</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/12/17/my-vimrc/">My Vimrc</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/12/13/finally-gonna-date-node-dot-js/">Finally Gonna Date node.js</a>
       </li>
     
   </ul>

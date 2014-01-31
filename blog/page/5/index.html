@@ -9,7 +9,7 @@
   <meta name="author" content="Akash  Agrawal">
 
   
-  <meta name="description" content="I have been taking a lot of vim with coffee lately. I really like the raw power of this editor. Up till now I have found replacement commands, &hellip;">
+  <meta name="description" content="When I first heard of node.js, I was in graduation just getting into rails. But I seriously took notice when it displaced rails as the most popular &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -84,7 +84,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/12/20/rudimentary-sessions-for-vim/">Rudimentary Sessions for Vim</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/12/13/finally-gonna-date-node-dot-js/">Finally Gonna Date node.js</a></h1>
     
     
       <p class="meta">
@@ -100,95 +100,22 @@
   
 
 
-<time datetime="2013-12-20T10:26:52+05:30" pubdate data-updated="true">Dec 20<span>th</span>, 2013</time>
+<time datetime="2013-12-13T17:51:17+05:30" pubdate data-updated="true">Dec 13<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>I have been taking a lot of vim with coffee lately. I really like the raw power of this editor. Up till now I have found replacement commands, mappings and plugins for most of my daily used features. Still, vim does not see projects and there is no automatic sessions support built-in.</p>
+  <div class="entry-content"><p>When I first heard of node.js, I was in graduation just getting into rails. But I seriously took notice when it displaced rails as the most popular repo on github. Speed whore as I am, I found event-driven non-blocking I/O particularly seducing.</p>
 
-<p>The plugins on offer are excellent in their own right but they did not cut it for me. Plus, I really want to get into hacking editor part and it was a nice excuse to try out some of the vimscript I learnt.</p>
+<p>I knew some elementary javascript and even at my work-ex of 7 months, never really used pure js. So I guessed, that just like ruby, I will definitely need to learn javascript a little. The world will be written in javascript in near future. Might as well start speaking it now.</p>
 
-<p>I started off a fork of casastorta&rsquo;s plugin of same name and got some autoloading in to avoid performance impact. I have also made the &lsquo;save session on exit default&rsquo;. The plugin once installed will try to save a session automatically in the current directory when you exit vim. Aaaannnnd, <strong>spoiler alert</strong>, it will also load the session when you fire up vim from same directory next time. It should fit right in if you plan to open vim from root of you projects.</p>
+<p>That said, my javascript is still quite rusty. But at least I now understand how to utilize functions as closures and decided to return to node. Being a web-dev, obviously I can&rsquo;t be playing with vanilla quite long. After saying hello to a couple of worlds and writing my own servers with some routes thrown in for taste, meteor caught my eye.</p>
 
-<p>Enough talk, lets see some code:</p>
+<p>About the only downside I can think of it is is that it does not have eyes for anything other than MongoDb. So I can&rsquo;t just start writing code for my projects.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="k">function</span><span class="p">!</span> sessions#create<span class="p">()</span>
-</span><span class='line'>   <span class="k">let</span> <span class="nb">path</span> <span class="p">=</span> getcwd<span class="p">()</span>
-</span><span class='line'>   <span class="k">if</span> <span class="p">!</span>filewritable<span class="p">(</span><span class="s1">&#39;./.session.vim&#39;</span><span class="p">)</span>
-</span><span class='line'>      <span class="k">if</span> tolower<span class="p">(</span>input<span class="p">(</span><span class="s2">&quot;No session file in &quot;</span> . <span class="nb">path</span> . <span class="s2">&quot;. Create one? [Y]es/[N]o &quot;</span><span class="p">))</span> <span class="p">=~</span> <span class="s2">&quot;y&quot;</span>
-</span><span class='line'>         <span class="k">mksession</span><span class="p">!</span> ./.session.<span class="k">vim</span>
-</span><span class='line'>      <span class="k">endif</span>
-</span><span class='line'>   <span class="k">else</span>
-</span><span class='line'>      <span class="k">if</span> tolower<span class="p">(</span>input<span class="p">(</span><span class="s2">&quot;Session file &quot;</span> . <span class="nb">path</span> . <span class="s2">&quot;/.seesion.vim already exists. Overwrite? [Y]es/[N]o? &quot;</span><span class="p">))</span> <span class="p">=~</span> <span class="s2">&quot;y&quot;</span>
-</span><span class='line'>         <span class="k">let</span> <span class="k">s</span>:sessionautoloaded <span class="p">=</span> <span class="m">1</span>
-</span><span class='line'>         <span class="k">call</span> sessions#<span class="k">save</span><span class="p">()</span>
-</span><span class='line'>      <span class="k">endif</span>
-</span><span class='line'>   <span class="k">endif</span>
-</span><span class='line'><span class="k">endfunction</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">function</span><span class="p">!</span> sessions#<span class="k">save</span><span class="p">()</span>
-</span><span class='line'>   <span class="k">if</span> <span class="k">s</span>:sessionautoloaded <span class="p">==</span> <span class="m">1</span>
-</span><span class='line'>      <span class="k">mksession</span><span class="p">!</span> ./.session.<span class="k">vim</span>
-</span><span class='line'>      <span class="k">echom</span> <span class="s2">&quot;Session saved.&quot;</span>
-</span><span class='line'><span class="c">      &quot;source ./.session.vim</span>
-</span><span class='line'>   <span class="k">else</span>
-</span><span class='line'>      <span class="k">echom</span> <span class="s2">&quot;No session to save. Please create session with &#39;:mksession .session.vim&#39; first! &quot;</span>
-</span><span class='line'>      <span class="k">if</span> tolower<span class="p">(</span>input<span class="p">(</span><span class="s2">&quot;Autocreate session for you? [Y]es/[N]o &quot;</span><span class="p">))</span> <span class="p">=~</span> <span class="s2">&quot;y&quot;</span>
-</span><span class='line'>         <span class="k">call</span> sessions#create<span class="p">()</span>
-</span><span class='line'>      <span class="k">endif</span>
-</span><span class='line'>   <span class="k">endif</span>
-</span><span class='line'><span class="k">endfunction</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">function</span><span class="p">!</span> sessions#<span class="k">load</span><span class="p">()</span>
-</span><span class='line'><span class="c">   &quot; Rudimentary session management</span>
-</span><span class='line'>   <span class="k">if</span> <span class="k">version</span> <span class="p">&gt;=</span> <span class="m">700</span>
-</span><span class='line'>      <span class="k">set</span> <span class="nb">sessionoptions</span><span class="p">=</span>blank<span class="p">,</span><span class="k">buffers</span><span class="p">,</span>sesdir<span class="p">,</span>tabpages<span class="p">,</span><span class="k">winpos</span><span class="p">,</span>folds<span class="p">,</span><span class="k">options</span><span class="p">,</span>unix<span class="p">,</span>slash
-</span><span class='line'>   <span class="k">endif</span>
-</span><span class='line'>
-</span><span class='line'>   <span class="k">if</span> <span class="p">!</span>exists<span class="p">(</span><span class="s2">&quot;s:sessionautoloaded&quot;</span><span class="p">)</span>
-</span><span class='line'>      <span class="k">let</span> <span class="k">s</span>:sessionautoloaded <span class="p">=</span> <span class="m">0</span>
-</span><span class='line'>   <span class="k">endif</span>
-</span><span class='line'>
-</span><span class='line'>   <span class="k">if</span> filereadable<span class="p">(</span><span class="s1">&#39;./.session.vim&#39;</span><span class="p">)</span>
-</span><span class='line'>      <span class="k">if</span> <span class="k">s</span>:sessionautoloaded <span class="p">==</span> <span class="m">0</span>
-</span><span class='line'>         source ./.session.<span class="k">vim</span>
-</span><span class='line'>         <span class="k">let</span> <span class="k">s</span>:sessionautoloaded <span class="p">=</span> <span class="m">1</span>
-</span><span class='line'>         <span class="k">echom</span> <span class="s2">&quot;Session loaded.&quot;</span>
-</span><span class='line'>      <span class="k">endif</span>
-</span><span class='line'>   <span class="k">endif</span>
-</span><span class='line'><span class="k">endfunction</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If you have any interest in scripting vim, above is a fairly easy noob code. The snippet from my base plugin is as follows:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="k">if</span> exists<span class="p">(</span><span class="s1">&#39;b:loaded_rudimentary_sessions_ftplugin&#39;</span><span class="p">)</span>
-</span><span class='line'>   <span class="k">finish</span>
-</span><span class='line'><span class="k">endif</span>
-</span><span class='line'><span class="k">let</span> <span class="k">b</span>:loaded_rudimentary_sessions_ftplugin <span class="p">=</span> <span class="m">1</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">&quot; Session is saved with &lt;leader&gt;ss (&lt;leader&gt; is \ by default)</span>
-</span><span class='line'>nmap <span class="p">&lt;</span><span class="k">silent</span><span class="p">&gt;</span> <span class="p">&lt;</span>leader<span class="p">&gt;</span><span class="nb">ss</span> :<span class="k">call</span> sessions#<span class="k">save</span><span class="p">()&lt;</span>CR<span class="p">&gt;</span>
-</span><span class='line'>nmap <span class="p">&lt;</span><span class="k">silent</span><span class="p">&gt;</span> <span class="p">&lt;</span>leader<span class="p">&gt;</span><span class="nb">sc</span> :<span class="k">call</span> sessions#create<span class="p">()&lt;</span>CR<span class="p">&gt;</span>
-</span><span class='line'>nmap <span class="p">&lt;</span><span class="k">silent</span><span class="p">&gt;</span> <span class="p">&lt;</span>leader<span class="p">&gt;</span><span class="k">sl</span> :<span class="k">call</span> sessions#<span class="k">load</span><span class="p">()&lt;</span>CR<span class="p">&gt;</span>
-</span><span class='line'>
-</span><span class='line'>augroup RudimentarySession
-</span><span class='line'>  autocmd <span class="nb">VimEnter</span> * <span class="k">call</span> sessions#<span class="k">load</span><span class="p">()</span>
-</span><span class='line'>  autocmd <span class="nb">VimLeave</span> * <span class="k">call</span> sessions#<span class="k">save</span><span class="p">()</span>
-</span><span class='line'>augroup END
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Before you think of installing this plugin, you might want to know a few issues that I noticed. First, if a session file exists in the directory, vim will always load it. Always. Even if you specify a file explicitly while opening vim. The file will be opened, sure, but in a hidden buffer. You will have to navigate to that file on your own.</p>
-
-<p>Second, it might get a little confusing when every directory can potentially house a vim session file. It will get unpredictable what you will see on entering vim from a particular directory. It will be good to have some sort of organization to these session files.</p>
-
-<p>If you want to give it a go, use your favorite vim bundle manager to install it from <a href="https://github.com/akagr/vim-rudimentary-sessions">my git repo here</a>.</p>
-
-<p>If you have any suggestions or issues, take it to the github issue tracker. It ain&rsquo;t there for nothing.</p>
+<p>A nodejs project should be coming my way in sometime. I am hopeful of that. I will be spending as much time as I can manage with node till then. Should be an interesting journey.</p>
 </div>
   
   
@@ -213,14 +140,6 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2014/01/29/angularjs-directives-ii/">AngularJs Directives: II</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/01/28/angularjs-directives-i/">AngularJs Directives: I</a>
-      </li>
-    
-      <li class="post">
         <a href="/blog/2013/12/27/wrapping-my-head-around-prototypal-inheritance-in-javascript/">Wrapping My Head Around Prototypal Inheritance in Javascript</a>
       </li>
     
@@ -230,6 +149,14 @@
     
       <li class="post">
         <a href="/blog/2013/12/20/rudimentary-sessions-for-vim/">Rudimentary Sessions for Vim</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/12/17/my-vimrc/">My Vimrc</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/12/13/finally-gonna-date-node-dot-js/">Finally Gonna Date node.js</a>
       </li>
     
   </ul>
