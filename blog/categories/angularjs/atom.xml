@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Angularjs | Akash Agrawal]]></title>
   <link href="http://akashagrawal.me/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://akashagrawal.me/"/>
-  <updated>2014-01-31T13:33:37+05:30</updated>
+  <updated>2014-01-31T16:27:44+05:30</updated>
   <id>http://akashagrawal.me/</id>
   <author>
     <name><![CDATA[Akash  Agrawal]]></name>
@@ -22,23 +22,26 @@
 
 <p>But infinite scrollers are like pagination hopped up on botox. They look beautiful, feel fresh and don&rsquo;t make users wait for silly page loads. What&rsquo;s more? They are generally much easier to build. So lets build one such scroller in angularjs from scratch.</p>
 
+<!--more-->
+
+
 <p>Here&rsquo;s a light bulb. If you don&rsquo;t know when to use directives, look out for places where you need to manipulate DOM from js. This includes adding event listeners, manipulating classes, css etc. These scream directive almost always. Since we will most definitely need to attach at least a scroll event listener to something, directive is what we are going to write.</p>
 
 <p>Let&rsquo;s quickly create a dummy directive which attaches a scroll event to an element and make it alert every time we scroll it. Here is a quick fiddle to tinker with. Note that I have limited the height of scrollable element. Obviously, something needs to be scrollable. Be sure to put the directive on the element on which you are putting a scrollbar. It can be <code>&lt;body&gt;</code> itself. Just take care to get the controller right in that case.</p>
 
-<p><iframe style="width: 100%; height: 300px" frameborder="0" seamless="seamless" src="http://jsfiddle.net/akagr/Eu2FW/embedded/js,resources,html,css,result/light/"></iframe></p>
+<p><iframe style="width: 100%; height: 300px" frameborder="0" seamless="seamless" src="http://jsfiddle.net/akagr/Eu2FW/embedded/js,html,css,result/light/"></iframe></p>
 
 <p>See how I have populated the list very crudely to get things going. The interesting points here are the <code>&lt;ul scroller&gt;</code> element in html and the directive in js. We have binded an event to the element.</p>
 
 <p>But this list population is really bugging me. Moreover, I believe you&rsquo;ll want to load data on scroll instead of showing alert. So let&rsquo;s quickly refactor our controller and reference it from our directive.</p>
 
-<p><iframe style="width: 100%; height: 300px" frameborder="0" seamless="seamless" src="http://jsfiddle.net/akagr/Eu2FW/2/embedded/js,resources,html,css,result/light/"></iframe></p>
+<p><iframe style="width: 100%; height: 300px" frameborder="0" seamless="seamless" src="http://jsfiddle.net/akagr/Eu2FW/2/embedded/js,result,html,css/light/"></iframe></p>
 
 <p>We have stashed away the logic to add more data inside a method which is called once from controller itself to load initial data. Every time we scroll, it adds more data. See the problem yet? We need to load data only when user hits the bottom. And we don&rsquo;t want to load data if user is scrolling up. Notice how scroll bar behavior changes as you scroll more. Try dragging scrollbar manually.</p>
 
 <p>We need some logic to only load data if we have reached bottom. Lets see what we can do.</p>
 
-<p><iframe style="width: 100%; height: 300px" frameborder="0" seamless="seamless" src="http://jsfiddle.net/akagr/Eu2FW/4/embedded/js,resources,html,css,result/light/"></iframe></p>
+<p><iframe style="width: 100%; height: 300px" frameborder="0" seamless="seamless" src="http://jsfiddle.net/akagr/Eu2FW/4/embedded/result,js,html,css/light/"></iframe></p>
 
 <p>Now that&rsquo;s more like it. I have marked the new bits with comments. We had some core js methods for DOM elements so we needed to extract it out of jquery wrapped element object. Next we put in a condition so that the <code>loadMore()</code> is called only when we are near bottom. Here&rsquo;s what each option means:</p>
 
@@ -55,7 +58,7 @@
 
 <p>We have a fully functional infinite scrolling directive at this point. However it needs some refactoring. Right now, the directive is coupled with our controller too tight. For ex, it assumes that our controller must be having a <code>loadMore()</code> method. We can eliminate this by providing the loading method in html itself. Here&rsquo;s how. Look for additions and changes in comments.</p>
 
-<p><iframe style="width: 100%; height: 300px" frameborder="0" seamless="seamless" src="http://jsfiddle.net/akagr/Eu2FW/6/embedded/js,resources,html,css,result/light/"></iframe></p>
+<p><iframe style="width: 100%; height: 300px" frameborder="0" seamless="seamless" src="http://jsfiddle.net/akagr/Eu2FW/6/embedded/result,js,html,css/light/"></iframe></p>
 
 <p>By using isolate scope, we have fully decoupled our directive from controller. We can now use it without any changes across our apps. All we need is to specify the loading method in the html declaration. You can pimp out the <code>loadMore()</code> method by using some network calls and fetching stuff from database.</p>
 

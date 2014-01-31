@@ -111,50 +111,180 @@
 
 <p>But infinite scrollers are like pagination hopped up on botox. They look beautiful, feel fresh and don&rsquo;t make users wait for silly page loads. What&rsquo;s more? They are generally much easier to build. So lets build one such scroller in angularjs from scratch.</p>
 
-<p>Here&rsquo;s a light bulb. If you don&rsquo;t know when to use directives, look out for places where you need to manipulate DOM from js. This includes adding event listeners, manipulating classes, css etc. These scream directive almost always. Since we will most definitely need to attach at least a scroll event listener to something, directive is what we are going to write.</p>
-
-<p>Let&rsquo;s quickly create a dummy directive which attaches a scroll event to an element and make it alert every time we scroll it. Here is a quick fiddle to tinker with. Note that I have limited the height of scrollable element. Obviously, something needs to be scrollable. Be sure to put the directive on the element on which you are putting a scrollbar. It can be <code>&lt;body&gt;</code> itself. Just take care to get the controller right in that case.</p>
-
-<iframe style="width: 100%; height: 300px" frameborder="0" seamless="seamless" src="http://jsfiddle.net/akagr/Eu2FW/embedded/js,resources,html,css,result/light/"></iframe>
-
-
-<p>See how I have populated the list very crudely to get things going. The interesting points here are the <code>&lt;ul scroller&gt;</code> element in html and the directive in js. We have binded an event to the element.</p>
-
-<p>But this list population is really bugging me. Moreover, I believe you&rsquo;ll want to load data on scroll instead of showing alert. So let&rsquo;s quickly refactor our controller and reference it from our directive.</p>
-
-<iframe style="width: 100%; height: 300px" frameborder="0" seamless="seamless" src="http://jsfiddle.net/akagr/Eu2FW/2/embedded/js,resources,html,css,result/light/"></iframe>
-
-
-<p>We have stashed away the logic to add more data inside a method which is called once from controller itself to load initial data. Every time we scroll, it adds more data. See the problem yet? We need to load data only when user hits the bottom. And we don&rsquo;t want to load data if user is scrolling up. Notice how scroll bar behavior changes as you scroll more. Try dragging scrollbar manually.</p>
-
-<p>We need some logic to only load data if we have reached bottom. Lets see what we can do.</p>
-
-<iframe style="width: 100%; height: 300px" frameborder="0" seamless="seamless" src="http://jsfiddle.net/akagr/Eu2FW/4/embedded/js,resources,html,css,result/light/"></iframe>
-
-
-<p>Now that&rsquo;s more like it. I have marked the new bits with comments. We had some core js methods for DOM elements so we needed to extract it out of jquery wrapped element object. Next we put in a condition so that the <code>loadMore()</code> is called only when we are near bottom. Here&rsquo;s what each option means:</p>
-
-<ul>
-<li>scrollHeight: This is the total height of the element if it were not of limited height. Imagine all the <code>&lt;li&gt;</code> elements stacked without any hidden by overflow.</li>
-<li>scrollTop: This is the amount of vertical pixels which we have scrolled. If you are at the top, it is 0.</li>
-<li>offsetHeight: This is the height of the current frame visible to you. (Height of the yellow frame visible to us)</li>
-</ul>
-
-
-<p>  <img class="center" src="http://javascript.info/files/tutorial/browser/dom/elemScroll.png"></p>
-
-<p>I have added a padding of 5 pixels to make it failsafe. I found sometimes even when I was at bottom, the sum of scrollTop and offsetHeight was lagging behind by a couple of pixels.</p>
-
-<p>We have a fully functional infinite scrolling directive at this point. However it needs some refactoring. Right now, the directive is coupled with our controller too tight. For ex, it assumes that our controller must be having a <code>loadMore()</code> method. We can eliminate this by providing the loading method in html itself. Here&rsquo;s how. Look for additions and changes in comments.</p>
-
-<iframe style="width: 100%; height: 300px" frameborder="0" seamless="seamless" src="http://jsfiddle.net/akagr/Eu2FW/6/embedded/js,resources,html,css,result/light/"></iframe>
-
-
-<p>By using isolate scope, we have fully decoupled our directive from controller. We can now use it without any changes across our apps. All we need is to specify the loading method in the html declaration. You can pimp out the <code>loadMore()</code> method by using some network calls and fetching stuff from database.</p>
-
-<p>Thanks for sticking through. Hope you enjoyed it.</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/01/31/infinite-scroller-in-angularjs/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/27/wrapping-my-head-around-prototypal-inheritance-in-javascript/">Wrapping My Head Around Prototypal Inheritance in Javascript</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-27T16:28:40+05:30" pubdate data-updated="true">Dec 27<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Javascript does not have the usual class-object model. I know some C++, some more Java and lots of Ruby. All of them follow classical object model which was kinda etched in my mind now. As such, the object model of javascript took a lot of time for me to wrap my stubborn head around.</p>
+
+<p>So have I mastered it? Not at all. I have just started with serious js and need to practice. But I think I have a fairly good idea of how it works and what goes where. So here goes.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/12/27/wrapping-my-head-around-prototypal-inheritance-in-javascript/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/24/building-vim-from-source/">Building Vim From Source</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-24T16:26:54+05:30" pubdate data-updated="true">Dec 24<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Continuing my journey to vim enlightment, I decided to build it from source since the one I installed from apt had begun panting on large files. I won&rsquo;t lie, compiling from source gives me that bad-ass father of god kinda feeling; so that&rsquo;s two for 2. Anyways let&rsquo;s get started. The steps given here will install console vim with perl, python, ruby and tcl enabled. I did it on my Ubuntu precise but it should work for all things nix.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/12/24/building-vim-from-source/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/20/rudimentary-sessions-for-vim/">Rudimentary Sessions for Vim</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-20T10:26:52+05:30" pubdate data-updated="true">Dec 20<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I have been taking a lot of vim with coffee lately. I really like the raw power of this editor. Up till now I have found replacement commands, mappings and plugins for most of my daily used features. Still, vim does not see projects and there is no automatic sessions support built-in.</p>
+
+<p>The plugins on offer are excellent in their own right but they did not cut it for me. Plus, I really want to get into hacking editor part and it was a nice excuse to try out some of the vimscript I learnt.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/12/20/rudimentary-sessions-for-vim/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/17/my-vimrc/">My Vimrc</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-17T12:46:00+05:30" pubdate data-updated="true">Dec 17<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I love using sublime text. But there is something about vim that just keeps me pulling back. It&rsquo;s not my default editor of choice (yet) but I still enjoy writing stuff with it when I am not working. This blog is a fine example. Following is my vim config file. Some settings are there thanks to authors of some excellent blogs. Others, I have written myself out of my own needs. One thing&rsquo;s for sure, when it comes to customizability, vim is the grand-daddy of them all.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/12/17/my-vimrc/">Read on &rarr;</a>
+    </footer>
   
 
 
