@@ -65,6 +65,9 @@ body {
       padding-right: $pad-wide;
     }
   }
+  hgroup{
+    text-align: center;
+  }
   div.pagination {
     @extend .group;
     margin-left: $pad-min;
