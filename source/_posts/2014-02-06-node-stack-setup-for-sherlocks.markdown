@@ -18,9 +18,9 @@ If you are like me and like to know how every bit of code in front of you works,
 First thing we need is to install node and npm. Google it. This bit is easily found. Then come back and we will start with our app.
 
 ```bash
-nvm install -g express
-nvm install -g grunt-cli
-nvm install -g bower
+npm install -g express
+npm install -g grunt-cli
+npm install -g bower
 ```
 
 We installed some node packages here. The `-g` flag means that they are global packages accessible throughout system. First is express. There are really loads of node frameworks including derby, sails etc. I found express to be most production-ready, least opinionated and most easy to setup. Then there is grunt. I'll leave that to a little later. Bower is to front-end what npm is to backend. Bootstrap? Foundation? jQuery? Well, bower takes care of them. I'd have really loved if npm gave us those too. But those are the things we get right now so better suck it.
