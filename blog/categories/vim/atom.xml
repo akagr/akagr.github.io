@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Vim | akash agrawal]]></title>
+  <title><![CDATA[Category: Vim | How stuff doesn't works]]></title>
   <link href="http://akashagrawal.me/blog/categories/vim/atom.xml" rel="self"/>
   <link href="http://akashagrawal.me/"/>
-  <updated>2014-02-25T15:22:59+05:30</updated>
+  <updated>2014-03-24T12:57:51+05:30</updated>
   <id>http://akashagrawal.me/</id>
   <author>
     <name><![CDATA[Akash  Agrawal]]></name>
