@@ -9,7 +9,7 @@
   <meta name="author" content="Akash  Agrawal">
 
   
-  <meta name="description" content="If&rsquo;s and elses make me cringe. I go out of my way to keep them away from my code since they generally result in lengthy and brittle code. Other &hellip;">
+  <meta name="description" content="Ifs and elses make me cringe. I try to keep them away from my code since they generally result in lengthy and brittle code. But there are times when &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -108,7 +108,7 @@
   </header>
 
 
-<div class="entry-content"><p>If&rsquo;s and elses make me cringe. I go out of my way to keep them away from my code since they generally result in lengthy and brittle code. Other times they can form a picture of elegance. There are yet other cases where you simply don&rsquo;t have a choice. I learned a new pattern for defining functions lazily which I think is pretty cool. It cuts out these conditionals in a particular scenario. Let&rsquo;s dig in.</p>
+<div class="entry-content"><p>Ifs and elses make me cringe. I try to keep them away from my code since they generally result in lengthy and brittle code. But there are times when you simply don&rsquo;t have a choice. And you hate every moment of it. I learned a new pattern for defining functions lazily which I think is pretty cool. It cuts out these conditionals in a particular scenario and keeps me a little happier. Let&rsquo;s dig in.</p>
 
 <!-- more -->
 
@@ -118,7 +118,8 @@
 <p>This pattern can be applied when you know you&rsquo;ll need to execute a conditional only once and use it&rsquo;s result throughout. Example of this is if you are writing your own wrapper for ajax calls. IE, as always, requires a little something extra. So you may be lured into writing something like this:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">myajax</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
-</span><span class='line'>  <span class="kd">var</span> <span class="nx">browser</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span> <span class="cm">/* Detect browser here with user agent or whatever */</span>
+</span><span class='line'>  <span class="cm">/* Detect browser here with user agent or whatever */</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">browser</span> <span class="o">=</span> <span class="s1">&#39;some browser&#39;</span><span class="p">;</span>
 </span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="nx">browser</span> <span class="o">===</span> <span class="s1">&#39;ie&#39;</span><span class="p">)</span>
 </span><span class='line'>    <span class="cm">/* Do it the way microsoft wants you to */</span>
 </span><span class='line'>  <span class="k">else</span>
@@ -127,14 +128,13 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h2>Reflection</h2>
-
-<p>There is nothing wrong with this code, if you are using it to teach beginners how to define functions. For production purposes, executing the conditional every time and knowing only one block is executing always is a pain. Sure, you can cache the result of browser and use that as a conditional so you don&rsquo;t have to calculate it again. But still, that conditional won&rsquo;t be leaving anytime soon.</p>
+<p>There is nothing wrong with this code, if you are using it to teach beginners how to define functions. For production purposes, executing the conditional every time and knowing only one block is executing is always a pain. Sure, you can cache the result of browser and use that as a conditional so you don&rsquo;t have to calculate it again. But still, that conditional won&rsquo;t be leaving anytime soon. Fortunately, javascript doesn&rsquo;t go lightweight on you especially when functions are involved.</p>
 
 <h2>Solution</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">myajax</span>  <span class="o">=</span> <span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>  <span class="kd">var</span> <span class="nx">browser</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span> <span class="cm">/* Detect browser here with user agent or whatever */</span>
+</span><span class='line'>  <span class="cm">/* Detect browser here with user agent or whatever */</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">browser</span> <span class="o">=</span> <span class="s1">&#39;some browser&#39;</span><span class="p">;</span>
 </span><span class='line'>  <span class="kd">var</span> <span class="nx">result</span><span class="p">;</span>
 </span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="nx">browser</span> <span class="o">===</span> <span class="s1">&#39;ie&#39;</span><span class="p">){</span>
 </span><span class='line'>    <span class="nx">result</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
@@ -151,9 +151,9 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Now that may look like more code than the previous snippet, but let&rsquo;s run it. After the first run, based on the browser detected, <code>myajax</code> would contain code related to that browser only. Thereafter, there will be no conditionals for checking browser, no calculating browser from user agent, no nothing.</p>
+<p>Now that may look like more code than the previous snippet, but let&rsquo;s do a dry run. Based on the browser detected, <code>myajax</code> would contain code related to that browser only. Thereafter, there will be no conditionals for checking browser, no calculating browser from user agent, no nothing. Suddenly, our ajax wrapper loses all fat starts eating less cpu cycles doing comparison it already should know an answer to.</p>
 
-<p>This was one of those times where ability to use functions as objects really shines. Think you&rsquo;ll use it sometime soon?</p>
+<p>I hope the code was easy to follow. It wasn&rsquo;t much anyways. Think you&rsquo;ll use it sometime soon?</p>
 
 <p>Thanks for reading.</p>
 </div>
