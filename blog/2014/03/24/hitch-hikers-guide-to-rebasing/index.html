@@ -1,0 +1,388 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Hitch-hiker's Guide to Rebasing - If I Were a Cyborg</title>
+  <meta name="author" content="Akash  Agrawal">
+
+  
+  <meta name="description" content="Git rebase is one of those features which people tell you not to use. Understand this, it is one of the most powerful tool git has to offer. People &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta property="og:title" content="Hitch-hiker's Guide to Rebasing - If I Were a Cyborg" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://gravatar.com/avatar/453b13f5280b214c55204aa8640efb8e" />
+  <meta property="og:url" content="http://akashagrawal.me/blog/2014/03/24/hitch-hikers-guide-to-rebasing" />
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://akashagrawal.me/blog/2014/03/24/hitch-hikers-guide-to-rebasing">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="if I were a cyborg" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-46483932-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">if I were a cyborg</a></h1>
+  
+    <h2>musings of akash agrawal</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:akashagrawal.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/know-me">Know Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Hitch-hiker's Guide to Rebasing</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-24T18:33:00+05:30" pubdate data-updated="true">Mar 24<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Git rebase is one of those features which people tell you not to use. Understand this, it is one of the most powerful tool git has to offer. People fear it because it is one of those few tools capable of irreversibly(maybe) damaging your git history. But don&rsquo;t expect to be a git ninja without knowing how to do a conflict-ridden <code>git rebase -i</code>. I&rsquo;ll try to provide a scenario based approach to learning rebase. Here are a couple of conventions I&rsquo;ll follow in my git graphs.</p>
+
+<!-- more -->
+
+
+<ul>
+<li><code>*</code> represent the commits which you don&rsquo;t want affected</li>
+<li><code>x</code> represent the commits which you want to move over or which were affected by rebasing</li>
+</ul>
+
+
+<p>But first&hellip;</p>
+
+<h2>What is rebasing</h2>
+
+<p>Every git commit except the first one has at least one parent. Its base, if you will. i.e. each commit is based off another commit. When I say &lsquo;based off&rsquo;, I mean it borrows all the files from its parent except the ones that have been changed and creates objects representing new changes on top of that.</p>
+
+<p>Rebasing, in simplest terms means changing the parent of a commit. That&rsquo;s the full definition of rebasing, although git allows you some utilities to make some other changes too.</p>
+
+<p>Visually, rebasing means you can move actual commits between branches. Cherry-picking means rebasing just a single commit. Nothing fancy there. Rebasing is generally associated with moving over more than one commit.</p>
+
+<p>Now back to business. Here are some use cases of rebasing.</p>
+
+<h2>Rebasing a branch over another</h2>
+
+<p>  We have something like:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='bash'><span class='line'>--*--*--*--*--* <span class="o">(</span>master<span class="o">)</span>
+</span><span class='line'>   <span class="se">\</span>
+</span><span class='line'>    x--x--x--x--x <span class="o">(</span>dev<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To rebase dev over master, we can run:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git co dev
+</span><span class='line'><span class="nv">$ </span>git rebase master
+</span><span class='line'>
+</span><span class='line'>    --*--*--*--*--* <span class="o">(</span>master<span class="o">)</span>
+</span><span class='line'>                   <span class="se">\</span>
+</span><span class='line'>                    x--x--x--x--x<span class="o">(</span>dev<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Rebasing only some commits from tip of a branch to another</h2>
+
+<p>  We don&rsquo;t want to rebase full branch. Just some commits from its tip. For this we will need to create a temporary branch to save the new tip too.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='bash'><span class='line'>--*--*--*--*--* <span class="o">(</span>master<span class="o">)</span>
+</span><span class='line'>   <span class="se">\</span>
+</span><span class='line'>    *--*--*--x--x <span class="o">(</span>dev<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We will create a new branch on the new tip first.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git co -b temp &lt;commit_id&gt;
+</span><span class='line'>
+</span><span class='line'>  --*--*--*--*--* <span class="o">(</span>master<span class="o">)</span>
+</span><span class='line'>       <span class="se">\</span>
+</span><span class='line'>        *--*--* <span class="o">(</span>temp<span class="o">)</span>
+</span><span class='line'>               <span class="se">\</span>
+</span><span class='line'>                x--x <span class="o">(</span>dev<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now we can easily rebase the commits over as</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git rebase --onto master temp dev
+</span><span class='line'>
+</span><span class='line'>  --*--*--*--*--* <span class="o">(</span>master<span class="o">)</span>
+</span><span class='line'>        <span class="se">\ </span>       <span class="se">\</span>
+</span><span class='line'>         <span class="se">\ </span>       x--x <span class="o">(</span>dev<span class="o">)</span>
+</span><span class='line'>          <span class="se">\</span>
+</span><span class='line'>           *--*--* <span class="o">(</span>temp<span class="o">)</span>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Interactive rebasing</h2>
+
+<p>This will take time and is a little dodgy to get right in the first try. I recommend a test repo for this one.</p>
+
+<p>To do an interactive rebase, you just add a <code>-i</code> option to any rebase command we discussed. This will open up a text editor with some commits listed along with their hashes. These are the commits which will be affected by rebasing. The general format of a line is:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;action&gt; &lt;<span class="nb">hash</span>&gt; &lt;commit_message&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You&rsquo;ll notice that <code>pick</code> is applied by default to all the commits. This means that if you save and exit the file now, the rebase will be no different than what you have done without the -i flag. But we didn&rsquo;t go interactive for nothing. We get a wealth of actions which can help re-write git history anyway we see fit. Here&rsquo;s what they are supposed to do.</p>
+
+<ul>
+<li>p/pick: The commit will be rebased without any modifications. This is what you do if you don&rsquo;t do an interactive rebase.</li>
+<li>r/reword: When the rebase operation will get to this commit, it will pause and prompt you for a new commit message.</li>
+<li>e/edit: The rebase operation will pause before rebasing this commit. You can change files, amend them in this commit and do a <code>git rebase --continue</code> to resume rebasing.</li>
+<li>s/squash: Git will pause rebasing before this commit and prompt you for a new commit message. Then it will merge (amend) this commit into the previous one.</li>
+<li>f/fixup: This is just like &ldquo;squash&rdquo;, but discards this commit&rsquo;s log message. Git doesn&rsquo;t pause for this one. The commit is automatically merged into its parent.</li>
+</ul>
+
+
+<p>Know that if a commit is rebased, it will in reality create an entirely new commit. This means that you should not rebase commits which you have already pushed somewhere. If you do, it is still possible to synchronize your new history but other co-workers (if any) might not appreciate the extra work.</p>
+
+<h2>Don&rsquo;t fret the conflicts!</h2>
+
+<p>Always expect conflicts. It will save you from a nasty shock when you just want to do a rebase quickly and leave for weekend. However, if you know what you are doing, the conflicts are handled pretty systematically. If you even run into a conflict during rebase, git will tell you about the naughty files. Open them, correct them and save them. Then do a <code>git add &lt;conflicting_files&gt;</code>. Make sure you don&rsquo;t commit your changes. Then simply continue rebasing with <code>git rebase --continue</code>.</p>
+
+<p>Even if go cold-feet and want to opt out from rebasing, you can do a <code>git rebase --abort</code> and git will give you back your history just as it was before you started.</p>
+
+<h2>Recovering lost commits</h2>
+
+<p>I already told you the rebase commits are actually entirely different commits and git will stop showing you your old ones. So you actually completed a rebase and now want to recover your previous commits. You are conflicted! But git is lenient. It will not actually delete those old commits until next cleaning cycle (once every few weeks maybe). You can search for your lost commits by running reflog.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git reflog
+</span><span class='line'>
+</span><span class='line'>2356552 HEAD@<span class="o">{</span>0<span class="o">}</span>: commit: New post: Git rebase <span class="o">(</span>incomplete<span class="o">)</span>
+</span><span class='line'>2056160 HEAD@<span class="o">{</span>1<span class="o">}</span>: commit <span class="o">(</span>amend<span class="o">)</span>: New post: Lazy definitions in javascript
+</span><span class='line'>1a2c1b5 HEAD@<span class="o">{</span>2<span class="o">}</span>: commit <span class="o">(</span>amend<span class="o">)</span>: New post: Lazy definitions in javascript
+</span><span class='line'>5b6f6c6 HEAD@<span class="o">{</span>3<span class="o">}</span>: commit: New post: Lazy definitions in javascript
+</span><span class='line'>...
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The above is a reflog of this blog I pulled up just as I am writing this. Luckily, you can see how rebasing or amending a commit will give you a new one. You can also see the hash of old commit (5b6f6c6) here. Note the SHA-hash, check it out, make a branch on it. You won&rsquo;t lose it again.</p>
+
+<p>There is almost always a way of recovering your stuff in git. That is if you don&rsquo;t have a habit of running <code>git gc</code> after every operation.</p>
+
+<p>I hope I helped at least one of you with rebasing. I&rsquo;ll be delighted to add more scenarios to this post if you can suggest them.</p>
+
+<p>Thanks for reading.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Akash  Agrawal</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-24T18:33:00+05:30" pubdate data-updated="true">Mar 24<span>th</span>, 2014</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://akashagrawal.me/blog/2014/03/24/hitch-hikers-guide-to-rebasing/" data-via="akshagrwl" data-counturl="http://akashagrawal.me/blog/2014/03/24/hitch-hikers-guide-to-rebasing/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/03/24/lazy-definitions-in-javascript/" title="Previous Post: Lazy definitions in javascript">&laquo; Lazy definitions in javascript</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/03/24/hitch-hikers-guide-to-rebasing/">Hitch-hiker's Guide to Rebasing</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/03/24/lazy-definitions-in-javascript/">Lazy Definitions in Javascript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/06/node-stack-setup-for-sherlocks/">Node Stack Setup for Sherlocks</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/31/infinite-scroller-in-angularjs/">Infinite Scroller in AngularJs</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/12/27/wrapping-my-head-around-prototypal-inheritance-in-javascript/">Wrapping My Head Around Prototypal Inheritance in Javascript</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Akash  Agrawal -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'akagr';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://akashagrawal.me/blog/2014/03/24/hitch-hikers-guide-to-rebasing/';
+        var disqus_url = 'http://akashagrawal.me/blog/2014/03/24/hitch-hikers-guide-to-rebasing/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
