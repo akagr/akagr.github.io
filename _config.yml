@@ -4,7 +4,7 @@
 
 url: http://akashagrawal.me
 title: if I were a cyborg
-subtitle: musings of akash agrawal
+subtitle: 
 author: Akash  Agrawal
 simple_search: http://google.com/search
 description: A blog about what catches my fancy although most probably it will have something to do with code.
@@ -98,4 +98,4 @@ disqus_show_comment_count: false
 google_analytics_tracking_id: UA-46483932-1
 
 # Facebook Like
-facebook_like: true
+facebook_like: false

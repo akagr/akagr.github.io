@@ -195,7 +195,8 @@ blockquote {
   
   footer {
     @extend .default-font;
-    text-align: right;
+    text-align: left;
+    font-size: 16px;
     
     a {
       text-decoration: underline;
@@ -361,8 +362,7 @@ body {
     margin: 4.236rem 0 2.618rem 0;
     
     h1 {
-      font-size: 62.000px;
-      font-size: 2.1rem;
+      font-size: 1.8rem;
       font-weight: bold;
       text-transform: uppercase;
       margin-bottom: 7.640px;
@@ -374,7 +374,7 @@ body {
     }
     
     h2 {
-      @extend .font-size-large;
+      @extend .font-size-medium;
       @extend .sans-serif-font;
       color: $secondary-text-color;
     }
@@ -523,12 +523,12 @@ article {
     @extend .margin-bottom-large;
     
     h1 {
-      font-size: 45.959px;
-      font-size: 1.85rem; /* 1.916 + 0.382 */
+      font-size: 1.5rem; /* 1.916 + 0.382 */
       margin-bottom: 3.456px;
       margin-bottom: 0.173rem;
       line-height: 50.58px;
       line-height: 2.534rem; /* 1.916 + 0.618 */
+      font-weight: bold;
       
       a, a:hover {
         color: $text-color;
@@ -566,11 +566,13 @@ article {
   
   h2 {
     font-size: 30.56px;
-    font-size: 1.328rem; /* 1.618 - 0.09 */
+    font-size: 1.0rem; /* 1.618 - 0.09 */
+    font-weight: bold;
     margin-top: 52.358px;
     margin-top: 2.618rem;
     margin-bottom: 9.046px;
     margin-bottom: 0.452rem;
+    text-align: left;
   }
   
   ul, ol {
@@ -580,6 +582,7 @@ article {
     text-align: left;
     margin-left: 20px;
     margin-left: 1rem;
+    font-size: 16px;
     
     li:last-child p, ol:last-child p { 
       margin-bottom: 0; 
@@ -602,6 +605,7 @@ article {
     @extend .default-line-height;
     @extend .margin-bottom-large;
     text-align: left;
+    font-size: 16px;
     
     a {
       text-decoration: underline;
@@ -611,8 +615,7 @@ article {
   p > code, li code {
     @extend .code-keywords;
     @extend .code-font;
-    font-size: 17.56px;
-    font-size: 0.878rem; /* 0.732 + 0.146 */
+    font-size: 16px;
   }
   
   // ----- post's footer -----
