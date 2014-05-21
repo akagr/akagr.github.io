@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Js | if I were a cyborg]]></title>
   <link href="http://akashagrawal.me/blog/categories/js/atom.xml" rel="self"/>
   <link href="http://akashagrawal.me/"/>
-  <updated>2014-03-31T15:33:24+05:30</updated>
+  <updated>2014-05-21T15:45:06+05:30</updated>
   <id>http://akashagrawal.me/</id>
   <author>
     <name><![CDATA[Akash  Agrawal]]></name>
@@ -12,6 +12,144 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How to Write Asynchronous Javascript]]></title>
+    <link href="http://akashagrawal.me/blog/2014/05/21/how_to_write_asynchronous_javascript/"/>
+    <updated>2014-05-21T14:48:45+05:30</updated>
+    <id>http://akashagrawal.me/blog/2014/05/21/how_to_write_asynchronous_javascript</id>
+    <content type="html"><![CDATA[<p>There is a high chance that any article you read on javascript mentions something about asynchronous nature of the language. But what exactly makes the language async? Or, in other words, how can we write asynchronous code? If you have tried accepting methods as arguments to make it <strong>look</strong> async, you&rsquo;ll know it won&rsquo;t work. If you have not, let&rsquo;s quickly build an async-looking method and see how it rolls.</p>
+
+<p>I will go with the most naive implementation of fibonacci since a reasonably high number will be sufficient to lock our program and show if our code is running async.</p>
+
+<p>```javascript
+var fibonacci = function(num) {
+  if(num &lt;= 1){</p>
+
+<pre><code>return 1;
+</code></pre>
+
+<p>  }
+  else{</p>
+
+<pre><code>return fibonacci(num - 1) + fibonacci(num -2)
+</code></pre>
+
+<p>  }
+};</p>
+
+<p>var my_async_method = function(num, callback){
+  /<em> Calculate the fibonacci number for the given argument </em>/
+  var result = fibonacci(num);</p>
+
+<p>  /<em> Call the given callback with the result </em>/
+  callback(result);
+}</p>
+
+<p>my_async_method(40, function(res){
+  console.log(&ldquo;Marker 1: Fibonacci returned: &rdquo; + res);
+});</p>
+
+<p>console.log(&ldquo;Marker 2: This line prints when the above method completes&rdquo;);
+```</p>
+
+<p>If we go ahead and run the above code, we&rsquo;ll notice a lag before the result and subsequently our markers are printed (otherwise pass a larger number). Another point of interest is that marker#2 had to wait for the execution of <code>my_async_method</code> to finish before it. Although our invocation of <code>my_async_method</code> looks async, it clearly isn&rsquo;t .</p>
+
+<p>To make a method truly asynchronous, we have to involve native code to break free from the control flow of our code. That means lot of low level C or even Assembly language. But those are not the only options. We can also cover our code inside one of the inherently async methods javascript has on offer. Methods such as <code>setTimeout</code>, <code>setInterval</code> and <code>process.nextTick</code>(node) are some of the async methods. Any code written in these will always execute asynchronously. Period.</p>
+
+<p>Let me give an idea of how we will make our own method to run asynchronously.</p>
+
+<p>```javascript
+var my_async_method = function(num, callback){
+  /<em> See what I am doing here? </em>/
+  setTimeout(function(){</p>
+
+<pre><code>/* Calculate the fibonacci number for the given argument */
+var result = fibonacci(num);
+
+/* Call the given callback with the result */
+callback(result);
+</code></pre>
+
+<p>  }, 0);
+};
+```</p>
+
+<p>If we run the code with this version of method, the second marker is executed immediately. After that, when the fibonacci data is calculated and available, our callback is executed. Like a real asynchronous method, right?</p>
+
+<p>This may not sound like a big deal. But I was regularly stumped when some methods behaved asynchronously when mine never did. If you ever wondered the same thing, maybe now you know the magic behind it. Just place your potential bottlenecks inside an asynchronous method and enjoy the real power of async javascript.</p>
+
+<p>Sound of below if this post helped you or you want to suggest corrections/improvements.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Lazy Definitions in Javascript]]></title>
+    <link href="http://akashagrawal.me/blog/2014/03/24/lazy-definitions-in-javascript/"/>
+    <updated>2014-03-24T15:21:53+05:30</updated>
+    <id>http://akashagrawal.me/blog/2014/03/24/lazy-definitions-in-javascript</id>
+    <content type="html"><![CDATA[<p>Ifs and elses make me cringe. I try to keep them away from my code since they generally result in lengthy and brittle code. But there are times when you simply don&rsquo;t have a choice. And you hate every moment of it. I learned a new pattern for defining functions lazily which I think is pretty cool. It cuts out these conditionals in a particular scenario and keeps me a little happier. Let&rsquo;s dig in.</p>
+
+<!-- more -->
+
+
+<h2>Use case</h2>
+
+<p>This pattern can be applied when you know you&rsquo;ll need to execute a conditional only once and use it&rsquo;s result throughout. Example of this is if you are writing your own wrapper for ajax calls. IE, as always, requires a little something extra. So you may be lured into writing something like this:</p>
+
+<p>```javascript
+var myajax = function(){
+  /<em> Detect browser here with user agent or whatever </em>/
+  var browser = &lsquo;some browser&rsquo;; <br/>
+  if(browser === &lsquo;ie&rsquo;)</p>
+
+<pre><code>/* Do it the way microsoft wants you to */
+</code></pre>
+
+<p>  else</p>
+
+<pre><code>/* Do it like the rest of this world. */
+</code></pre>
+
+<p>}
+```</p>
+
+<p>There is nothing wrong with this code, if you are using it to teach beginners how to define functions. For production purposes, executing the conditional every time and knowing only one block is executing is always a pain. Sure, you can cache the result of browser and use that as a conditional so you don&rsquo;t have to calculate it again. But still, that conditional won&rsquo;t be leaving anytime soon. Fortunately, javascript doesn&rsquo;t go lightweight on you especially when functions are involved.</p>
+
+<h2>Solution</h2>
+
+<p>```javascript
+var myajax  = (function () {
+  /<em> Detect browser here with user agent or whatever </em>/
+  var browser = &lsquo;some browser&rsquo;;
+  var result;
+  if(browser === &lsquo;ie&rsquo;){</p>
+
+<pre><code>result = function(){
+  /* This way ie */
+};
+</code></pre>
+
+<p>  }
+  else {</p>
+
+<pre><code>result = function() {
+  /* Chrome, FF, what have you */  
+}
+</code></pre>
+
+<p>  }
+  return result;
+})();
+```</p>
+
+<p>Now that may look like more code than the previous snippet, but let&rsquo;s do a dry run. Based on the browser detected, <code>myajax</code> would contain code related to that browser only. Thereafter, there will be no conditionals for checking browser, no calculating browser from user agent, no nothing. Suddenly, our ajax wrapper loses all fat and starts eating less cpu cycles doing comparison it already should know an answer to.</p>
+
+<p>I hope the code was easy to follow. It wasn&rsquo;t much anyways. Think you&rsquo;ll use it sometime soon?</p>
+
+<p>Thanks for reading.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Node Stack Setup for Sherlocks]]></title>
@@ -475,26 +613,6 @@ So how does this work? When interpreter does not find</code>how_many_legs()<code
 <p>I hope now you have a better understanding of how the prototypal inheritance works in javascript. For perfection, world&rsquo;s your playground.</p>
 
 <p>Thanks for reading. Sound off below if you think something&rsquo;s amiss or incorrect.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Finally Gonna Date node.js]]></title>
-    <link href="http://akashagrawal.me/blog/2013/12/13/finally-gonna-date-node-dot-js/"/>
-    <updated>2013-12-13T17:51:17+05:30</updated>
-    <id>http://akashagrawal.me/blog/2013/12/13/finally-gonna-date-node-dot-js</id>
-    <content type="html"><![CDATA[<p>When I first heard of node.js, I was in graduation just getting into rails. But I seriously took notice when it displaced rails as the most popular repo on github. Speed whore as I am, I found event-driven non-blocking I/O particularly seducing.</p>
-
-<p>I knew some elementary javascript and even at my work-ex of 7 months, never really used pure js. So I guessed, that just like ruby, I will definitely need to learn javascript a little. The world will be written in javascript in near future. Might as well start speaking it now.</p>
-
-<!--more-->
-
-
-<p>That said, my javascript is still quite rusty. But at least I now understand how to utilize functions as closures and decided to return to node. Being a web-dev, obviously I can&rsquo;t be playing with vanilla quite long. After saying hello to a couple of worlds and writing my own servers with some routes thrown in for taste, meteor caught my eye.</p>
-
-<p>About the only downside I can think of it is is that it does not have eyes for anything other than MongoDb. So I can&rsquo;t just start writing code for my projects.</p>
-
-<p>A nodejs project should be coming my way in sometime. I am hopeful of that. I will be spending as much time as I can manage with node till then. Should be an interesting journey.</p>
 ]]></content>
   </entry>
   

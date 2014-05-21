@@ -36,11 +36,15 @@
     </url>
     <url>
         <loc>http://akashagrawal.me/blog/2014/03/24/lazy-definitions-in-javascript/</loc>
-        <lastmod>2014-03-24T17:48:51+05:30</lastmod>
+        <lastmod>2014-05-21T15:37:40+05:30</lastmod>
     </url>
     <url>
         <loc>http://akashagrawal.me/blog/2014/03/24/hitch-hikers-guide-to-rebasing/</loc>
-        <lastmod>2014-03-26T12:21:33+05:30</lastmod>
+        <lastmod>2014-05-21T15:37:33+05:30</lastmod>
+    </url>
+    <url>
+        <loc>http://akashagrawal.me/blog/2014/05/21/how_to_write_asynchronous_javascript/</loc>
+        <lastmod>2014-05-21T15:42:26+05:30</lastmod>
     </url>
     <url>
         <loc>http://akashagrawal.me/know-me/</loc>
@@ -52,10 +56,10 @@
     </url>
     <url>
         <loc>http://akashagrawal.me/</loc>
-        <lastmod>2014-03-26T12:21:33+05:30</lastmod>
+        <lastmod>2014-05-21T15:42:26+05:30</lastmod>
     </url>
     <url>
         <loc>http://akashagrawal.me/blog/archives/</loc>
-        <lastmod>2014-03-26T12:21:33+05:30</lastmod>
+        <lastmod>2014-05-21T15:42:26+05:30</lastmod>
     </url>
 </urlset>
