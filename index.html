@@ -111,59 +111,12 @@
 
   <div class="entry-content"><p>There is a high chance that any article you read on javascript mentions something about asynchronous nature of the language. But what exactly makes the language async? Or, in other words, how can we write asynchronous code? If you have tried accepting methods as arguments to make it <strong>look</strong> async, you&rsquo;ll know it won&rsquo;t work. If you have not, let&rsquo;s quickly build an async-looking method and see how it rolls.</p>
 
-<p>I will go with the most naive implementation of fibonacci since a reasonably high number will be sufficient to lock our program and show if our code is running async.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">fibonacci</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">num</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="nx">num</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">){</span>
-</span><span class='line'>    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="k">else</span><span class="p">{</span>
-</span><span class='line'>    <span class="k">return</span> <span class="nx">fibonacci</span><span class="p">(</span><span class="nx">num</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="nx">fibonacci</span><span class="p">(</span><span class="nx">num</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">};</span>
-</span><span class='line'>
-</span><span class='line'><span class="kd">var</span> <span class="nx">my_async_method</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">num</span><span class="p">,</span> <span class="nx">callback</span><span class="p">){</span>
-</span><span class='line'>  <span class="cm">/* Calculate the fibonacci number for the given argument */</span>
-</span><span class='line'>  <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">fibonacci</span><span class="p">(</span><span class="nx">num</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="cm">/* Call the given callback with the result */</span>
-</span><span class='line'>  <span class="nx">callback</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">my_async_method</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">){</span>
-</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Marker 1: Fibonacci returned: &quot;</span> <span class="o">+</span> <span class="nx">res</span><span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Marker 2: This line prints when the above method completes&quot;</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If we go ahead and run the above code, we&rsquo;ll notice a lag before the result and subsequently our markers are printed (otherwise pass a larger number). Another point of interest is that marker#2 had to wait for the execution of <code>my_async_method</code> to finish before it. Although our invocation of <code>my_async_method</code> looks async, it clearly isn&rsquo;t .</p>
-
-<p>To make a method truly asynchronous, we have to involve native code to break free from the control flow of our code. That means lot of low level C or even Assembly language. But those are not the only options. We can also cover our code inside one of the inherently async methods javascript has on offer. Methods such as <code>setTimeout</code>, <code>setInterval</code> and <code>process.nextTick</code>(node) are some of the async methods. Any code written in these will always execute asynchronously. Period.</p>
-
-<p>Let me give an idea of how we will make our own method to run asynchronously.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">my_async_method</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">num</span><span class="p">,</span> <span class="nx">callback</span><span class="p">){</span>
-</span><span class='line'>  <span class="cm">/* See what I am doing here? */</span>
-</span><span class='line'>  <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-</span><span class='line'>    <span class="cm">/* Calculate the fibonacci number for the given argument */</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">fibonacci</span><span class="p">(</span><span class="nx">num</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="cm">/* Call the given callback with the result */</span>
-</span><span class='line'>    <span class="nx">callback</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">},</span> <span class="mi">0</span><span class="p">);</span>
-</span><span class='line'><span class="p">};</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If we run the code with this version of method, the second marker is executed immediately. After that, when the fibonacci data is calculated and available, our callback is executed. Like a real asynchronous method, right?</p>
-
-<p>This may not sound like a big deal. But I was regularly stumped when some methods behaved asynchronously when mine never did. If you ever wondered the same thing, maybe now you know the magic behind it. Just place your potential bottlenecks inside an asynchronous method and enjoy the real power of async javascript.</p>
-
-<p>Sound of below if this post helped you or you want to suggest corrections/improvements.</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/05/21/how_to_write_asynchronous_javascript/">Read on &rarr;</a>
+    </footer>
   
 
 

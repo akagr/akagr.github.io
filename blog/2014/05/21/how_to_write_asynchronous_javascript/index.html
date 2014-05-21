@@ -108,6 +108,9 @@
 
 <div class="entry-content"><p>There is a high chance that any article you read on javascript mentions something about asynchronous nature of the language. But what exactly makes the language async? Or, in other words, how can we write asynchronous code? If you have tried accepting methods as arguments to make it <strong>look</strong> async, you&rsquo;ll know it won&rsquo;t work. If you have not, let&rsquo;s quickly build an async-looking method and see how it rolls.</p>
 
+<!--more-->
+
+
 <p>I will go with the most naive implementation of fibonacci since a reasonably high number will be sufficient to lock our program and show if our code is running async.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"></pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">fibonacci</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">num</span><span class="p">)</span> <span class="p">{</span>

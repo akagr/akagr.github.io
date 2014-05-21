@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Js | if I were a cyborg]]></title>
   <link href="http://akashagrawal.me/blog/categories/js/atom.xml" rel="self"/>
   <link href="http://akashagrawal.me/"/>
-  <updated>2014-05-21T15:45:06+05:30</updated>
+  <updated>2014-05-21T15:46:24+05:30</updated>
   <id>http://akashagrawal.me/</id>
   <author>
     <name><![CDATA[Akash  Agrawal]]></name>
@@ -19,6 +19,9 @@
     <updated>2014-05-21T14:48:45+05:30</updated>
     <id>http://akashagrawal.me/blog/2014/05/21/how_to_write_asynchronous_javascript</id>
     <content type="html"><![CDATA[<p>There is a high chance that any article you read on javascript mentions something about asynchronous nature of the language. But what exactly makes the language async? Or, in other words, how can we write asynchronous code? If you have tried accepting methods as arguments to make it <strong>look</strong> async, you&rsquo;ll know it won&rsquo;t work. If you have not, let&rsquo;s quickly build an async-looking method and see how it rolls.</p>
+
+<!--more-->
+
 
 <p>I will go with the most naive implementation of fibonacci since a reasonably high number will be sufficient to lock our program and show if our code is running async.</p>
 
