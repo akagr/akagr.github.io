@@ -3,7 +3,7 @@ layout: post
 title: "Lazy definitions in javascript"
 date: 2014-03-24 15:21:53 +0530
 comments: true
-categories: 
+categories: ['js']
 ---
 Ifs and elses make me cringe. I try to keep them away from my code since they generally result in lengthy and brittle code. But there are times when you simply don't have a choice. And you hate every moment of it. I learned a new pattern for defining functions lazily which I think is pretty cool. It cuts out these conditionals in a particular scenario and keeps me a little happier. Let's dig in.
 

@@ -3,7 +3,7 @@ layout: post
 title: "Hitch-hiker's guide to rebasing"
 date: 2014-03-24 18:33:00 +0530
 comments: true
-categories: 
+categories: ['git']
 ---
 Git rebase is one of those features which people tell you not to use. Understand this, it is one of the most powerful tool git has to offer. People fear it because it is one of those few tools capable of irreversibly(maybe) damaging your git history. But don't expect to be a git ninja without knowing how to do a conflict-ridden `git rebase -i`. I'll try to provide a scenario based approach to learning rebase. Here are a couple of conventions I'll follow in my git graphs.
 
