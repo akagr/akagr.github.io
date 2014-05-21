@@ -8,6 +8,8 @@ categories: ['js']
 
 There is a high chance that any article you read on javascript mentions something about asynchronous nature of the language. But what exactly makes the language async? Or, in other words, how can we write asynchronous code? If you have tried accepting methods as arguments to make it **look** async, you'll know it won't work. If you have not, let's quickly build an async-looking method and see how it rolls.
 
+<!--more-->
+
 I will go with the most naive implementation of fibonacci since a reasonably high number will be sufficient to lock our program and show if our code is running async.
 
 ```javascript
